@@ -1,0 +1,21 @@
+***
+`array_map(?callable $callback, array $array, array ...$arrays)` - применяет callback ко всем элементам переданного массива.
+`array_filter(array $array, ?callable $callback = null, int $mode = 0): array` - фильтрует элементы массива с помощью callback.
+`parse_url(string $url, int $component = -1)` - парсит адресную строку, для использования лучше подсмотреть компоненты.
+`sprintf(string $format, mixed ...$values): string` - форматирует и возвращает строку.
+`exit(string $status = ?): void` - выводит сообщение и останавливает работу скрипта.
+`die(string $message = ?): void` - как и функция выше, выводит сообщение и останавливает работу скрипта.
+`implode(string $separator, array $array): string` - функция объединяет элементы массива в строку.
+`explode(string $separator, string $string, int $limit = PHP_INT_MAX): array` - функция разбивает строку на массив.
+`array_keys(array $array, mixed $filter_value, bool $strict = false): array` - функция возвращает массив ключей переданного в аргументы массива.
+`header(string $header, bool $replace = true, int $response_code = 0): void` - функция отправляет необработанный заголовок страницы.
+`method_exists(object|string $object_or_class, string $method): bool` - функция проверяет наличие указанного метода у объекта.
+`compact(array|string $var_name, array|string ...$var_names): array`  - функция создает массив, содержащий переменные и их значения.
+`extract(array &$array, int $flags = EXTR_OVERWRITE, string $prefix = ""): int` - функция обратна функции выше, извлекает переменные из массива.
+`str_contains(string $haystack, string $needle): bool` - функция  определяет, содержит ли строка заданную подстроку.
+`strlen(string $string): int` - функция вовозращает длинну строки.
+`htmlspecialchars(string $string, int $flags = ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, ?string $encoding = null, bool $double_encode = true): string`  - функция преобразовывает специальные символы в HTML.
+`file_get_contents(string $filename, bool $use_include_path = false, ?resource $context = null, int $offset = 0, ?int $length = null): string|false` - функция читает заданный файл и возвращает содержимое в виде строки.
+`preg_split(string $pattern, string $subject, int $limit = -1, int $flags = 0): array|false` - функция разбивает строку по указанному регулярному выражению, возвращает массив.
+`str_ends_with(string $haystack, string $needle): bool` - функция проверяет конец строки с заданной подстрокой.
+`get_class_methods(object|string $object_or_class): array` - функция возвращает массив методов переданного класса или объекта.
