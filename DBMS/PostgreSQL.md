@@ -1,5 +1,5 @@
 ***
-## Индексирование
+## Indexing
 - GIST
 - SP-GIST
 - GIN
