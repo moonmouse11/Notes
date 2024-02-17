@@ -1,5 +1,7 @@
+# Docker-compose
 ***
 `docker-compose.yaml` - исполняемый файл для запуска контейнеров.
+#### Example
 
 ```yaml
 version: '3' // версия композа
@@ -20,7 +22,7 @@ services: // начало сервисов
 ```
 
 `docker-compose up --build -d`
-### Опции docker-compose
+## Опции docker-compose
 - `docker-compose up` - старт всех сервисов.
 - `docker-compose down` - остановка всех сервисов.
 - `docker-compose services` - список сервисов.
