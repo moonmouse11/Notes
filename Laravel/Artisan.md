@@ -7,4 +7,5 @@
 - `php artisan ui:auth` - запускает генерацию файлов для авторизации в фреймворке.
 - `php artisan route:list` - выводит список объявленных путей.
 - `php artisan make:police [policy_name]` - создает политику фреймворка с указанным именем.
+- `php artisan key:generate` - команда для генерации секретного ключа.
 - 
