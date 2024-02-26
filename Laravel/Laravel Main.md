@@ -3,4 +3,5 @@
 - [[Artisan]]
 - [[Blade]]
 - [[Sail]]
+- [[Fucntions]]
 - 
