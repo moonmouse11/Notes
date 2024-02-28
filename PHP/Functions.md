@@ -11,12 +11,17 @@
 - `array_keys(array $array, mixed $filter_value, bool $strict = false): array` - функция возвращает массив ключей переданного в аргументы массива.
 - `header(string $header, bool $replace = true, int $response_code = 0): void` - функция отправляет необработанный заголовок страницы.
 - `method_exists(object|string $object_or_class, string $method): bool` - функция проверяет наличие указанного метода у объекта.
-- `compact(array|string $var_name, array|string ...$var_names): array`  - функция создает массив, содержащий переменные и их значения.
+- `compact(array|string $var_name, array|string ...$var_names): array`  - функция создает массив, содержащий переменные и их значения.
 - `extract(array &$array, int $flags = EXTR_OVERWRITE, string $prefix = ""): int` - функция обратна функции выше, извлекает переменные из массива.
-- `str_contains(string $haystack, string $needle): bool` - функция  определяет, содержит ли строка заданную подстроку.
+- `str_contains(string $haystack, string $needle): bool` - функция  определяет, содержит ли строка заданную подстроку.
 - `strlen(string $string): int` - функция вовозращает длинну строки.
-- `htmlspecialchars(string $string, int $flags = ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, ?string $encoding = null, bool $double_encode = true): string`  - функция преобразовывает специальные символы в HTML.
+- `htmlspecialchars(string $string, int $flags = ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, ?string $encoding = null, bool $double_encode = true): string`  - функция преобразовывает специальные символы в HTML.
 - `file_get_contents(string $filename, bool $use_include_path = false, ?resource $context = null, int $offset = 0, ?int $length = null): string|false` - функция читает заданный файл и возвращает содержимое в виде строки.
 - `preg_split(string $pattern, string $subject, int $limit = -1, int $flags = 0): array|false` - функция разбивает строку по указанному регулярному выражению, возвращает массив.
 - `str_ends_with(string $haystack, string $needle): bool` - функция проверяет конец строки с заданной подстрокой.
 - `get_class_methods(object|string $object_or_class): array` - функция возвращает массив методов переданного класса или объекта.
+- `strpos(string $haystack, string $needle, int $offset = 0): int|false` - функция возвращает позицию первого вхождения подстроки в строку.
+- `in_array(mixed $needle, array $haystack, bool $strict = false): bool` - функция проверяет наличие заданных данных в массиве.
+- `array_pop(array &$array): mixed` - извлекает последний элемент массива.
+- `array_pad(array $array, int $length, mixed $value): array` - дополняет массив значениями до заданной длины.
+
