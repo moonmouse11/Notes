@@ -4,4 +4,5 @@
 - [[Blade]]
 - [[Sail]]
 - [[Fucntions]]
+- [[Patterns]]
 - 
