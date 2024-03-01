@@ -163,3 +163,48 @@ $table->rawIndex(new Expression('upper(name)'), 'index_name');
 ```
 ***
 ## Creating Foreign Key
+Поле внешнего ключа участвует в установлении межтабличной связи. Оно хранит ключ записи первичной таблицы и, таким образом, создается во вторичной таблице.
+Есть для способа создания внешнего ключа.
+1. Первый способ реализуется в два этапа. Создание поля внешнего ключа вместе с индексом внешнего ключа - вызовом у объекта структуры создаваемой таблицы методом `foriegnIdFor()`.
+	- `foriegnIdFor(Model::class, string field_name = null)` - метод создает поле вешнего ключа того же типа, к которому принадлежит ключевое поле.
+	- `foreignId(string field_name)` - создает беззнаковое целочисленное поле. Формат `UNSIGNED BIGINT`.
+	- `foreingUuid(string field_name)` - создает поле типа uuid. Формат `UUID`
+	Создание связи методом `constrained()` - у созданного поля внешнего ключа.
+	- `constrained(string primary_table_name, string key_table_name)` - создает внешний ключ к привязанному полю.
+``` php
+// Пример использования
+use App\Models\Astartes;
+
+$table->foreingIdFor(Astartes::class)->constrained();
+$table->foreingId('astartes_id')->constrained();
+
+/* Поле внешнего ключа user свяжет текущую вторичную таблицу
+с превичной таблицей userlist */
+$table->foreingId('user')->constrained('userlist', 'num');
+```
+2. Второй способ реализуется в 4 этапа:
+	- Создание поля внешнего ключа типа, совпадающего с типом ключевого поля первичной таблицы - осуществляется вызовом соответсвующего метода. Позволяет привязвать ключами поля любого типа.
+	- `foreign(string field_name, string index_name = null)` - меняет поле с числового на ключ.
+	- `references(string foreign_field_name)` - указывает поле внешнего ключа для связи таблиц.
+	- `on(string table_name)` - метод устанавливает таблицу для связи БД.
+``` php
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+ 
+Schema::table('posts', function (Blueprint $table) {
+
+	// Пример кода - создание поля и привязка внешнего ключа к нему.
+    $table->unsignedBigInteger('user_id');
+    $table->foreign('user_id')->references('id')->on('users');
+```
+Указать какую операцию следует выполнить с записями вторичной таблицы при изменении или удалении первичной записи можно с помощью методов:
+- `onDelete(string operation_name)` - операция, выполняемая при удалении записи.
+- `onUpdate(string operation_name)` - операция, выполняемая при обновлении записи.
+- `cascadeOnDelete()` - аналогично `onDelete('cascade')`.
+- `restictOnDelete()` -  аналогично `onDelete('restict')`.
+- `cascadeOnUpdate()` - аналогично `onUpdate('cascade')`.
+- `restictOnUpdate()` -  аналогично `onUpdate('restict')`.
+- `nullOnDelete()` - при удалении записи первичной таблицы, в поле внешнего ключа ставиться `null`.
+На основе внешенго ключа создается индекс. Формат: `[foreign_table_name]_[primary_key_field]`.
+При необходимости можно удалить ключ по имени.
+***
