@@ -1,23 +1,11 @@
-# SQL Sytax
+# Basics
 **Реляционная база данных** - это упорядоченная информация, связанная между собой определенными отношениями.
 ***
 1. DDL - (Data Definition Language) работают с целыми таблицами. `CREATE` `ALTER` `DROP` 
 2. DML - (Data Manipulation Language) операторы для работы с содержимым таблицы. `SELECT` `INSERT` `UPDATE` `DELETE`  
 3. DCL - (Data Control Language) определение доступа к данным. `GRANT` `REVOKE` `DENY` 
 4. TCL - (Transactional Control Language) управление тразакциями. `BEGIN TRANSACTION` `COMMIT TRANSACTION` `ROLLBACK TRANSACTION` `SAVE TRANSACTION` 
-****
-## Syntax
-Структура SQL запроса:
-- `SELECT`
-- `FROM`
-- `WHERE`
-- `GROUP BY`
-- `HAVING`
-- `ORDER BY`
-- `UNION`
-### Need to find info about all joins
-	-
--------------
+***
 ## ACID
 **ACID** - набор требований, которые обеспечивают сохранность данных.
 - A - Atomicity. Атомарность - гарантирует, что каждая транзакция будет выполнена полностью, или не будет выполнена совсем, без промежуточных состояний.

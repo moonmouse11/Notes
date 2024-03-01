@@ -1,7 +1,7 @@
 # DBMS Main
 
 ## SQL Language
-- [[SQL Syntax]]
+- [[SQL Main]]
 ## DB
 - [[MariaDB]]
 - [[Clickhouse]]

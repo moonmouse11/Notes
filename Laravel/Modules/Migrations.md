@@ -83,3 +83,83 @@ public $withinTransaction = false; // По умолчанию true
 Все методы возвращают объект класса `\Illuminate\Database\Schema\ColumnDifinition`  представляющий описание данного поля.
 ***
 ## Soft Deletes
+Создание в таблице поля отметки "мягкого" удаления выполняется вызовом метода класса _**`Blueprint`**_
+- `softDeletes(string field_name = deleted_at, int precision = 0)` - отметка удаления. Формат `TIMESTAMP`. 
+- `softDeletesTz(string field_name = deleted_at, int precision = 0)` - аналогично методу выше с утетом временных зон.t
+***
+## Add fields parameters.
+Для указания дополнительных параметров полей используются методы:
+- `default(mixed value)` - задает для текущего поля значение по умолчанию.
+```php
+// Пример кода с использование default()
+$table->decimal('price', 10, 2)->default(0);
+// Пример с выражением SQL
+use Illuminate\Database\Qeury\Expression;
+
+$table->float('random')->default(new Expression('RAND()'));
+```
+- `nullable(bool nullable = true)` - превращает текущее поле в необязательное _**(Может принимать значение `NULL`)**_ если предано `true`. Обратное поведение с `false`.
+- `useCurrent()` - задает для текущего поля временной отметки в качестве значения по умолчанию текущее дату и время.
+- `useCurrentOnUpdate()` - аналогична методу выше, записывает текущее значение времени при каждом обновлении строки.
+- `autoincrement()` - превращает текущее целочисленное поле в автоинкремент.
+- `from(started value` - указывает у автоинкрементного поля заданное "начальное значение" _**(Только MySQL & PostgreSQL)**_
+- `storedAs(new Illuminate\Database\Qeury\Expression(expression))` - позволяет рассчитывать значение по умолчанию на основе заданного SQL выражения. _**(Только MySQL & PostgreSQL)**_
+``` php
+// Пример функции storedAs
+$table->decimal('total', 10, 2)->storedAs('`price` * `count`');
+```
+- `comment(string comment)` - добавляет полю заданный строковый комментарий. _**(Только MySQL & PostgreSQL)**_
+- `virtualAs(new Illuminate\Database\Qeury\Expression(expression))` - превращает поле в простое вычисляемое _**(Только MySQL)**_
+- `unsigned()` - превращяет целочисленное поле в беззнаковое _**(Только MySQL)**_
+- `invisible()` - превращает текущее поле в невидимое, и его значение не будет извлекаться при выполенении `SELECT`. _**(Только MySQL)**_
+- `charset(string charset_code)` - указывает полю заданную в методе кодировку. _**(Только MySQL)**_
+- `collation(string sorting_querry)` - указывает последовательность сортировки с заданным обозначением. _**(Только MySQL)**_
+- `first()` - помещает поле в начало таблицы. _**(Только MySQL)**_
+- `after(string field_name)` - помещает поле в тадлице после заданного. _**(Только MySQL)**_
+- `generatedAs(string expression)` - переводит числовое поле в поле идентификации. Заполняется только при отсутвии явного заполнения. _**(Только PostgreSQL)**_
+``` php
+// Пример метода generatedAs
+$table->unsignedBigInteger('id')->generatedAs();
+// Добавляем дополнительные параметры.
+$table->unsignedBigInteger('id')->generatedAs('start with 10 increment by 5');
+// Пример с методом ниже.
+$table->unsignedBigInteger('id')->generatedAs()->always();
+```
+- `always()` - превращяет поле идентификации в заполняемое принудительно. _**(Только PostgreSQL)**_
+- `isGeometry()` - указывает полю тип `GEOMETRY` вместо `GEOGRAPHY` по умолчанию. _**(Только PostgreSQL)**_
+***
+## Creating indexes
+Методы для создания индексов в таблице:
+- `index()` - метод добавляет обычный инекс. Поддреживает три формата вызова
+1. `index(string index_name = null, string algorythm = null)` - создает именованный индекс с указанным алгоритмом. _**(Создание индекса с разным алгоритмом поддерживают не все СУБД)**_
+``` php
+// Пример применения метода index
+$table->unsignedTinyInteger('order')->index();
+$table->string('name', 40)->index('idx_name', 'hash');
+```
+2. `index(string index_field_name, string index_name = null, string algorythm = null)` - метод вызываетя у объекта, представляющего структуру создаваемой таблицы.
+```php
+// Пример использования
+$table->string('name', 40);
+$table->index('name');
+```
+3. `index(array index_fileds_names, string index_name = null, string algorythm = null)` - создает составной индекс по нескольким полям.
+``` php
+// Пример создания составного индекса
+$table->unsignedTinyInteger('order');
+$table->string('name', 40);
+$table->index(['name', 'order']);
+```
+- `unique(string index_name = null, string algorythm = null)` - создает уникальный индекс. Формат вызова аналогичен методоу `index()`.
+- `primary(string index_name = null, string algorythm = null)` - создает первичный ключ. Формат вызова аналогичен методоу `index()`. _(Следует вызывать у не автоинкрементных полей)_
+- `fullText(string index_name = null, string algorythm = null)` - создает полнотекстовый индекс. Формат вызова такой же как у метода `index()`. _**(Только MySQL & PostgreSQL)**_ 
+- `spatialIndex(string index_name = null)` - создает пространственный индекс. _**(Только MySQL)**_
+- `rawIndex(new Illuminate\Database\Qeury\Expression(expression), string index_name)` - создает индекс на основе SQL выражения. 
+``` php
+use \Illuminate\Database\Query\Expression;
+
+$table->string('name', 40);
+$table->rawIndex(new Expression('upper(name)'), 'index_name');
+```
+***
+## Creating Foreign Key

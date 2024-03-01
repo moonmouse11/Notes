@@ -4,5 +4,5 @@
 - [[Blade]]
 - [[Sail]]
 - [[Fucntions]]
-- [[Patterns]]
+- [[Laravel Patterns]]
 - 
