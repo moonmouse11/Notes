@@ -18,7 +18,7 @@ public $withinTransaction = false; // По умолчанию true
 ## Creating Tables.
 - `create(string table_name, callback Blueprint)` - метод для создания таблицы.
 Анонимная функция принимает объект класса `Illuminate\Database\Schema\Blueprint`. 
-### Creating fields.
+### Creating Fields.
 Код, создающий поля новой таблицы, создаются в анонимной функции, переданной вторым параметром.
 Поля создаются методами объекта структуры таблицы.
 #### Schema methods.
@@ -87,7 +87,7 @@ public $withinTransaction = false; // По умолчанию true
 - `softDeletes(string field_name = deleted_at, int precision = 0)` - отметка удаления. Формат `TIMESTAMP`. 
 - `softDeletesTz(string field_name = deleted_at, int precision = 0)` - аналогично методу выше с утетом временных зон.t
 ***
-## Add fields parameters.
+## Add Fields Parameters.
 Для указания дополнительных параметров полей используются методы:
 - `default(mixed value)` - задает для текущего поля значение по умолчанию.
 ```php
@@ -128,7 +128,7 @@ $table->unsignedBigInteger('id')->generatedAs()->always();
 - `always()` - превращяет поле идентификации в заполняемое принудительно. _**(Только PostgreSQL)**_
 - `isGeometry()` - указывает полю тип `GEOMETRY` вместо `GEOGRAPHY` по умолчанию. _**(Только PostgreSQL)**_
 ***
-## Creating indexes
+## Creating Indexes
 Методы для создания индексов в таблице:
 - `index()` - метод добавляет обычный инекс. Поддреживает три формата вызова
 1. `index(string index_name = null, string algorythm = null)` - создает именованный индекс с указанным алгоритмом. _**(Создание индекса с разным алгоритмом поддерживают не все СУБД)**_
@@ -208,3 +208,82 @@ Schema::table('posts', function (Blueprint $table) {
 На основе внешенго ключа создается индекс. Формат: `[foreign_table_name]_[primary_key_field]`.
 При необходимости можно удалить ключ по имени.
 ***
+## Add Table Parameters
+Дополнительные параметры таблиц можно указать с помощью следующих свойств объекта:
+- `charset` - устанавливает текствоую кодировку у всей таблицы. _**(Только MySQL)**_
+- `collation` - устанавливает последовательнсть сортировки записей у таблицы. _**(Только MySQL)**_
+- `engine` - устанавливает программное ядро для работы с таблицей. _**(Только MySQL)**_
+- `temporary()` - указывает создать временную таблицу. _**(Не поддерживается Microsoft SQL Server)**_
+``` php
+// Пример использоваия
+$table->charset = 'cp1251';
+$table->collation = 'cp1251_russian_ci';
+$table->temporary();
+$table->id();
+```
+***
+## Updating & Deleting
+### Updating Fields
+Для правки полей и индексов таблицы применяется статический метод `table()`.
+``` php
+// Пример использования
+Schema::table('table_name', function (Blueprint $table) {
+	// Код изменения структуры таблицы в callback функции
+});
+```
+_**Перед правкой полей таблицы необходимо установить пакет `doctrine/dbal`.**_
+Правка полей таблицы выполняется в 2 этапа.
+1. Задание новых параметров поля - вызовом необходимого метода как при создании.
+2. Указание исправить поле с помощью метода `change`.
+``` php
+// Пример кодв
+public function up(): void
+{
+	Schema::table('table_name', function (Blueprint $table) {
+		$table->text('description');
+		$table->string('name', 50)->unique()->change();
+	});
+}
+```
+- `renameColumn(string old_name field, string new_name_field)` - метод для переименования поля. _**(Переименование полей Enum и Set в 9 версии не поддерживается.)**_
+### Deleting Fields
+- `dropColumn(... string fields_name)` - метод удаляет из таблицы указанное поле.
+- `dropTimestamps()` - метод удаляет поля отметок содания и правки.
+- `dropTimestampsTz()` - аналогичен методу выше с утетом временных зон.
+- `dropRememberToken()` - удаляет поле `remember_token`.
+- `dropSoftDelete()` - метод удаляет отметки Soft Deletes.
+- `dropSoftDeleteTz()` - удаляет отметки Soft Deletes с учетом временных зон.
+_**(Правка и удаление нескольких полей одновременно в SQLite  в Laravel 9 не поддерживается)**_
+### Updating Indexes
+- `remaneIndex(string old_index_name, string new_index_name)` - метод для переименования индекса.
+``` php
+// Пример кода переименования индекса
+Schema::table('table_name', function (Blueprint $table) {
+	$table->renameIndex('old_index_name', 'new_index_name');
+});
+```
+### Deleting Indexes
+- `dropIndex(string index_name)` - удаляет обычный индекс.
+- `dropUnique(string index_name)` - удаляет уникальный индекс.
+- `dropPrimary(string index_name)` - удаляет ключевой индекс.
+- `dropFullText(string index_name)` - удаляет полнотекствоый индекс.
+- `dropSpatial(string index_name)` -  удаляет пространственный индекс.
+- `dropIndex([string first_field_name, string second_field_name])` - удаляет индекс, сгенерированный фреймворком. 
+### Deleting Foreign Keys
+- `dropForeign(string foriegn_key_name)` - метод для удаления внешнего ключа в стуктуре таблицы.
+- `dropForeign([string first_foriegn_key_name, string second_foreign_key_name])` - другая сигнатура метода выше.
+Перед изменением структуры связанной таблицы возможно потребуется запретить соблюдение ссылочной целостности. Это можно сделать с помощью метода `disableForeignKeyConstraints()`
+- `disableForeignKeyConstraints()` - отключает соблюдение ссылочной целостности таблицы.
+- `enableForeignKeyConstraints()` - обратно методу выше.
+### Updating & Deleting Tables
+- `rename(string old_table_name, string new_table_name)` - метод для переименования таблиц.
+- `drop(string table_name)` - удаляет указанную таблицу.
+- `dropIfExists(string table_name)` - проверяет существование таблицы и после удаляет ее. Не вызывает ошибок.
+``` php
+// Примеры использования методов удаления таблиц.
+Schema::rename('old_table_name', 'new_table_name');
+Schema::drop('table_name');
+Schema::dropIfExists('table_name')
+```
+***
+## Check Existing

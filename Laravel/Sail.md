@@ -5,5 +5,4 @@ _**Laravel Sail**_ - это инструмент командной строки
 - `composer require laravel/sail --dev`
 - `./vendor/bin/sail up`
 - `alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'` - установка псевдонима в bash.
-
 ***
