@@ -245,7 +245,108 @@ class Account extends Model
 }
 ```
 ## 4. Many to Many
-Связь "Многие ко многим" реализуется в три этапа.
-1. СоздатAccountь связующую таблицу
-2. объявить
-3. тоже объявить
+Связь "Многие ко многим" реализуется в три этапа:
+1. Создать связующую таблицу, содержащую два поля внешнего ключа. (По соглашению имена этих таблиц должны соответсвовать формату `[model_name]_id`. Сама связующая таблица по соглашению должна иметь имя `[model_name_a]_[model_name_b]` расположенные в алфавитном порядке). _(Создавать модель для связующей таблицы необязательно)._
+2. Обявить в связываемых моделях метод `belongsToMany()`. (Как правило его имя совпадает с именем второй связываемой таблицы).
+	- `belongsToMany(string second_model_class_name, string relation_table_name = null, string relation_field_name = null, string second_relation_field_name = null, string key_field_name = null, string secondary_key_field_name = null): BelongsToMany`  - метод формирует связь между двумя связующими таблицами.
+3. Объявить метод `belongsToMany()` во второй связующей таблице.
+###### Пример создания связи "Многие к многим" с соответсвием полей.
+``` php
+// Миграции
+Schema::create('machines', function (Blueprint $table) {
+	$table->id();
+	$table->string('title', 30);
+	$table->timestamps();
+});
+
+Schema::create('spares', function (Blueprint $table) {
+	$table->id();
+	$table->string('title', 30);
+	$table->timestamps();
+});
+// Миграция связующей таблицы
+Schema::create('machine_spare', function (Blueprint $table) {
+	$table->foreignId('machine_id')->constrained()->cascadeOnDelete();
+	$table->foreignId('spare_id')->constrained()->cascadeOnDelete();
+});
+
+// Модель Машины
+use App\Models\Spare;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+class Machine extends Model
+{
+	...
+	public function spares(): BelonsToMany
+	{
+		return $this->belongsToMany(Spare::class);
+	}
+}
+
+// Модель Детали
+use App\Models\Machine;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+class Spare extends Model
+{
+	...
+	public function machines(): BelonsToMany
+	{
+		return $this->belongsToMany(Machine::class);
+	}
+}
+```
+###### Пример создания связи "Многие к многим" без соответсвия полей.
+``` php
+// Миграции
+Schema::create('machines', function (Blueprint $table) {
+	$table->id('michine_id');
+	$table->string('title', 30);
+	$table->timestamps();
+});
+
+Schema::create('spares', function (Blueprint $table) {
+	$table->id('spare_id');
+	$table->string('title', 30);
+	$table->timestamps();
+});
+// Миграция связующей таблицы
+Schema::create('ms', function (Blueprint $table) {
+	$table->foreignId('machine')->constrained('michines', 'michine_id')
+		->cascadeOnDelete();
+	$table->foreignId('spare')->constrained('spares', 'spare_id')
+		->cascadeOnDelete();
+});
+
+// Модель Машины
+use App\Models\Spare;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+class Machine extends Model
+{
+	protected $primaryKey = 'michine_id';
+	...
+	public function spares(): BelonsToMany
+	{
+		return $this->belongsToMany(Spare::class, 'ms', 'machine', 'spare'
+			'michine_id', 'spare_id');
+	}
+}
+
+// Модель Детали
+use App\Models\Machine;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+class Spare extends Model
+{
+	protected $primaryKey = 'spare_id';
+	...
+	public function machines(): BelonsToMany
+	{
+		return $this->belongsToMany(Machine::class, 'ms', 'spare', 'machine'
+			'spare_id', 'michine_id');
+	}
+}
+```
+Каждый объект связанной модели поддерживает свойство `pivot`, хранящее объект с записью связующей таблицы. 
+ОБъект генерируется фреймворком Laravel и хранит поля с ключами связанных записей. (Если связущая модель имеет дополнительные поля, они в объект `pivot` по умолчанию не заносятся). 
