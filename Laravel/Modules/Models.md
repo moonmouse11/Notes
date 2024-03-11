@@ -554,3 +554,23 @@ class User extends Authenticatable
 Значения "преобразователя" можно отправить с кэш с помощью метода `shouldCache()` **(сокращает количество высичлений)**
 ***
 ## Virtual Fields
+**Витуальное поле** - поле, которое вычисляется самим фреймворком. Реализуется в виде преобразователя, содержащего тольео ацессор **(accessor)**.
+###### Пример создания "виртуального" поля в модели.
+``` php
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
+class Category extends Model
+{
+	...
+	protected function fullName(): Attribute
+	{  
+	    return Attribute::make(  
+	        get: fn ($value) => ($this->parent()) ?   
+				$this->parent()->name . ' - ' . $this->name : $this->name  
+	    );  
+	}
+	...
+	
+	$categoryFullName = $category->full_name;
+}
+```
