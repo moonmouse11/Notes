@@ -316,6 +316,7 @@ Schema::create('ms', function (Blueprint $table) {
 		->cascadeOnDelete();
 	$table->foreignId('spare')->constrained('spares', 'spare_id')
 		->cascadeOnDelete();
+	$table->text('some_very_important_info');
 });
 
 // Модель Машины
@@ -368,4 +369,157 @@ public function manyWithPivots(): BelongsToMany
 - Не содержит втоикрементный ключ. `public $incrementing = false,`
 - Все поля модели доступны для массового присваивания. `protected $guarded = []`.
 Если связующая таблица не содержит полей создания и обновления записи, рекомендуется обозначить свойство `public $timestams = false`.
-Связи с двумя моделями создаются с помощью метода 
+Связи с двумя моделями создаются с помощью метода `belongsTo`
+###### Пример применения метода `belongsTo()`
+``` php
+// Пример использования метода belongsTo()
+namespace App;
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+use App\Models\Machine;
+use App\Models\Spare;
+
+class MachineSpare extends Pivot 
+{
+	public $timestamps = false;
+
+	public function machine(): BelongsTo
+	{
+		return $this->belongsTo(Machine::class);
+	}
+
+	public function spare(): BelongsTo
+	{
+		return $this->belongsTo(Spare::class);
+	}
+}
+```
+При создании сввязи в связываемых моделях следует явно указать, что для обработки связующей таблицы должна использоваться связующая модель, и задать имена полей, который должны присутствовать в модели pivot.
+Связующая модель задается в  методе `using(string relation_model_class_name)`. Извлекаемые из связующей модели поля задаются в методе `withPivot(string field_name)`.
+###### Пример применения метода `using()`
+``` php
+use App\Models\MachineSpare;
+
+class Machine extends Model
+{
+	...
+	public function spares(): BelongsToMany
+	{
+		return $this->belongsToMany(Spare::class)->using(MachineSpare::class)
+			->withPivot('some_very_important_info');
+	}
+}
+```
+## Signing Models
+По умолчанию при правке или удалении записей вторичной модели Laravel не помечает связанную с ними запись первичной моедли как исправленную, обновляя в не значение поля отметки правки. Чтобы указать фреймворку помечать в таких случаях запись первичной модели как исправленную следуюет:
+- Объявить во вторичной модели `protected $touches`
+- Присвоить этому свойству массив с именами обратных связей.
+###### Пример применения свойства `touches`
+``` php
+class Post extends Model
+{
+	protected $touches = ['category'];
+}
+```
+## One To Many Through
+Фреймворк Laravel позволяет создать сквозную связь "Один со многими" между моделями через помежуточную.
+Для этого в начальной модели объявляется метод, создающий такую связь. (Обычно его имя совпадает с именем связанной конечной таблицы).
+- `hasManyThrough(string final_model_class_name, middle_model_class_name, string middle_model_foreing_key_field_name = null, string final_model_foreing_key_field_name = null, primary_model_field_name = null, string middle_model_key_field_name = null)` - метод для создания сквозной связи "Один ко многим".
+###### Пример создания сковзной связи "Один ко многим".
+``` php 
+// Пример сощдания "One To Many Through"
+use App\Models\Post;
+use App\Models\Offer;
+
+class Category extends Model
+{
+	...
+	public function offer(): HasManyThrough
+	{
+		return $this->hasManyThrough(Offer::class, Post::class);
+	}
+}
+```
+## One To One Through
+Сквозная связь "Один к одному" создается аналогично сквозной связи "Один со многими".
+- `hasOneThrough(string final_model_class_name, middle_model_class_name, string middle_model_foreing_key_field_name = null, string final_model_foreing_key_field_name = null, primary_model_field_name = null, string middle_model_key_field_name = null)` - метод для создания сквозной связи "Один к одному".
+###### Пример создания сквозной связи "Один к одному".
+``` php
+// Пример сощдания "One To One Through"
+use App\Models\Post;
+use App\Models\Offer;
+
+class Category extends Model
+{
+	...
+	public function offer(): HasOneThrough
+	{
+		return $this->hasOneThrough(Offer::class, Post::class);
+	}
+}
+```
+## Plug Models
+Записи заглушки - нужны для закрытия `null` при отсутствии связанной записи в таблице. 
+Можно настроить фреймворк Laravel выдавать запись-заглушку, представляющую собой объект связанной модели. 
+- `withDefault(array fields_values = null | callback function = null)` - метод для создания записи  заглушки.
+###### Пример создания записи-заглушки.
+``` php
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\User;
+
+class Post extends Model
+{
+	// Пример создания записи по умолчанию.
+	public function user(): BelongsTo
+	{
+		return $this->belongsTo(User::class)->withDefault();
+	}
+
+	// Пример создания записи массивом.
+	public function user(): BelongsTo
+	{
+		return $this->belongsTo(User::class)
+			->withDefault(['name' => 'admin']);
+	}
+
+	public function user(): BelongsTo
+	{
+		return $this->belongsTo(User::class)
+			->withDefault(function ($user, $bb) {
+				$user->name = 'admin' . config('app.name');
+			});
+	}
+}
+```
+## Closed Relation
+Фреймворк Laravel позволяет создать закнутые связи - в которых таблица ссылается сама на себя.
+Пример - использование вложенности с помощью поля `parent_id`.
+###### Пример создания замкнутой связи.
+``` php
+// Пример создания поля 'parent_id' в таблице
+Schema::create('categories', function (Blueprint $table) {
+	$table->bigInteger('parent_id');  
+	$table->foreign('parent_id')->references('id')  
+	    ->on('categories')->restrictOnDelete();
+});
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;  
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+// Пример создания замкнутой связи в модеди.
+class Category extends Model
+{
+	public function categories(): HasMany  
+	{  
+	    return $this->hasMany(self::class, 'parent_id');  
+	}  
+  
+	public function parent(): BelongsTo  
+	{  
+	    return $this->belongsTo(self::class, 'parent_id');  
+	}
+}
+```
+***
+# Model Methods
