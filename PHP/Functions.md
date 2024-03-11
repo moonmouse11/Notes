@@ -26,3 +26,5 @@
 - `array_pad(array $array, int $length, mixed $value): array` - дополняет массив значениями до заданной длины.
 - `count(Countable|array $value, int $mode = COUNT_NORMAL): int` - функция возвращает количество элементов в массиве.
 - `array_chunk(array $array, int $length, bool $preserve_keys = false): array` - функция разбивает массив на части.
+- `fastcgi_finish_request(): bool` - функция сбрасывает все запрошенные данные клиенту и завершает обработку запроса.
+- 
