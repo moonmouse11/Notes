@@ -4,6 +4,7 @@
 **Модель** - программный модуль, служащий для вазимодействия с определенной базой данных.  Для извлечения значений полей, добавления, правки и удаления записей. 
 Так же модель предоставляет прямой доступ к построителю запросов, посредством которого производится выборка записей.
 Отдельный объект модели хранит значения полей отдельной записи таблицы. Через объект можно обратиться к значениям полей через одноименные свойства и предоставляет ряд методов для обработки записи.
+_**Рекомендуется размещать модели по дополнительным директориям и прописывать namespace**_
 ***
 ## Creating Model
 Для создания модели рекомендуется воспользоваться командой `php artisan make:model [model_name]`.
@@ -114,17 +115,23 @@ Schema::create('posts', function (Blueprint $table){
 	...
 });
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Post;
+
 class Category extends Model {
-	public function posts() : Illuminate\Database\Eloquent\Relations\HasMany
+	public function posts(): HasMany
 	{
-		return $this->hasMany(App\Models\Post::class);
+		return $this->hasMany(Post::class);
 	}
 }
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Category;
+
 class Post extends Model {
-	public function category(): Illuminate\Database\Eloquent\Relations\BelongsTo
+	public function category(): BelongsTo
 	{
-		return $this->belongsTo(App\Models\Category::class);
+		return $this->belongsTo(Category::class);
 	}
 }
 ```
@@ -145,21 +152,27 @@ Schema::create('posts', function (Blueprint $table){
 	...
 });
 
+use App\Models\Post;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class Category extends Model {
-	public function posts() : Illuminate\Database\Eloquent\Relations\HasMany
+	public function posts(): HasMany
 	{
-		return $this->hasMany(App\Models\Post::class, 'category', 'title');
+		return $this->hasMany(Post::class, 'category', 'title');
 	}
 }
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Category
 
 class Post extends Model {
 	protected $primaryKey = 'title';
 	protected $keyType = 'string';
 	public $incrementing = false;
 	
-	public function category(): Illuminate\Database\Eloquent\Relations\BelongsTo
+	public function category(): BelongsTo
 	{
-		return $this->belongsTo(App\Models\Category::class, 'category', 'title');
+		return $this->belongsTo(Category::class, 'category', 'title');
 	}
 }
 ```
@@ -174,6 +187,7 @@ class Post extends Model {
 ###### Пример создания связи "Один с одним из многих".
 ``` php
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Post;
 
 class Category extends Model
 {
@@ -400,6 +414,7 @@ class MachineSpare extends Pivot
 ###### Пример применения метода `using()`
 ``` php
 use App\Models\MachineSpare;
+use App\Models\Spare;
 
 class Machine extends Model
 {
@@ -528,6 +543,8 @@ class Category extends Model
 - `save()` - статический метод для сохранения записи в БД.
 - `delete()` - статический метод, удаляет запись из БД.
 - `create()` - статический метод, создает объект модели.
+Подробнее:
+	[[Model Methods]]
 ***
 ## Accessors & Mutator
 Преобразование типов полей между моделями `Eloquent` и базой данных.
@@ -574,3 +591,4 @@ class Category extends Model
 	$categoryFullName = $category->full_name;
 }
 ```
+***
