@@ -27,4 +27,5 @@
 - `count(Countable|array $value, int $mode = COUNT_NORMAL): int` - функция возвращает количество элементов в массиве.
 - `array_chunk(array $array, int $length, bool $preserve_keys = false): array` - функция разбивает массив на части.
 - `fastcgi_finish_request(): bool` - функция сбрасывает все запрошенные данные клиенту и завершает обработку запроса.
+- `http_response_code(int $response_code = 0): int|bool` - функция получает или задает коды ответов HTTP.
 - 
