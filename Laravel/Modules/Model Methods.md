@@ -73,3 +73,18 @@ Category::updateOrCreate(['title' => 'Category title', 'parent_id' => 1],
 - `trashed(): bool` - возвращает `true` если запись была "мягко" удалена.
 - `forceDelete()` - полностью удаляет запись из базы данных.
 ***
+## Work with relations
+- `associate(object relation_model)` - метод для создания обратной связи между объектами.
+- `saveMany(array relation_objects)` - методя связывает все записи, содержащиеся в переданном массиве.
+- `dissociate()` - метод для удаления связи  между объектами.
+- `createMany(array relation_objects)` - метод создает новые записи, заносит в поля каждой их них значения из переданного массива и связывает их.
+- `push()` - метод для сохранения текущей и связанных записей в базу данных.
+- `attach(string record_key, array fields_value = null | array keys)` -  метод для связывания объектов "Один ко многим". 
+- `sync(array records_keys, bool disconnect_records = true)` -  связывает с текущей записью объекты по указанным ключам. Второй параметр для сохранения старых связей с записью.
+- `syncWithoutDetaching(array records_keys)` - аналогично методу выше, без отсоединения старых связанных записей.
+- `syncWithPivotWalues(array keys, array values, bool disconnect_records = true)` - метод связывает с текущей записью переданные в аргумент записи, и заносит данные в дополнительные поля.
+- `toggle(array records_keys)` - перебирает заданный массив с ключами записей, и проверяет связанна ли текущая запись с переданными. Если запись связана - то ее отсоединяют. Если нет - наоборот.
+- `updateExistingPivot(string record_key, array record_fields)` - обновляет значения указанной связующей записи.
+***
+## Copy Records
+- `replicate(array ignoring_fields)` - метод копирует текущую запись, игнорируя заполнение переданных в параметрах полей.
