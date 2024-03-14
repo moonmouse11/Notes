@@ -88,3 +88,127 @@ Category::updateOrCreate(['title' => 'Category title', 'parent_id' => 1],
 ***
 ## Copy Records
 - `replicate(array ignoring_fields)` - метод копирует текущую запись, игнорируя заполнение переданных в параметрах полей.
+``` php
+$category = Category::firstOrNew(['name' => 'Грузовой']);
+
+// Создает первую запись
+$post1 = Post::create([
+	'title' => 'ЗИЛ', 
+	'content' => 'Старый, ржавый', 
+	'address' => 'Писать мне', 
+	'price' => 1000000, 
+	'rubric_id' => $rubric->id, 
+	'user_id' => $user->id
+]);
+
+// Создаем сторую запись на основе первой 
+$post2 = $post1->replicate(['content', 'price']);
+// Заносим новые значения в поля скопированной записи.
+$bb2->fill(['content' => 'Новый', 'price' => 10000000]);
+$bb2->save();
+```
+***
+## Mass Work With Records
+Для добавления, правки и удаления большого количества данных рекомендуется использовать простроитель запросов `DB`, для повышения быстродействия. 
+Его методы можно вызвать у класса модели как статические, либо у объекта модели как обычные.
+При использовании `DB` 
+- Поля `created_at` и `updated_at` - не заполняются и не изменяются.
+- Методы `save()` и `delete()` - не выполняются.
+- События моделей не генерируются.
+### Mass Creating Records
+Для массового добавления записией применяются методы:
+- `insert(array fields_value): bool` - метод для массового добавления записей в таблицу. Методв выдаст ошибку при добавлении записей с индентичным уникальным ключом.
+``` php
+// Пример использования метода insert
+$category1 = Category::firstOrNew(['name' => 'Легковой']);
+Post::insert([
+	'title' => 'Запорожец', 
+	'content' => 'Старый, ржавый, сильно битый', 
+	'address' => 'На помойке', 
+	'price' => 10000, 
+	'rubric_id' => $category1->id, 
+	'user_id' => $user->id
+]); 
+
+$category2 = Category::firstOrNew(['name' => 'Грузовой']); 
+// Добавляем сразу две записи 
+Post::insert([
+	[
+		'title' => 'МАЗ', 
+		'content' => 'Старый, заслуженный', 
+		'address' => 'На стоянке', 
+		'price' => 4000000, 
+		'rubric_id' => $category2->id, 
+		'user_id' => $user->id
+	], 
+	[
+		'title' => 'ГАЗ', 
+		'content' => 'Совсем новый', 
+		'address' => 'На стоянке', 
+		'price' => 70000000, 
+		'rubric_id' => $category2->id, 
+		'user_id' => $user->id
+	]
+]);
+```
+- `insertOrIgnore(array fields_value)` - аналогичен методу выше, но при добавлении записей с одинаковыми ключами - ошибка будет проигнорировна.
+- `insertUsing(array fields_value, inner_querry)` - метод добавляет записи, извлеченные переданным в аргументы "вложенным запросом".
+``` php
+// Пример работы метода insertUsing()
+OldPost::insertUsing(
+	['title', 'content', 'address', 'price', 'rubric_id', 'user_id'], 
+	Post::select('title', 'content', 'address', 'price', 'rubric_id', 'user_id') 
+		->where('created_at', '<', now()->subYears(10)) 
+);
+```
+- `insertGetId(array record_fields, string counter_name)` - добавляет запись и возвращает ее сегенерированный идентификатор. Второй параметр для PostgreSQL - указывается имя счетчика для генерации идентификатора.
+### Mass Updating Records
+- `update(array record_fields)` - метод "построителя запросов" для массового обновления записей.
+- `where(string field_name, mixed field_value)` - метод для поиска записей по указанным в аргументах параметрам.
+- `updateOrInsert(array search_model_fields, array update_model_fields)` - метод аналогичен методу `updateOrCreate`. Только в качестве результата возвращает объект `DB`.
+``` php
+// Пример использования метода updateOrCreate
+use Illuminate\Support\Facades\Hash; 
+User::updateOrInsert([
+	'email' => 'editor@bboard.ru', 
+	'name' => 'editor'], 
+	['password' => Hash::make('editor')
+]);
+```
+- `upsert(array need_fields, array search_fields, array updateing_fields)` - метод исправляет записи моделей, удовлетворяющие заданным условиям.
+``` php
+// Пример использования метода upsert
+User::upsert(
+[ 
+	 [
+		 'email' => 'editor@bboard.ru', 
+		 'name' => 'editor', 
+		 'password' => Hash::make('supereditor')
+	],
+	[
+		'email' => 'trainee@bboard.ru', 
+		'name' => 'trainee', 
+		'password' => Hash::make('12345')
+	] 
+], 
+['email'], 
+['password']
+);
+```
+### Mass Deleting Records
+- `delete(): int` - метод для массовго удаления записей. В качестве результата возвращает количество удаленных записей. _**(Если вызвать на коллекции без фильтрации - удалит все записи модели).**_
+- `truncate()` - метод удаляет все записи таблицы и сбрасывает счетчик автоинкремента.
+***
+## DB Facade
+`Illuminate\Support\Facades\DB`
+Объект построителя запросов. Этот фасад пригодится, если необходимо добавить в таблицу данные, но связанная модель еще не создана. 
+Методы `DB`, необходиые для работы:
+- `connection(string database_name)` - метод для указания базы данных, с которой предстоит работать.
+- `table(string table_name)` - метод для указания таблицы, с которой предстоит работать.
+``` php
+use Illuminate\Support\Facades\DB; 
+// Добавляем запись в таблицу rubrics базы данных по умолчанию 
+DB::table('categories')->insert(['title' => 'Техника']);  
+// Добавляем запись в таблицу offers базы данных mysql 
+DB::connection('mysql')->table('offers')->insert(['many_data_values']);
+```
