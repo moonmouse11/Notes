@@ -48,7 +48,7 @@ GIT_AUTHOR_EMAIL - почта пользователя.
 - `git branch -M` - переименовывает ветку.
 - `git branch [new_branch_name] [start_commit]` - создание новой ветки с определенного коммита.
 - `git branch -d [branch_name]` - удаляет ветку из репозитория.
-- `git branch --set-upstream [local_branch_name] [remote_branch]` - создает локальную ветку в связке с удаленной.
+- `git branch --set-upstream-to [local_branch_name] [remote_branch]` - создает локальную ветку в связке с удаленной.
 - `git rm -f [files_name]` - удаляет файл из репозитория.
 - `git rm --cached [files_name]` - удаляет файл из индекса.
 - `git mv [file_name] [new_file_name]` - перемещает или переименовывает файл.
