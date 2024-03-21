@@ -101,6 +101,7 @@ $activeCustomers = Customer::all()->where('active', 1); //Laravel collection
 Методы для извлечения первой записи из таблицы базы данных.
 - `first(array|string $columns = ['*'])` - статический метод, возвращает первую запись из БД с указанными в параметре полями.
 - `firstOrFail(array|string $columns = ['*'])` - метод возвращает первую запись из базы данных с указанными полями, или возвращает ошибку.
-- `sole()` -
-- `firstOr()` - 
+- `sole(array|string $columns = ['*'])` - метод аналогичен методу выше, но если найдено больше одной записи в базе данных - выбрасываетс исключение.
+- `firstOr(Closure|array|string $columns = ['*'], Closure $callback = null)` - аналогичен методу `first`. В случае отсутвия записей в таблицу возвращается результат, заданный callback функцией в параметрах.
 ###### Searching records.
+

@@ -1,8 +1,7 @@
-# Docker-compose
+# Docker-Compose
 ***
 `docker-compose.yaml` - исполняемый файл для запуска контейнеров.
-#### Example
-
+###### Example
 ```yaml
 version: '3' // версия композа
 
@@ -28,6 +27,7 @@ services: // начало сервисов
 - `docker-compose services` - список сервисов.
 - `docker-compose images` - образ для сборки контейнера.
 - `docker-compose build` - местоположение Dockerfile.
+- `docker-compose build --no-cache` - собирает контейнеры заново, сбрасывая весь cache.
 - `docker-compose depends_on` - указание на последовательность запуска сервисов.
 - `docker-compose envoronment` - переменные окружения.
 - `docker-compose volumes` - маппинг папок и томов.
