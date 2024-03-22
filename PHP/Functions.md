@@ -28,4 +28,7 @@
 - `array_chunk(array $array, int $length, bool $preserve_keys = false): array` - функция разбивает массив на части.
 - `fastcgi_finish_request(): bool` - функция сбрасывает все запрошенные данные клиенту и завершает обработку запроса.
 - `http_response_code(int $response_code = 0): int|bool` - функция получает или задает коды ответов HTTP.
-- 
+- `filter_var(mixed $value, int $filter = FILTER_DEFAULT, array|int $options = 0): mixed` - функция фильтрует переменную с помощью определённого фильтра.
+- `spl_autoload_register(?callable $callback = null, bool $throw = true, bool $prepend = false): bool` - регистрирует функцию в autoload. 
+- `http_build_query(array|object $data, string $numeric_prefix = "", ?string $arg_separator = null, int $encoding_type = PHP_QUERY_RFC1738): string` - функция генерирует URL-кодированную строку запроса из предоставленного ассоциативного (или индексированного) массива.
+`
