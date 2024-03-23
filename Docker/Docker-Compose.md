@@ -1,8 +1,8 @@
 # Docker-Compose
 ***
-`docker-compose.yaml` - исполняемый файл для запуска контейнеров.
+`docker-compose.yml` - исполняемый файл для запуска контейнеров.
 ###### Example
-```yaml
+```yml
 version: '3' // версия композа
 
 services: // начало сервисов
