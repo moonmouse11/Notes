@@ -11,7 +11,7 @@
 - `array_keys(array $array, mixed $filter_value, bool $strict = false): array` - функция возвращает массив ключей переданного в аргументы массива.
 - `header(string $header, bool $replace = true, int $response_code = 0): void` - функция отправляет необработанный заголовок страницы.
 - `method_exists(object|string $object_or_class, string $method): bool` - функция проверяет наличие указанного метода у объекта.
-- `compact(array|string $var_name, array|string ...$var_names): array`  - функция создает массив, содержащий переменные и их значения.
+- `compact(array|string $var_name, array|string ...$var_names): array`  - функция создает массив, содержащий переменные и их значения. _**(Не могут быть переданы суперглобальные массивы)**_.
 - `extract(array &$array, int $flags = EXTR_OVERWRITE, string $prefix = ""): int` - функция обратна функции выше, извлекает переменные из массива.
 - `str_contains(string $haystack, string $needle): bool` - функция  определяет, содержит ли строка заданную подстроку.
 - `strlen(string $string): int` - функция вовозращает длинну строки.
@@ -31,4 +31,9 @@
 - `filter_var(mixed $value, int $filter = FILTER_DEFAULT, array|int $options = 0): mixed` - функция фильтрует переменную с помощью определённого фильтра.
 - `spl_autoload_register(?callable $callback = null, bool $throw = true, bool $prepend = false): bool` - регистрирует функцию в autoload. 
 - `http_build_query(array|object $data, string $numeric_prefix = "", ?string $arg_separator = null, int $encoding_type = PHP_QUERY_RFC1738): string` - функция генерирует URL-кодированную строку запроса из предоставленного ассоциативного (или индексированного) массива.
-`
+- `mb_strtoupper(string $string, ?string $encoding = null): string` - функция приводит строку в верхнему регистру. _**(Для кодировки больше одного байта)**_
+- `mb_strtolower(string $string, ?string $encoding = null): string` - функция приводит строку к нижнему реистру. _**(Для кодировки больше одного байта)**_
+- `array_key_exists(string|int|float|bool|resource|null $key, array $array): bool` - функция проверяет, содежит ли массив зпдпнный ключ или индекс.
+- `call_user_func(callable $callback, mixed ...$args): mixed` - функция вызывает callback-функцию, переданную первым параметром, и передаёт остальные параметры в качестве аргументов. 
+- `call_user_func_array(callable $callback, array $args): mixed` - функция вызывает callback-функцию `callback`, с параметрами из массива `args`.
+- 

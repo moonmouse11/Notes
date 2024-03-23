@@ -6,18 +6,18 @@
 version: '3' // версия композа
 
 services: // начало сервисов
-	php: // название
-		image: // контейнер
-		command: // команда контенеру
-		volumes: // пути файлов
-		ports: // порты
-		build: // сборка
-			context: //
-			dockerfile: // путь к Dockerfile
-		working_dir: // указание рабочей директории контейнера
-		enviroment: // окружение
-		depends_on: // зависимость от другого контейнера
-		comtaimer_name: // название контейнера
+  php: // название
+    image: // контейнер
+    command: // команда контенеру
+    volumes: // пути файлов
+    ports: // порты
+    build: // сборка
+      context: //
+      dockerfile: // путь к Dockerfile
+    working_dir: // указание рабочей директории контейнера
+    enviroment: // окружение
+    depends_on: // зависимость от другого контейнера
+    container_name: // название контейнера
 ```
 
 `docker-compose up --build -d`
