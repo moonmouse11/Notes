@@ -36,4 +36,15 @@
 - `array_key_exists(string|int|float|bool|resource|null $key, array $array): bool` - функция проверяет, содежит ли массив зпдпнный ключ или индекс.
 - `call_user_func(callable $callback, mixed ...$args): mixed` - функция вызывает callback-функцию, переданную первым параметром, и передаёт остальные параметры в качестве аргументов. 
 - `call_user_func_array(callable $callback, array $args): mixed` - функция вызывает callback-функцию `callback`, с параметрами из массива `args`.
+- `spl_autoload_call(string $class): void` - функцию запускают для ручного поиска класса или интерфейса через зарегистрированные методы очереди.
+- `func_get_args(): array` - функция возвращает массив, который содержит список аргументов функции.
+- `func_num_args(): int` - возвращает количество аргументов, переданных функции.
+- `func_get_arg(int $position): mixed` - функция возвращает указанный аргумент, из переданных функции.
+- `function_exists(string $function): bool` - проверяет существование указанной в аргументе функции.
+- `get_defined_functions(bool $exclude_disabled = true): array` - возвращает массив всех определенных функций.
+- `register_shutdown_function(callable $callback, mixed ...$args): void` - регистрирует функцию, которая выполняется при завершении работы скрипта.
+- `register_tick_function(callable $callback, mixed ...$args): bool` - регистрирует функцию, которая должна вызываться при каждом "тике".
+- `unregister_tick_function(callable $callback): void` - обратна функции выше.
+- `forward_static_call(callable $callback, mixed ...$args): mixed` - Вызов пользовательской функции или метода, заданные в параметре callback с последующими аргументами. Эта функция должна вызываться в контексте метода и не может быть вызвана вне класса. Она использует позднее статическое связывание.
+- `forward_static_call_array(callable $callback, array $args): mixed` - Вызывает пользовательскую функцию или метод, заданные в параметре callback. Эта функция должна вызываться в контексте метода и не может быть вызвана вне класса. Она использует позднее статическое связывание. Все аргументы пересылаются в метод по значению и в виде массива, аналогично `call_user_func_array()`.
 - 
