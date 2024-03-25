@@ -1,4 +1,4 @@
-# Functions
+[]()# Functions
 ***
 - `array_map(?callable $callback, array $array, array ...$arrays)` - применяет callback ко всем элементам переданного массива.
 - `array_filter(array $array, ?callable $callback = null, int $mode = 0): array` - фильтрует элементы массива с помощью callback.

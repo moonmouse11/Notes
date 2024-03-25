@@ -104,4 +104,5 @@ $activeCustomers = Customer::all()->where('active', 1); //Laravel collection
 - `sole(array|string $columns = ['*'])` - метод аналогичен методу выше, но если найдено больше одной записи в базе данных - выбрасываетс исключение.
 - `firstOr(Closure|array|string $columns = ['*'], Closure $callback = null)` - аналогичен методу `first`. В случае отсутвия записей в таблицу возвращается результат, заданный callback функцией в параметрах.
 ###### Searching records.
-
+Методы для поиска записей в базе данных:
+- `find`
