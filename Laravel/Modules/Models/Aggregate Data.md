@@ -105,4 +105,9 @@ $activeCustomers = Customer::all()->where('active', 1); //Laravel collection
 - `firstOr(Closure|array|string $columns = ['*'], Closure $callback = null)` - аналогичен методу `first`. В случае отсутвия записей в таблицу возвращается результат, заданный callback функцией в параметрах.
 ###### Searching records.
 Методы для поиска записей в базе данных:
-- `find`
+- `find()` - 
+- `findMany()` - 
+- `findOrFail()` - 
+- `findOrNew()` - 
+- `firstWhere()` - 
+###### Filter records.
