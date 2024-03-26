@@ -1,5 +1,6 @@
-[]()# Functions
+# Functions
 ***
+## Array
 - `array_map(?callable $callback, array $array, array ...$arrays)` - применяет callback ко всем элементам переданного массива.
 - `array_filter(array $array, ?callable $callback = null, int $mode = 0): array` - фильтрует элементы массива с помощью callback.
 - `parse_url(string $url, int $component = -1)` - парсит адресную строку, для использования лучше подсмотреть компоненты.
@@ -47,10 +48,12 @@
 - `unregister_tick_function(callable $callback): void` - обратна функции выше.
 - `forward_static_call(callable $callback, mixed ...$args): mixed` - Вызов пользовательской функции или метода, заданные в параметре callback с последующими аргументами. Эта функция должна вызываться в контексте метода и не может быть вызвана вне класса. Она использует позднее статическое связывание.
 - `forward_static_call_array(callable $callback, array $args): mixed` - Вызывает пользовательскую функцию или метод, заданные в параметре callback. Эта функция должна вызываться в контексте метода и не может быть вызвана вне класса. Она использует позднее статическое связывание. Все аргументы пересылаются в метод по значению и в виде массива, аналогично `call_user_func_array()`.
+## Password
 - `password_hash(string $password, string|int|null $algo, array $options = []): string` - функция создает хэш-пароля, используя необратимый алгоритм хеширования.
 - `password_algos(): array` - функция возвращает полный список зарегистрированных идентификаторов алгоритмов шифрований.
 - `password_get_info(string $hash): array` - возвращает информацию о заданном хэше.
 - `password_needs_rehash(string $hash, string|int|null $algo, array $options = []): bool` - валидация переданного хэша по переданному в аргументы алгоритму.
 - `password_verify(string $password, string $hash): bool` - функция проверяет соотвествие пароля хэшу.
 - `crypt(string $string, string $salt): string` - функция возвращает хешированную строку, полученную с помощью стандартного алгоритма UNIX, основанного на DES или другого алгоритма.
+## Session
 - 
