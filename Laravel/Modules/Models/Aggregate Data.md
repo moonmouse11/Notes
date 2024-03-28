@@ -105,9 +105,43 @@ $activeCustomers = Customer::all()->where('active', 1); //Laravel collection
 - `firstOr(Closure|array|string $columns = ['*'], Closure $callback = null)` - аналогичен методу `first`. В случае отсутвия записей в таблицу возвращается результат, заданный callback функцией в параметрах.
 ###### Searching records.
 Методы для поиска записей в базе данных:
-- `find()` - 
-- `findMany()` - 
-- `findOrFail()` - 
-- `findOrNew()` - 
-- `firstWhere()` - 
+- `find($key, $default = null)` - метод ищет запись по заданному ключу.
+- `findMany(Arrayable|array $ids, array|string $columns = ['*'])` - метод ищет записи, по заданному ключу.
+- `findOrFail(mixed $id, array|string $columns = ['*'])` - метод ищет запись по заданному ключу, если запись не найдена - выбрасывается исключение `ModelNotFoundException`.
+- `findOrNew(mixed $id, array|string $columns = ['*'])` - метод ищет запись по заданному ключу, если запись не найдена - создает новую, с полями из аргументов.
+- `firstWhere(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` -  метод ищет первую запись, удовлетворяющую заданному условию. Возвращает объект найденной записи.
 ###### Filter records.
+- `where()` -
+- `orWhere()` -
+- `whereNot()` - 
+- `oeWhereNot()` - 
+- `whereColumn()` - 
+- `orWhereColumn()` -
+- `whereDate()` -
+- `orWhereDate()` -
+- `whereDay()` - 
+- `orWhereDay()` - 
+- `whereMonth()` -
+- `orWhereMonth()` -
+- `whereTime()` -
+- `orWhereTime()` -
+- `whereBetween()` -
+- `whereNotBetween()` -
+- `orWhereBetween()` -
+- `orWhereNotBetween()` -
+- `whereBetweenColumns()` -
+- `whereNotBetweenColunms()` - 
+- `orWhereBetweenColumns()` -
+- `orWhereNotBetweenColunms()` - 
+- `whereIn()` - 
+- `whereIntegerInRaw()` -
+- `whereNotIn()` - 
+- `whereIntegerNotInRaw()` -
+- `orWhereIn()` - 
+- `orWhereIntegerInRaw()` - 
+- `orWhereNotIn()` - 
+- `orWhereIntegerNotInRaw()` - 
+- `whereNull()` - 
+- `whereNotNull()` - 
+- `orWhereNull()` - 
+- `orWhereNotNull()` - 

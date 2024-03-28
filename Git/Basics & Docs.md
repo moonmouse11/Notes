@@ -1,4 +1,4 @@
-# Basics & Docs
+ # Basics & Docs
 ***
 ## Introduction & Terminal commands
 - `git help --all` - выводит все команды Git.
