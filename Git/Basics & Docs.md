@@ -19,6 +19,8 @@
 - `git add . --interactive` - интерактивный режим добавления файла в индекс.
 - `git status` - показывает состояние индекса репозитория на данный момент.
 - `git config -l` - выводит содержимое конфигурационного файла с полным названием переменных.
+- `git config branch.autosetuprebase always` - устанавливает автоматический `rebase` для новых веток.
+- `git config branch.[branch_name].rebase true` - устанавливает автоматический `rebase` для указанной ветки.
 - `git config user.name "[user_name]"` - установка имени пользователя.
 - `git config user.email "[user_email]"` - установка почты пользователя.
 ```config

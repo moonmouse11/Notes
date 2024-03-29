@@ -2,9 +2,7 @@
 
 ## SQL Language
 - [[SQL Main]]
-## DB
-- [[MariaDB]]
-- [[Clickhouse]]
-- [[MySQL]]
-- [[PostgreSQL]]
-- [[SQLite]]
+## DBMS Models
+- [[Relation SQL Databases]]
+- [[NoSQL Databases]]
+- 

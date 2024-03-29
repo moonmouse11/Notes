@@ -111,37 +111,37 @@ $activeCustomers = Customer::all()->where('active', 1); //Laravel collection
 - `findOrNew(mixed $id, array|string $columns = ['*'])` - метод ищет запись по заданному ключу, если запись не найдена - создает новую, с полями из аргументов.
 - `firstWhere(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` -  метод ищет первую запись, удовлетворяющую заданному условию. Возвращает объект найденной записи.
 ###### Filter records.
-- `where()` -
-- `orWhere()` -
-- `whereNot()` - 
-- `oeWhereNot()` - 
-- `whereColumn()` - 
-- `orWhereColumn()` -
-- `whereDate()` -
-- `orWhereDate()` -
-- `whereDay()` - 
-- `orWhereDay()` - 
-- `whereMonth()` -
-- `orWhereMonth()` -
-- `whereTime()` -
-- `orWhereTime()` -
-- `whereBetween()` -
-- `whereNotBetween()` -
-- `orWhereBetween()` -
-- `orWhereNotBetween()` -
-- `whereBetweenColumns()` -
-- `whereNotBetweenColunms()` - 
-- `orWhereBetweenColumns()` -
-- `orWhereNotBetweenColunms()` - 
-- `whereIn()` - 
-- `whereIntegerInRaw()` -
-- `whereNotIn()` - 
-- `whereIntegerNotInRaw()` -
-- `orWhereIn()` - 
-- `orWhereIntegerInRaw()` - 
-- `orWhereNotIn()` - 
-- `orWhereIntegerNotInRaw()` - 
-- `whereNull()` - 
-- `whereNotNull()` - 
-- `orWhereNull()` - 
-- `orWhereNotNull()` - 
+- `where(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` -
+- `orWhere(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` -
+- `whereNot(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` - 
+- `orWhereNot(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` - 
+- `whereColumn(Expression|string|array $first, string|null $operator = null, string|null $second = null, string|null $boolean = 'and')` - 
+- `orWhereColumn(Expression|string|array $first, string|null $operator = null, string|null $second = null)` -
+- `whereDate(Expression|string $column, DateTimeInterface|string|null $operator, DateTimeInterface|string|null $value = null, string $boolean = 'and')` -
+- `orWhereDate(Expression|string $column, DateTimeInterface|string|null $operator, DateTimeInterface|string|null $value = null)` -
+- `whereDay(Expression|string $column, DateTimeInterface|string|int|null $operator, DateTimeInterface|string|int|null $value = null, string $boolean = 'and')` - 
+- `orWhereDay(Expression|string $column, DateTimeInterface|string|int|null $operator, DateTimeInterface|string|int|null $value = null)` - 
+- `whereMonth(Expression|string $column, DateTimeInterface|string|int|null $operator, DateTimeInterface|string|int|null $value = null, string $boolean = 'and')` -
+- `orWhereMonth(Expression|string $column, DateTimeInterface|string|int|null $operator, DateTimeInterface|string|int|null $value = null)` -
+- `whereTime(Expression|string $column, DateTimeInterface|string|null $operator, DateTimeInterface|string|null $value = null, string $boolean = 'and')` -
+- `orWhereTime(Expression|string $column, DateTimeInterface|string|null $operator, DateTimeInterface|string|null $value = null)` -
+- `whereBetween(Expression|string $column, iterable $values, string $boolean = 'and', bool $not = false)` -
+- `whereNotBetween(Expression|string $column, iterable $values, string $boolean = 'and')` -
+- `orWhereBetween(Expression|string $column, iterable $values)` -
+- `orWhereNotBetween(Expression|string $column, iterable $values)` -
+- `whereBetweenColumns(Expression|string $column, array $values, string $boolean = 'and', bool $not = false)` -
+- `whereNotBetweenColumns(Expression|string $column, array $values, string $boolean = 'and')` - 
+- `orWhereBetweenColumns(Expression|string $column, array $values)` -
+- `orWhereNotBetweenColumns(Expression|string $column, array $values)` - 
+- `whereIn(Expression|string $column, mixed $values, string $boolean = 'and', bool $not = false)` - 
+- `whereIntegerInRaw(string $column, Arrayable|array $values, string $boolean = 'and', bool $not = false)` -
+- `whereNotIn(Expression|string $column, mixed $values, string $boolean = 'and')` - 
+- `whereIntegerNotInRaw(string $column, Arrayable|array $values, string $boolean = 'and')` -
+- `orWhereIn(Expression|string $column, mixed $values)` - 
+- `orWhereIntegerInRaw(string $column, Arrayable|array $values)` - 
+- `orWhereNotIn(Expression|string $column, mixed $values)` - 
+- `orWhereIntegerNotInRaw(string $column, Arrayable|array $values)` - 
+- `whereNull(string|array|Expression $columns, string $boolean = 'and', bool $not = false)` - 
+- `whereNotNull(string|array|Expression $columns, string $boolean = 'and')` - 
+- `orWhereNull(string|array|Expression $column)` - 
+- `orWhereNotNull(Expression|string $column)` - 
