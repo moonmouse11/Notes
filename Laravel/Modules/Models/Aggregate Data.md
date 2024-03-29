@@ -111,7 +111,23 @@ $activeCustomers = Customer::all()->where('active', 1); //Laravel collection
 - `findOrNew(mixed $id, array|string $columns = ['*'])` - метод ищет запись по заданному ключу, если запись не найдена - создает новую, с полями из аргументов.
 - `firstWhere(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` -  метод ищет первую запись, удовлетворяющую заданному условию. Возвращает объект найденной записи.
 ###### Filter records.
-- `where(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` -
+- `where(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` - метод отбирает записи, удовлетворяющие заданным в параметрах условиям. Формирует SQL-запрос с командой `WHERE`.
+``` php
+// Пример использования метода where()
+// SELECT * FROM posts WHERE price >= 1000;
+$posts = Post::where('price', '>=', 1000)->get();
+
+// SELECT * FROM posts WHERE price >= 1000 AND category_id = 1;
+$posts = Post::where('price', '>=', 1000)
+	->where('category_id', 1)->get();
+
+// SELECT * FROM posts WHERE price >= 1000 OR category_id = 1;
+$posts = Post::where('price', '>=', 1000)
+	->where('category_id','=', 1, 'or')->get();
+// Another way
+
+
+```
 - `orWhere(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` -
 - `whereNot(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` - 
 - `orWhereNot(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` - 
