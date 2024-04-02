@@ -142,5 +142,7 @@ Nginx состоит из модулей, которые настраивают�
      variables_hash_bucket_size
      variables_hash_max_size
 ```
+Подробнее: 
+	[[Config Structure]]
 ***
 ## Static Data
