@@ -18,3 +18,4 @@ _**image - образ**_
 - `docker volume` 
 - `docker volume inspect` 
 - `docker exec -it [container_name] [command]` - запускает указанную команду в указанном контейнере.
+- `docker rmi -f $(docker images -a -q)` - скрипт для удаления всех образов на устройстве.
