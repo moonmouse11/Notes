@@ -2,6 +2,59 @@
 ***
 Работа Nginx и его модулей определяется в концигурационном файле. 
 `nginx.conf` - конфигурационный файл по умолчанию.
+``` bash
+# Установим NGINX
+sudo apt install nginx
+
+# Проверяем что запущен
+systemctl status nginx
+
+# Основные команды
+sudo systemctl stop nginx
+sudo systemctl start nginx
+sudo systemctl restart nginx
+sudo systemctl reload nginx
+
+# Создаем папку для сайта
+sudo mkdir -p /var/www/you-domain/html
+
+# Даем себе права на папку
+sudo chown -R $USER:$USER /var/www/you-domain/html
+
+# Создаем тестовый сайт
+nano /var/www/you-domain/html/index.html
+
+# Создаем файл настроек
+sudo nano /etc/nginx/sites-available/you-domain
+
+# Вставляем туда следующий блок:
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/you-domain/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name you-domain www.you-domain;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+
+# Активируем наш файл настроек
+sudo ln -s /etc/nginx/sites-available/you-domain /etc/nginx/sites-enabled/
+
+# Корректируем файл
+sudo nano /etc/nginx/nginx.conf
+# раскоментируем строчку server_names_hash_bucket_size 64;
+
+# Проверяем корректность настроек
+sudo nginx -t
+
+# Перезапускаем NGINX
+sudo systemctl restart nginx
+```
 ###### Базовые команды.
 ``` bash
 nginx
@@ -30,7 +83,7 @@ Nginx состоит из модулей, которые настраивают�
 Директивы делятся на **простые** и **блочные**. 
 `#` - символ для комментирования в конфигурационном файле.
 ``` conf
-# Список основных директив Nginx
+# Список основных директив Nginx Core
      accept_mutex
      accept_mutex_delay
      daemon

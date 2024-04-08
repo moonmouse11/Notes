@@ -56,4 +56,7 @@
 - `password_verify(string $password, string $hash): bool` - функция проверяет соотвествие пароля хэшу.
 - `crypt(string $string, string $salt): string` - функция возвращает хешированную строку, полученную с помощью стандартного алгоритма UNIX, основанного на DES или другого алгоритма.
 ## Session
+- `session_abort(): bool` - функция отменяет изменения в массиве сессии и завершает ее.
+- `session_cache_expire(?int $value = null): int|false` - получает и устанавливает срок действия текущего кэша.
+- `session_cache_limiter(?string $value = null): string|false` - функция получает, или устанавливает текуший режим кэширования.
 - 

@@ -1,4 +1,4 @@
-# Extesions
+# Extensions
 ***
 - `php[versoin]-cli` - пакет для поддержки запуска из командной строки.
 - `php-curl` - расширение для работы с URL.
