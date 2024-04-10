@@ -1,4 +1,4 @@
 # Main
-- [[Notes/Composer/Basics|Basics]]
-- [[Notes/Composer/Commands|Commands]]
+- [[Composer/Basics|Basics]]
+- [[Composer/Commands|Commands]]
 - 

@@ -128,7 +128,7 @@ $posts = Post::where('price', '>=', 1000)
 
 
 ```
-- `orWhere(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` -
+- `orWhere(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` - 
 - `whereNot(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` - 
 - `orWhereNot(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` - 
 - `whereColumn(Expression|string|array $first, string|null $operator = null, string|null $second = null, string|null $boolean = 'and')` - 
