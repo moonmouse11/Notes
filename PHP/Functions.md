@@ -59,4 +59,22 @@
 - `session_abort(): bool` - функция отменяет изменения в массиве сессии и завершает ее.
 - `session_cache_expire(?int $value = null): int|false` - получает и устанавливает срок действия текущего кэша.
 - `session_cache_limiter(?string $value = null): string|false` - функция получает, или устанавливает текуший режим кэширования.
-- 
+- `session_write_close(): bool` - функция записывает данные сесси и завершает ее.
+- `session_create_id(string $prefix = ""): string|false` - создает новый идентификатор сессии.
+- `session_decode(string $data): bool` - декодирует данные сесии из строки.
+- `session_destroy(): bool` - уничтожает данные сессии.
+- `session_encode(): string|false` - кодирует данные текущей сессии в формате строки.
+- `session_gc(): int|false` - выполняет сборку мусора данных сессии.
+- `session_get_cookie_params(): array` - функция возвращает cookie сессии.
+- `session_id(?string $id = null): string|false` - получает и устанавливает идентификатор сессии.
+- `session_module_name(?string $module = null): string|false` - возвращает и устанавливает модуль текущей сессии.
+- `session_name(?string $name = null): string|false` - получает или устанавливает имя текузей сессии.
+- `session_regenerate_id(bool $delete_old_session = false): bool` - генерирует и обновляет идентификатор текущей сессии.
+- `session_register_shutdown(): void` - функция заверщает сессию.
+- `session_reset(): bool` - реинициализирует сессию новыми значениями.
+- `session_save_path(?string $path = null): string|false` - получает или устанавливает путь сохранения сессии.
+- `session_set_cookie_params(int $lifetime_or_options, ?string $path = null, ?string $domain = null, ?bool $secure = null,?bool $httponly = null): bool` - кстанавливает параметры сессионной cookie.
+- `session_set_save_handler(callable $open, callable $close, callable $read, callable $write, callable $destroy, callable $gc, callable $create_sid = ?, callable $validate_sid = ?, callable $update_timestamp = ?): bool` - функция устанавливает пользовательские обработчики хранения сессии.
+- `session_start(array $options = []): bool` - функция стартует сесиию, или возобновляет предыдущую.
+- `session_status(): int` - возвращает текущее состояние сессии.
+- `session_unset(): bool` - удаляет все переменные сессии.
