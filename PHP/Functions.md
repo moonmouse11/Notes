@@ -30,14 +30,12 @@
 - `fastcgi_finish_request(): bool` - функция сбрасывает все запрошенные данные клиенту и завершает обработку запроса.
 - `http_response_code(int $response_code = 0): int|bool` - функция получает или задает коды ответов HTTP.
 - `filter_var(mixed $value, int $filter = FILTER_DEFAULT, array|int $options = 0): mixed` - функция фильтрует переменную с помощью определённого фильтра.
-- `spl_autoload_register(?callable $callback = null, bool $throw = true, bool $prepend = false): bool` - регистрирует функцию в autoload. 
 - `http_build_query(array|object $data, string $numeric_prefix = "", ?string $arg_separator = null, int $encoding_type = PHP_QUERY_RFC1738): string` - функция генерирует URL-кодированную строку запроса из предоставленного ассоциативного (или индексированного) массива.
 - `mb_strtoupper(string $string, ?string $encoding = null): string` - функция приводит строку в верхнему регистру. _**(Для кодировки больше одного байта)**_
 - `mb_strtolower(string $string, ?string $encoding = null): string` - функция приводит строку к нижнему реистру. _**(Для кодировки больше одного байта)**_
 - `array_key_exists(string|int|float|bool|resource|null $key, array $array): bool` - функция проверяет, содежит ли массив зпдпнный ключ или индекс.
 - `call_user_func(callable $callback, mixed ...$args): mixed` - функция вызывает callback-функцию, переданную первым параметром, и передаёт остальные параметры в качестве аргументов. 
 - `call_user_func_array(callable $callback, array $args): mixed` - функция вызывает callback-функцию `callback`, с параметрами из массива `args`.
-- `spl_autoload_call(string $class): void` - функцию запускают для ручного поиска класса или интерфейса через зарегистрированные методы очереди.
 - `func_get_args(): array` - функция возвращает массив, который содержит список аргументов функции.
 - `func_num_args(): int` - возвращает количество аргументов, переданных функции.
 - `func_get_arg(int $position): mixed` - функция возвращает указанный аргумент, из переданных функции.
@@ -78,3 +76,20 @@
 - `session_start(array $options = []): bool` - функция стартует сесиию, или возобновляет предыдущую.
 - `session_status(): int` - возвращает текущее состояние сессии.
 - `session_unset(): bool` - удаляет все переменные сессии.
+## SPL
+- `class_implements(object|string $object_or_class, bool $autoload = true): array|false` - функция возвращает список интерфейсов, реализованных в заданносм классе или интерфейсе.
+- `class_parents(object|string $object_or_class, bool $autoload = true): array|false` - возвращает список родительских классов заданного класса.
+- `class_uses(object|string $object_or_class, bool $autoload = true): array|false` - функция возвращает список трейтов, используемых в заданном классе.
+- `iterator_apply(Traversable $iterator, callable $callback, ?array $args = null): int` - вызывает указанную функцию для каждого элемента в итераторе.
+- `iterator_count(Traversable|array $iterator): int` - функция возвращает количество элементов в итераторе.
+- `iterator_to_array(Traversable|array $iterator, bool $preserve_keys = true): array` - функция копирует итератор в массив.
+- `spl_autoload_call(string $class): void` - функцию запускают для ручного поиска класса или интерфейса через зарегистрированные методы очереди.
+- `spl_autoload_extensions(?string $file_extensions = null): string` - функция реистрирует и выводит расширения файлов для функций `spl_autoload`.
+- `spl_autoload_functions(): array` - функция возвращает вписок зарегистрированных функций автозагрузки классов.
+- `spl_autoload_register(?callable $callback = null, bool $throw = true, bool $prepend = false): bool` - регистрирует функцию в autoload. 
+- `spl_autoload_unregister(callable $callback): bool` - отменяет регистрацию функции. Противоположна функции выше.
+- `spl_autoload(string $class, ?string $file_extensions = null): void` - функция по умолчанию для автозагрузки классов.
+- `spl_classes(): array` - функция возвращает доступные `spl` классы.
+- `spl_object_hash(object $object): string` - функция возвращает хэш-идентификатор объекта.
+- `spl_object_id(object $object): int` - функция получает целочисленный идентификатор объекта.
+## 

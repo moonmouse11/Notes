@@ -141,3 +141,11 @@
 Подробнее:
 	[[ngx_http_core_module]]
 ***
+## ngx_http_access_module
+``` conf
+     allow
+     deny
+```
+Подробнее:
+	[[ngx_http_access_module]]
+***
