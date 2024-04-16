@@ -5,4 +5,5 @@
 - [[Notes/PHP/General|General]]
 - [[Object Oriented Programming]]
 - [[Notes/PHP/Versions|Versions]]
+- [[php.ini]]
 - 

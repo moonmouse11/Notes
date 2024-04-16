@@ -1,14 +1,9 @@
 # Functions
 ***
-## Array
-- `array_map(?callable $callback, array $array, array ...$arrays)` - применяет callback ко всем элементам переданного массива.
-- `array_filter(array $array, ?callable $callback = null, int $mode = 0): array` - фильтрует элементы массива с помощью callback.
 - `parse_url(string $url, int $component = -1)` - парсит адресную строку, для использования лучше подсмотреть компоненты.
 - `sprintf(string $format, mixed ...$values): string` - форматирует и возвращает строку.
 - `exit(string $status = ?): void` - выводит сообщение и останавливает работу скрипта.
 - `die(string $message = ?): void` - как и функция выше, выводит сообщение и останавливает работу скрипта.
-- `implode(string $separator, array $array): string` - функция объединяет элементы массива в строку.
-- `explode(string $separator, string $string, int $limit = PHP_INT_MAX): array` - функция разбивает строку на массив.
 - `array_keys(array $array, mixed $filter_value, bool $strict = false): array` - функция возвращает массив ключей переданного в аргументы массива.
 - `header(string $header, bool $replace = true, int $response_code = 0): void` - функция отправляет необработанный заголовок страницы.
 - `method_exists(object|string $object_or_class, string $method): bool` - функция проверяет наличие указанного метода у объекта.
@@ -22,11 +17,6 @@
 - `str_ends_with(string $haystack, string $needle): bool` - функция проверяет конец строки с заданной подстрокой.
 - `get_class_methods(object|string $object_or_class): array` - функция возвращает массив методов переданного класса или объекта.
 - `strpos(string $haystack, string $needle, int $offset = 0): int|false` - функция возвращает позицию первого вхождения подстроки в строку.
-- `in_array(mixed $needle, array $haystack, bool $strict = false): bool` - функция проверяет наличие заданных данных в массиве.
-- `array_pop(array &$array): mixed` - извлекает последний элемент массива.
-- `array_pad(array $array, int $length, mixed $value): array` - дополняет массив значениями до заданной длины.
-- `count(Countable|array $value, int $mode = COUNT_NORMAL): int` - функция возвращает количество элементов в массиве.
-- `array_chunk(array $array, int $length, bool $preserve_keys = false): array` - функция разбивает массив на части.
 - `fastcgi_finish_request(): bool` - функция сбрасывает все запрошенные данные клиенту и завершает обработку запроса.
 - `http_response_code(int $response_code = 0): int|bool` - функция получает или задает коды ответов HTTP.
 - `filter_var(mixed $value, int $filter = FILTER_DEFAULT, array|int $options = 0): mixed` - функция фильтрует переменную с помощью определённого фильтра.
@@ -92,4 +82,30 @@
 - `spl_classes(): array` - функция возвращает доступные `spl` классы.
 - `spl_object_hash(object $object): string` - функция возвращает хэш-идентификатор объекта.
 - `spl_object_id(object $object): int` - функция получает целочисленный идентификатор объекта.
-## 
+## Array
+- `array_map(?callable $callback, array $array, array ...$arrays)` - применяет callback ко всем элементам переданного массива.
+- `array_filter(array $array, ?callable $callback = null, int $mode = 0): array` - фильтрует элементы массива с помощью callback.
+- `implode(string $separator, array $array): string` - функция объединяет элементы массива в строку.
+- `explode(string $separator, string $string, int $limit = PHP_INT_MAX): array` - функция разбивает строку на массив.
+- `in_array(mixed $needle, array $haystack, bool $strict = false): bool` - функция проверяет наличие заданных данных в массиве.
+- `array_pop(array &$array): mixed` - извлекает последний элемент массива.
+- `array_pad(array $array, int $length, mixed $value): array` - дополняет массив значениями до заданной длины.
+- `count(Countable|array $value, int $mode = COUNT_NORMAL): int` - функция возвращает количество элементов в массиве.
+- `array_chunk(array $array, int $length, bool $preserve_keys = false): array` - функция разбивает массив на части.
+## Function for variables
+- `boolval(mixed $value): bool` - функция возвращает логическое значение переменной. 
+Пример использования.
+``` php
+echo '0: '.(boolval(0) ? 'true' : 'false')."\n";  # false
+echo '42: '.(boolval(42) ? 'true' : 'false')."\n";   # true
+echo '0.0: '.(boolval(0.0) ? 'true' : 'false')."\n";   # false
+echo '4.2: '.(boolval(4.2) ? 'true' : 'false')."\n";   # true
+echo '"": '.(boolval("") ? 'true' : 'false')."\n";  # false
+echo '"string": '.(boolval("string") ? 'true' : 'false')."\n";  # true
+echo '"0": '.(boolval("0") ? 'true' : 'false')."\n";  # false
+echo '"1": '.(boolval("1") ? 'true' : 'false')."\n";  # true
+echo '[1, 2]: '.(boolval([1, 2]) ? 'true' : 'false')."\n";  # true
+echo '[]: '.(boolval([]) ? 'true' : 'false')."\n";  # false
+echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
+```
+- `debug_zval_dump(mixed $value, mixed ...$values): void` - функция сбрасывает строковое представление внутренней структуры zval на вывод.
