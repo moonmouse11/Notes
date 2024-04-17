@@ -108,4 +108,7 @@ echo '[1, 2]: '.(boolval([1, 2]) ? 'true' : 'false')."\n";  # true
 echo '[]: '.(boolval([]) ? 'true' : 'false')."\n";  # false
 echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 ```
-- `debug_zval_dump(mixed $value, mixed ...$values): void` - функция сбрасывает строковое представление внутренней структуры zval на вывод.
+- `debug_zval_dump(mixed $value, mixed ...$values): void` - функция сбрасывает строковое представление внутренней структуры `zval` на вывод.
+- `empty(mixed $var): bool` - проверяет, пустая ли переменная.
+- `floatval(mixed $value): float` - функция возвращает значение переменной в виде числа с плавающей точкой.
+- 
