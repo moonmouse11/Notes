@@ -3,19 +3,19 @@
 ## Main
  - `php artisan about` - выводит информацию о приложении.
  - `php artisan clear-compiled` - удаляет скомпилированные классы
- - `php artisan completion` - 
+ - `php artisan completion` - Dump the shell completion script.
  - `php artisan db` - запускает консоль базы данных.
  - `php artisan docs` - команда для поиска документации по модулям фреймворка.
- - `php artisan down` - 
+ - `php artisan down` - Put the application into maintenance / demo mode.
  - `php artisan env` - выводит текущие переменные окружения `env`.
  - `php artisan help` - команда помощи.
- - `php artisan inspire` - 
+ - `php artisan inspire` - Display an inspiring quote.
  - `php artisan list` - список команд.
- - `php artisan optimize` - 
+ - `php artisan optimize` - Cache framework bootstrap, configuration, and metadata to increase performance.
  - `php artisan test` - запуск тестов приложения.
  - `php artisan tinker` - работа в теминале фреймворка Laravel внутри проложения.
- - `php artisan ui` - 
- - `php artisan up` - 
+ - `php artisan ui` - Swap the front-end scaffolding for the application.
+ - `php artisan up` - Bring the application out of maintenance mode.
 
 ## Serve
 - `php artisan serve` - запускает сервер с приложением.
