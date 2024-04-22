@@ -125,10 +125,23 @@ $posts = Post::where('price', '>=', 1000)
 $posts = Post::where('price', '>=', 1000)
 	->where('category_id','=', 1, 'or')->get();
 // Another way
+$posts = Post::where(['price', '>=', 1000],
+					['category_id', '=', 2, 'or'])->get();
 
-
+// SELECT * FROM posts WHERE category_id = 1 OR (price >= 1000 AND price <= 5000);
+$posts = Post::where('category_id', 1)
+	->where(static function ($query) {
+		$query->where('price', '>=', 1000)
+			->where('price', '<=', 5000);
+	}, null, null, or)->get();
 ```
-- `orWhere(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` - 
+- `orWhere(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` - аналогичен методу выше, только задаваемое условие объединяется с предыдущим с использованием логического опертатора `OR`. 
+``` php
+// Пример использования метода orWhere()
+// SELECT * FROM posts WHERE price >= 1000 OR category_id = 1;
+$posts = Posts::where('price', '>=', 1000)
+	->orWhere('category_id', '=', 1)->get();
+```
 - `whereNot(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` - 
 - `orWhereNot(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` - 
 - `whereColumn(Expression|string|array $first, string|null $operator = null, string|null $second = null, string|null $boolean = 'and')` - 
