@@ -20,8 +20,12 @@ class DatabaseSeeder extends Seeder
 	public function run(): void
 	{
 		// Создание пользователя с помощью сидера.
-		User::create(['name' => 'admin', 'email' => 'admin@admin.com',
-			'password' => Hash::make('admin')]);
+		User::create([
+			'name' => 'admin', 
+			'email' => 'admin@admin.com',
+			'password' => Hash::make('admin'),
+			// Another model fields
+		]);
 	}
 }
 ```
