@@ -92,6 +92,7 @@
 - `array_pad(array $array, int $length, mixed $value): array` - дополняет массив значениями до заданной длины.
 - `count(Countable|array $value, int $mode = COUNT_NORMAL): int` - функция возвращает количество элементов в массиве.
 - `array_chunk(array $array, int $length, bool $preserve_keys = false): array` - функция разбивает массив на части.
+- `array_walk_recursive(array|object &$array, callable $callback, mixed $arg = null): bool` - рекурсивно применяет указанную пользовательскую функцию к каждому элементу массива.
 ## Function for variables
 - `boolval(mixed $value): bool` - функция возвращает логическое значение переменной. 
 Пример использования.
