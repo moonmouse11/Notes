@@ -37,14 +37,14 @@ _**Рекомендуется размещать модели по дополн�
 ``` php
 // Пример использования наследуемых полей модели.
 class Post extends Model {
-	protected $connection = 'pgsql',
-	protected $table = 'post_table',
-	protected $primaryKey = 'post_id',
-	protected $keyType = 'uuid',
-	public $incrementing = false,
-	protected $dateFormat = 'U',
-	const CREATED_AT = 'added',
-	const UPDATED_AT = 'update',
+	protected $connection = 'pgsql';
+	protected $table = 'post_table';
+	protected $primaryKey = 'post_id';
+	protected $keyType = 'uuid';
+	public $incrementing = false;
+	protected $dateFormat = 'U';
+	const CREATED_AT = 'added';
+	const UPDATED_AT = 'update';
 }
 ```
 #### Параметры преобразования типов:
