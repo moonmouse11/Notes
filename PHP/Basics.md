@@ -14,7 +14,17 @@ PHP - Hypertext Preprocessor.
 - 2015 - PHP7.
 - 2020 - PHP8.
 ***
-## Variables
+## Variables 
+
+### Variables types
+- **Integers**
+- **Doubles**
+- **NULL**
+- **Strings**
+- **Booleans**
+- **Arrays**
+- **Objects**
+- **Resources**
 
 ***
 ## Package Manager
