@@ -13,6 +13,8 @@ PHP - Hypertext Preprocessor.
 - 2004 - PHP5.
 - 2015 - PHP7.
 - 2020 - PHP8.
+Подробнее:
+	[[Notes/PHP/Versions|Versions]]
 ***
 ## Variables 
 

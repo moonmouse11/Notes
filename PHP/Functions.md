@@ -1,5 +1,6 @@
 # Functions
 ***
+## Non-sorted
 - `parse_url(string $url, int $component = -1)` - парсит адресную строку, для использования лучше подсмотреть компоненты.
 - `sprintf(string $format, mixed ...$values): string` - форматирует и возвращает строку.
 - `exit(string $status = ?): void` - выводит сообщение и останавливает работу скрипта.
@@ -36,7 +37,8 @@
 - `unregister_tick_function(callable $callback): void` - обратна функции выше.
 - `forward_static_call(callable $callback, mixed ...$args): mixed` - Вызов пользовательской функции или метода, заданные в параметре callback с последующими аргументами. Эта функция должна вызываться в контексте метода и не может быть вызвана вне класса. Она использует позднее статическое связывание.
 - `forward_static_call_array(callable $callback, array $args): mixed` - Вызывает пользовательскую функцию или метод, заданные в параметре callback. Эта функция должна вызываться в контексте метода и не может быть вызвана вне класса. Она использует позднее статическое связывание. Все аргументы пересылаются в метод по значению и в виде массива, аналогично `call_user_func_array()`.
-- `enum_exists(): bool` - 
+- `eval(string $code): mixed` - функция расценивает строку как PHP код и выполняет его.
+***
 ## Password
 - `password_hash(string $password, string|int|null $algo, array $options = []): string` - функция создает хэш-пароля, используя необратимый алгоритм хеширования.
 - `password_algos(): array` - функция возвращает полный список зарегистрированных идентификаторов алгоритмов шифрований.
@@ -44,6 +46,7 @@
 - `password_needs_rehash(string $hash, string|int|null $algo, array $options = []): bool` - валидация переданного хэша по переданному в аргументы алгоритму.
 - `password_verify(string $password, string $hash): bool` - функция проверяет соотвествие пароля хэшу.
 - `crypt(string $string, string $salt): string` - функция возвращает хешированную строку, полученную с помощью стандартного алгоритма UNIX, основанного на DES или другого алгоритма.
+***
 ## Session
 - `session_abort(): bool` - функция отменяет изменения в массиве сессии и завершает ее.
 - `session_cache_expire(?int $value = null): int|false` - получает и устанавливает срок действия текущего кэша.
@@ -67,6 +70,7 @@
 - `session_start(array $options = []): bool` - функция стартует сесиию, или возобновляет предыдущую.
 - `session_status(): int` - возвращает текущее состояние сессии.
 - `session_unset(): bool` - удаляет все переменные сессии.
+***
 ## SPL
 - `class_implements(object|string $object_or_class, bool $autoload = true): array|false` - функция возвращает список интерфейсов, реализованных в заданносм классе или интерфейсе.
 - `class_parents(object|string $object_or_class, bool $autoload = true): array|false` - возвращает список родительских классов заданного класса.
@@ -83,6 +87,7 @@
 - `spl_classes(): array` - функция возвращает доступные `spl` классы.
 - `spl_object_hash(object $object): string` - функция возвращает хэш-идентификатор объекта.
 - `spl_object_id(object $object): int` - функция получает целочисленный идентификатор объекта.
+***
 ## Array
 - `array_map(?callable $callback, array $array, array ...$arrays)` - применяет callback ко всем элементам переданного массива.
 - `array_filter(array $array, ?callable $callback = null, int $mode = 0): array` - фильтрует элементы массива с помощью callback.
@@ -94,6 +99,8 @@
 - `count(Countable|array $value, int $mode = COUNT_NORMAL): int` - функция возвращает количество элементов в массиве.
 - `array_chunk(array $array, int $length, bool $preserve_keys = false): array` - функция разбивает массив на части.
 - `array_walk_recursive(array|object &$array, callable $callback, mixed $arg = null): bool` - рекурсивно применяет указанную пользовательскую функцию к каждому элементу массива.
+- 
+***
 ## Function for variables
 - `boolval(mixed $value): bool` - функция возвращает логическое значение переменной. 
 Пример использования.
@@ -113,4 +120,11 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `debug_zval_dump(mixed $value, mixed ...$values): void` - функция сбрасывает строковое представление внутренней структуры `zval` на вывод.
 - `empty(mixed $var): bool` - проверяет, пустая ли переменная.
 - `floatval(mixed $value): float` - функция возвращает значение переменной в виде числа с плавающей точкой.
+- `gettype(mixed $value): string` - функция возвращает тип переменной.
+- 
+***
+## Class & Objects
+- `enum_exists(string $enum, bool $autoload = true): bool` - функция проверяет существование переданного в аргументы Enum.
+- `__autoload(string $class): void` - функция пытается загрузить класс, переданные в аргумент. _**Устаревшая с  PHP 7.2.0**_.
+- `class_alias(string $class, string $alias, bool $autoload = true): bool` - функция создает псевдоним класса.
 - 
