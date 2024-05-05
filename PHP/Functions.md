@@ -127,4 +127,7 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `enum_exists(string $enum, bool $autoload = true): bool` - функция проверяет существование переданного в аргументы Enum.
 - `__autoload(string $class): void` - функция пытается загрузить класс, переданные в аргумент. _**Устаревшая с  PHP 7.2.0**_.
 - `class_alias(string $class, string $alias, bool $autoload = true): bool` - функция создает псевдоним класса.
+- `class_exists(string $class, bool $autoload = true): bool` - функция проверяет объявление класса.
+- `get_called_class(): string` - функция возвращает имя класса, из которого вызван статический метод.
+- `get_class_methods(object|string $object_or_class): array` - функция возвращает массив с именами методов класса.
 - 
