@@ -97,6 +97,7 @@
 - `array_pop(array &$array): mixed` - извлекает последний элемент массива.
 - `array_pad(array $array, int $length, mixed $value): array` - дополняет массив значениями до заданной длины.
 - `count(Countable|array $value, int $mode = COUNT_NORMAL): int` - функция возвращает количество элементов в массиве.
+- `sizeof(Countable|array $value, int $mode = COUNT_NORMAL): int` - функция-псевдоним `count`.
 - `array_chunk(array $array, int $length, bool $preserve_keys = false): array` - функция разбивает массив на части.
 - `array_walk_recursive(array|object &$array, callable $callback, mixed $arg = null): bool` - рекурсивно применяет указанную пользовательскую функцию к каждому элементу массива.
 - 
@@ -130,4 +131,5 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `class_exists(string $class, bool $autoload = true): bool` - функция проверяет объявление класса.
 - `get_called_class(): string` - функция возвращает имя класса, из которого вызван статический метод.
 - `get_class_methods(object|string $object_or_class): array` - функция возвращает массив с именами методов класса.
+- `get_class_vars(string $class): array` - функция получает свойства классов, объявленных по умолчанию.
 - 
