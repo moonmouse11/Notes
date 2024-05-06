@@ -122,7 +122,7 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `empty(mixed $var): bool` - проверяет, пустая ли переменная.
 - `floatval(mixed $value): float` - функция возвращает значение переменной в виде числа с плавающей точкой.
 - `gettype(mixed $value): string` - функция возвращает тип переменной.
-- 
+- `settype(mixed &$var, string $type): bool` - функция задает тип указанной переменной.
 ***
 ## Class & Objects
 - `enum_exists(string $enum, bool $autoload = true): bool` - функция проверяет существование переданного в аргументы Enum.
