@@ -41,7 +41,7 @@
 - `set_error_handler()` -
 - `trigger_error()` - 
 - `iterator_to_array()` - 
-- 
+- `error_reporting()` - 
 ***
 ## Password
 - `password_hash(string $password, string|int|null $algo, array $options = []): string` - функция создает хэш-пароля, используя необратимый алгоритм хеширования.
