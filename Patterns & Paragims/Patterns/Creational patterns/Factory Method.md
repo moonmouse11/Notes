@@ -8,37 +8,63 @@
 ###### Пример:
 ``` php
 <?php
- 
-abstract class Product
+interface Interviewer
 {
+    public function askQuestions();
 }
-class ProductA extends Product
+
+class Developer implements Interviewer
 {
-}
-class ProductB extends Product
-{
-}
-abstract class FactoryAbstract
-{
-    public function create($type)
+    public function askQuestions()
     {
-        switch ($type) {
-            case'A':
-                return new ProductA();
-            case'B':
-            default:
-                return new ProductB();
-        }
+        echo 'Asking about design patterns!';
     }
 }
 
-class Factory extends FactoryAbstract
+class CommunityExecutive implements Interviewer
 {
+    public function askQuestions()
+    {
+        echo 'Asking about community building';
+    }
 }
 
-$factory = new Factory();
-$productA = $factory->create('A');
+abstract class HiringManager
+{
+
+    // Фабричный метод
+    abstract public function makeInterviewer(): Interviewer;
+
+    public function takeInterview()
+    {
+        $interviewer = $this->makeInterviewer();
+        $interviewer->askQuestions();
+    }
+}
+
+class DevelopmentManager extends HiringManager
+{
+    public function makeInterviewer(): Interviewer
+    {
+        return new Developer();
+    }
+}
+
+class MarketingManager extends HiringManager
+{
+    public function makeInterviewer(): Interviewer
+    {
+        return new CommunityExecutive();
+    }
+}
+
+$devManager = new DevelopmentManager();
+$devManager->takeInterview(); // Output: Спрашивает о шаблонах проектирования.
+
+$marketingManager = new MarketingManager();
+$marketingManager->takeInterview(); // Output: Спрашивает о создании сообщества.
 ```
+Этот шаблон полезен для каких-то общих обработок в классе, но требуемые подклассы динамически определяются в ходе выполнения (runtime). То есть когда клиент не знает, какой именно подкласс может ему понадобиться.
 ***
 ## Плюсы
 - позволяет сделать код создания объектов более универсальным, не привязываясь к конкретным классам(`ConcreteProduct`), а оперируя лишь общим интерфейсом (`Product`);
