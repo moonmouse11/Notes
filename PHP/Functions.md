@@ -7,7 +7,6 @@
 - `die(string $message = ?): void` - как и функция выше, выводит сообщение и останавливает работу скрипта.
 - `array_keys(array $array, mixed $filter_value, bool $strict = false): array` - функция возвращает массив ключей переданного в аргументы массива.
 - `header(string $header, bool $replace = true, int $response_code = 0): void` - функция отправляет необработанный заголовок страницы.
-- `method_exists(object|string $object_or_class, string $method): bool` - функция проверяет наличие указанного метода у объекта.
 - `compact(array|string $var_name, array|string ...$var_names): array`  - функция создает массив, содержащий переменные и их значения. _**(Не могут быть переданы суперглобальные массивы)**_.
 - `extract(array &$array, int $flags = EXTR_OVERWRITE, string $prefix = ""): int` - функция обратна функции выше, извлекает переменные из массива.
 - `str_contains(string $haystack, string $needle): bool` - функция  определяет, содержит ли строка заданную подстроку.
@@ -18,7 +17,6 @@
 - `mime_content_type(resource|string $filename): string|false` - функция определяет MIME-тип содержимого файла.
 - `preg_split(string $pattern, string $subject, int $limit = -1, int $flags = 0): array|false` - функция разбивает строку по указанному регулярному выражению, возвращает массив.
 - `str_ends_with(string $haystack, string $needle): bool` - функция проверяет конец строки с заданной подстрокой.
-- `get_class_methods(object|string $object_or_class): array` - функция возвращает массив методов переданного класса или объекта.
 - `strpos(string $haystack, string $needle, int $offset = 0): int|false` - функция возвращает позицию первого вхождения подстроки в строку.
 - `fastcgi_finish_request(): bool` - функция сбрасывает все запрошенные данные клиенту и завершает обработку запроса.
 - `http_response_code(int $response_code = 0): int|bool` - функция получает или задает коды ответов HTTP.
@@ -166,4 +164,16 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `get_called_class(): string` - функция возвращает имя класса, из которого вызван статический метод.
 - `get_class_methods(object|string $object_or_class): array` - функция возвращает массив с именами методов класса.
 - `get_class_vars(string $class): array` - функция получает свойства классов, объявленных по умолчанию.
-- 
+- `get_class(object $object = ?): string` - функция возвращает имя класса, которому принадлежит переданный метод.
+- `get_declared_classes(): array` - функция возвращает массив с именами объявленных классов.
+- `get_declared_interfaces(): array` - возвращает массив с именами объявленных интерфейсов.
+- `get_declared_traits(): array` - возвращает массив с именами объявленных трейтов.
+- `get_mangled_object_vars(object $object): array` - возвращает массив искаженных свойств объекта. (Функция возвращает массив, который содержит свойства объекта).
+- `get_object_vars(object $object): array` - Возвращает видимые нестатические свойства указанного объекта `object` в соответствии с областью видимости.
+- `get_parent_class(object|string $object_or_class = ?): string|false` - функция получает имя родительского класса для объекта или класса.
+- `interface_exists(string $interface, bool $autoload = true): bool` - функция проверяет, определён ли указанный интерфейс.
+- `is_a(mixed $object_or_class, string $class, bool $allow_string = false): bool` - функция проверяет, принадлежит ли объект к типу или подтипу.
+- `is_subclass_of(mixed $object_or_class, string $class, bool $allow_string = true): bool` - функция проверяет, принадлежит ли объект к потомкам класса, или реализует ли объект или родители объекта интерфейс.
+- `method_exists(object|string $object_or_class, string $method): bool` - функция проверяет наличие указанного метода у объекта.
+- `property_exists(object|string $object_or_class, string $property): bool` - функция проверяет, есть ли у объекта или класса свойство.
+- `trait_exists(string $trait, bool $autoload = true): bool` - проверяет, существует ли трейт.
