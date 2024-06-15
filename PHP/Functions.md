@@ -177,3 +177,7 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `method_exists(object|string $object_or_class, string $method): bool` - функция проверяет наличие указанного метода у объекта.
 - `property_exists(object|string $object_or_class, string $property): bool` - функция проверяет, есть ли у объекта или класса свойство.
 - `trait_exists(string $trait, bool $autoload = true): bool` - проверяет, существует ли трейт.
+***
+## Filter functions
+- `filter_has_var(int $input_type, string $var_name): bool` - функция проверяет сузествование переменной указанного типа.
+- 

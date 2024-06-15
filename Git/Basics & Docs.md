@@ -1,4 +1,4 @@
- # Basics & Docs
+# Basics & Docs
 ***
 ## Introduction & Terminal commands
 - `git help --all` - выводит все команды Git.
@@ -17,8 +17,10 @@
 - `git add [files_name]` - добавление файла в индекс Git.
 - `git add .` - добавление всех файлов в директории и поддиректории в репозиторий.
 - `git add . --interactive` - интерактивный режим добавления файла в индекс.
+- `git add -p [file_name]` - интерактивный режим добавления файла в индекс, позволяет внести не все изменения файла в репозиторий.
 - `git status` - показывает состояние индекса репозитория на данный момент.
 - `git config -l` - выводит содержимое конфигурационного файла с полным названием переменных.
+- `git config core.fileMode [file_mode]` - устанавливает режим работы с правами доступа файлов. 
 - `git config branch.autosetuprebase always` - устанавливает автоматический `rebase` для новых веток.
 - `git config branch.[branch_name].rebase true` - устанавливает автоматический `rebase` для указанной ветки.
 - `git config user.name "[user_name]"` - установка имени пользователя.
@@ -47,12 +49,13 @@ GIT_AUTHOR_EMAIL - почта пользователя.
 - `git branch` - выводит все локальные ветки.
 - `git branch --remote` - выводит все удаленные ветки.
 - `git branch -a` - выводит все доступные ветки.
+- `git branch -v` - выводит информацию о ветке и ее последнем коммите.
 - `git branch -M` - переименовывает ветку.
 - `git branch [new_branch_name] [start_commit]` - создание новой ветки с определенного коммита.
 - `git branch -d [branch_name]` - удаляет ветку из репозитория.
 - `git branch --set-upstream-to [local_branch_name] [remote_branch]` - создает локальную ветку в связке с удаленной.
 - `git rm -f [files_name]` - удаляет файл из репозитория.
-- `git rm --cached [files_name]` - удаляет файл из индекса.
+- `git rm --cached [files_name]` - удаляет файл из индекса и оставляет в файловой системе.
 - `git mv [file_name] [new_file_name]` - перемещает или переименовывает файл.
 - `git clone` - клонирует репозиторий. 
 - `git config` - команда для работы с конфигурационным файлом Git.
@@ -73,6 +76,7 @@ GIT_AUTHOR_EMAIL - почта пользователя.
 - `git checkout HEAD -- [file_name]` - восстанавливает удаленный из репозитория файл.
 - `git checkout -m [branch]` - переносит локальные изменения в указанную ветку.
 - `git checkout -b [new_branch_name] [start_commit]` - создание ветки на текущем или заданном коммите и переключение на нее.
+- `git checkout -B [branch_name] [hash_commit]` - переносит существующую ветку на указанный коммит.
 - `git log [file_name]` - выводит историю изменений с файлом.
 - `git log --follow [file_name]` - выводит полную историю изменений с файлом, даже если файл был удален или перемещен.
 - `git log [-number] --pretty=oneline [hash_commit]` - выводит историю определенного коммита в одну строку.
