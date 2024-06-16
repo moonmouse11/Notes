@@ -56,6 +56,7 @@ GIT_AUTHOR_EMAIL - почта пользователя.
 - `git branch --set-upstream-to [local_branch_name] [remote_branch]` - создает локальную ветку в связке с удаленной.
 - `git rm -f [files_name]` - удаляет файл из репозитория.
 - `git rm --cached [files_name]` - удаляет файл из индекса и оставляет в файловой системе.
+- `git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch [file_name]" HEAD` - удаление файла из удаленного репозитория.
 - `git mv [file_name] [new_file_name]` - перемещает или переименовывает файл.
 - `git clone` - клонирует репозиторий. 
 - `git config` - команда для работы с конфигурационным файлом Git.
