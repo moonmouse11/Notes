@@ -180,4 +180,10 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 ***
 ## Filter functions
 - `filter_has_var(int $input_type, string $var_name): bool` - функция проверяет сузествование переменной указанного типа.
-- 
+- `filter_id(string $name): int|false` - функция возвращает идентификато поля.
+- `filter_input_array(int $type, array|int $options = FILTER_DEFAULT, bool $add_empty = true): array|false|null` - получает несколько переменных извне PHP, и, если установлено, фильтрует их.
+- `filter_input(int $type, string $var_name, int $filter = FILTER_DEFAULT, array|int $options = 0): mixed` - функция получает конкретную внешнюю переменную по имени и, если нужно, фильтрует значение переменной.
+- `filter_list(): array` - функция возвращает список всех поддерживаемых фильтров.
+- `filter_var_array(array $array, array|int $options = FILTER_DEFAULT, bool $add_empty = true): array|false|null` - функция принимает несколько переменных и при необходимости фильтрует их.
+- `filter_var(mixed $value, int $filter = FILTER_DEFAULT, array|int $options = 0): mixed` - функция фильтрует указанную переменную.
+***
