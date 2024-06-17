@@ -12,8 +12,6 @@
 - `str_contains(string $haystack, string $needle): bool` - функция  определяет, содержит ли строка заданную подстроку.
 - `strlen(string $string): int` - функция вовозращает длинну строки.
 - `htmlspecialchars(string $string, int $flags = ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, ?string $encoding = null, bool $double_encode = true): string`  - функция преобразовывает специальные символы в HTML.
-- `file_get_contents(string $filename, bool $use_include_path = false, ?resource $context = null, int $offset = 0, ?int $length = null): string|false` - функция читает заданный файл и возвращает содержимое в виде строки.
-- `fgetcsv(resource $stream, ?int $length = null, string $separator = ",", string $enclosure = "\"", string $escape = "\\"): array|false` - функция читает строку из файла и производит раззбор данных CSV.
 - `mime_content_type(resource|string $filename): string|false` - функция определяет MIME-тип содержимого файла.
 - `preg_split(string $pattern, string $subject, int $limit = -1, int $flags = 0): array|false` - функция разбивает строку по указанному регулярному выражению, возвращает массив.
 - `str_ends_with(string $haystack, string $needle): bool` - функция проверяет конец строки с заданной подстрокой.
@@ -188,8 +186,29 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `filter_var(mixed $value, int $filter = FILTER_DEFAULT, array|int $options = 0): mixed` - функция фильтрует указанную переменную.
 ***
 ## Filesystem functions
-- `basename(string $path, string $suffix = ""): string` - 
-
+- `basename(string $path, string $suffix = ""): string` - функция возвращает имя указанного файла.
+- `chgrp(string $filename, string|int $group): bool` - функция изменяет группу файла. (Должны быть права на группу).
+- `chmod(string $filename, int $permissions): bool` - изменяет режим доступа к файлу. 
+- `chown(string $filename, string|int $user): bool` - функция изменяет владельца указанного файла.
+- `clearstatcache(bool $clear_realpath_cache = false, string $filename = ""): void` - функция очищает кэш файлов. 
+- `copy(string $from, string $to, ?resource $context = null): bool` - копирует указанный файл.
+- `dirname(string $path, int $levels = 1): string` - функция возвращает путь к родительской дирекории.
+- `disk_free_space(string $directory): float|false` - функция возвращает объем доступного пространства в файловой системе.
+- `disk_total_space(string $directory): float|false` - возвращает общий объем файловой системы.\
+- `fclose(resource $stream): bool` - закрывает открытый поток к указанному файлу.
+- `fdatasync(resource $stream): bool` - функция синхронизирует данные с указанным файлом.
+- `feof(resource $stream): bool` - функция проверяет достигнут ли конец укзанного файла, при открытом потоке.
+- `fflush(resource $stream): bool` - функция сбрасывает буфер вывода в указанный файл.
+- `fgetc(resource $stream): string|false` - функция считывает символ из файла.
+- `fgetcsv(resource $stream, ?int $length = null, string $separator = ",", string $enclosure = "\"", string $escape = "\\"): array|false` - функция читает строку из файла и производит раззбор данных CSV.
+- `fgets(resource $stream, ?int $length = null): string|false` - функция читает строку из переданного файлового указателя.
+- `fgetss(resource $handle, int $length = ?, string $allowable_tags = ?): string` - функция читает строку из файла и удаляет HTML-теги (Удалена с PHP 8).
+- `file_exists(string $filename): bool` - функция проверяет существование указанного файла или директории.
+- `file_get_contents(string $filename, bool $use_include_path = false, ?resource $context = null, int $offset = 0, ?int $length = null): string|false` - функция читает заданный файл и возвращает содержимое в виде строки.
+- `file_put_contents(string $filename, mixed $data, int $flags = 0, ?resource $context = null): int|false` - функция записывает данные в файл, работает как последовательный вызов функций `fopen()`, `fwrite()` и `fclose()` для записи данных в файл.
+- `file(string $filename, int $flags = 0, ?resource $context = null): array|false` - функция читает содержимое файла и помещает его в массив.
+- `fileatime(string $filename): int|false` - функция возвращает время посленего обращения к указанному файлу.
+- 
 ***
 ## Image functions
 - `gd_info(): array` - функция выводит информацию об установленной библиотеке GD.
