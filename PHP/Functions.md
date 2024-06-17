@@ -187,3 +187,10 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `filter_var_array(array $array, array|int $options = FILTER_DEFAULT, bool $add_empty = true): array|false|null` - функция принимает несколько переменных и при необходимости фильтрует их.
 - `filter_var(mixed $value, int $filter = FILTER_DEFAULT, array|int $options = 0): mixed` - функция фильтрует указанную переменную.
 ***
+## Filesystem functions
+- `basename(string $path, string $suffix = ""): string` - 
+
+***
+## Image functions
+- `gd_info(): array` - функция выводит информацию об установленной библиотеке GD.
+- 
