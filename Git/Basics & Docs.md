@@ -1,3 +1,4 @@
+# Basics & Docs
 ***
 ## Introduction & Terminal commands
 - `git help --all` - выводит все команды Git.
@@ -91,6 +92,7 @@ GIT_AUTHOR_EMAIL - почта пользователя.
 - `git log --grep [regex] -P` - поиск по истории изменений с использованием Perl совместимого регулярного выражения.
 - `git log --grep [search_string] -i` - поиск по истории без учета регистра.
 - `git log -G[regex]` - поиск по изменениям файлов с испольованием регулярного выражения.
+- `git log [branch_name] --first-parent` - выводит историю коммитов без смерженных веток.
 - `git fetch` - загружает изменения с удаленного репозитория без внесения изменений в текущий.
 - `git symbolic-ref` - команда для управления символическими ссылками.
 - `git rev-list --all` - выводит hash всех коммитов. 
@@ -120,11 +122,12 @@ GIT_AUTHOR_EMAIL - почта пользователя.
 - `git revert [hash_commit]` - отменяет заданный коммит.
 - `git rebase [ported_branch]` - используется для изменения последовательности фиксаций. Переносит коммиты из одной ветки в другую.
 - `git rebase --abort` - команда прерывает rebase.
-- `git rebase --onto [base_branch] [parent_commit] [ported_branch]` - перенос ветки с частью другой ветки.
+- `git rebase --onto [base_branch] [parent_commit] [ported_branch]` - перенос ветки с частью другой ветки или с указанного коммита.
 - `git rebase --continue` - продолжает перенос коммитов, после разрешения конфликтов.
 - `git rebase --skip` - пропускает коммит при переносе.
 - `git rebase -i` - интерактивный режим `rebase`.
 - `git rebase --preserve-merges` - перенос веток, с сохранением структуры.
+- `git rebase -x '[bash_command]' [branch_name]` - перенос ветки, с выполнением сторонней команды. (тестирование и.т.д). (Если команда возвращает статус ошибки - `rebase` прерывается).
 - `git stash save [stash_name]` - сохранение индекса в stash.
 - `git stash list` - просмотр всех изменений в stash.
 - `git stash pop [stash_index]` - достает отложенные изменения из stash.
