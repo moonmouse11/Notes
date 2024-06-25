@@ -7,8 +7,10 @@ _**Все методы перегрузки должны быть объявле
 Ни один из аргументов этих магических методов не может быть передан по ссылке.
 Интерпретация `перегрузки` в PHP отличается от большинства объектно-ориентированных языков. Традиционно перегрузка означает возможность иметь несколько одноимённых методов с разным количеством и типами аргументов.**_
 ***
-## Methods for overloading
+## Methods for overloading properties.
 - `public __set(string $name, mixed $value): void`
 - `public __get(string $name): mixed`
 - `public __isset(string $name): bool`
 - `public __unset(string $name): void`
+***
+## Methods overloading

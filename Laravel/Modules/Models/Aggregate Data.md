@@ -142,9 +142,18 @@ $posts = Post::where('category_id', 1)
 $posts = Posts::where('price', '>=', 1000)
 	->orWhere('category_id', '=', 1)->get();
 ```
-- `whereNot(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` - 
-- `orWhereNot(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` - 
-- `whereColumn(Expression|string|array $first, string|null $operator = null, string|null $second = null, string|null $boolean = 'and')` - 
+- `whereNot(Closure|string|array|Expression $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')` - метод отбирает записи, не подходящие под заданные в параметрах условия.
+``` php
+// Пример использования метода whereNot()
+$posts = Posts::whereNot('price', '>=', 10000000)->get();
+```
+- `orWhereNot(Closure|array|string|Expression $column, mixed $operator = null, mixed $value = null)` - метод фильтрует записи, не подходящие под переданные с параметры и объединяет условие с предыдущим с использованием логического опертатора `OR`.
+- `whereColumn(Expression|string|array $first, string|null $operator = null, string|null $second = null, string|null $boolean = 'and')` - метод фильтрует записи аналогично методу `where()`, только сравнивает значение одного поля со значением другого поля.
+``` php
+// Пример использования метода whereColumn()
+// SELECT * FROM posts WHERE 'created_at' = 'updated_at';
+$posts = Posts::whereColumn('created_at', 'updated_at')->get();
+```
 - `orWhereColumn(Expression|string|array $first, string|null $operator = null, string|null $second = null)` -
 - `whereDate(Expression|string $column, DateTimeInterface|string|null $operator, DateTimeInterface|string|null $value = null, string $boolean = 'and')` -
 - `orWhereDate(Expression|string $column, DateTimeInterface|string|null $operator, DateTimeInterface|string|null $value = null)` -
