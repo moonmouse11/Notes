@@ -208,6 +208,8 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `file_put_contents(string $filename, mixed $data, int $flags = 0, ?resource $context = null): int|false` - функция записывает данные в файл, работает как последовательный вызов функций `fopen()`, `fwrite()` и `fclose()` для записи данных в файл.
 - `file(string $filename, int $flags = 0, ?resource $context = null): array|false` - функция читает содержимое файла и помещает его в массив.
 - `fileatime(string $filename): int|false` - функция возвращает время посленего обращения к указанному файлу.
+- `filectime(string $filename): int|false` - функция возвращает время изменения inode (индексный дкскриптор) указанного файла.
+- `filegroup(string $filename): int|false` - функция возвращает идентификатор группы указанного файла.
 - 
 ***
 ## Image functions
