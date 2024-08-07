@@ -202,7 +202,7 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `fgetc(resource $stream): string|false` - функция считывает символ из файла.
 - `fgetcsv(resource $stream, ?int $length = null, string $separator = ",", string $enclosure = "\"", string $escape = "\\"): array|false` - функция читает строку из файла и производит раззбор данных CSV.
 - `fgets(resource $stream, ?int $length = null): string|false` - функция читает строку из переданного файлового указателя.
-- `fgetss(resource $handle, int $length = ?, string $allowable_tags = ?): string` - функция читает строку из файла и удаляет HTML-теги (Удалена с PHP 8).
+- `fgetss(resource $handle, int $length = ?, string $allowable_tags = ?): string` - функция читает сроку из файла и удаляет HTML-теги (Удалена с PHP 8).
 - `file_exists(string $filename): bool` - функция проверяет существование указанного файла или директории.
 - `file_get_contents(string $filename, bool $use_include_path = false, ?resource $context = null, int $offset = 0, ?int $length = null): string|false` - функция читает заданный файл и возвращает содержимое в виде строки.
 - `file_put_contents(string $filename, mixed $data, int $flags = 0, ?resource $context = null): int|false` - функция записывает данные в файл, работает как последовательный вызов функций `fopen()`, `fwrite()` и `fclose()` для записи данных в файл.
@@ -210,6 +210,16 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `fileatime(string $filename): int|false` - функция возвращает время посленего обращения к указанному файлу.
 - `filectime(string $filename): int|false` - функция возвращает время изменения inode (индексный дкскриптор) указанного файла.
 - `filegroup(string $filename): int|false` - функция возвращает идентификатор группы указанного файла.
+- `fileinode(string $filename): int|false` - функция возвращает индексный дескриптор файла.
+- `filemtime(string $filename): int|false` - возвращает время последнего обращения к файлу.
+- `fileowner(string $filename): int|false` - возвращает идентификатор владельца файла.
+- `fileperms(string $filename): int|false` - возвращает информация о правах доступа к файлу.
+- `filesize(string $filename): int|false` - возвращает размер файла.
+- `filetype(string $filename): string|false` - функция возвращает тип файла.
+- `flock(resource $stream, int $operation, int &$would_block = null): bool` - функция блокирует файл методом переносимой рекомендательной блокировки.
+- `fnmatch(string $pattern, string $filename, int $flags = 0): bool` - функция проверяет совпадение названия файла с указанным шаблоном.
+- `fopen(string $filename, string $mode, bool $use_include_path = false, ?resource $context = null): resource|false` - функция открывает файл или указанный URL-ресурс.
+- `fpassthru(resource $stream): int` - выводит все оставшиеся данные из файлового указателя.
 - 
 ***
 ## Image functions
