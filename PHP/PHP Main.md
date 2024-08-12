@@ -6,4 +6,5 @@
 - [[Object Oriented Programming]]
 - [[Notes/PHP/Versions|Versions]]
 - [[php.ini]]
+- [[Hints]]
 - 
