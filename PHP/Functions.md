@@ -220,7 +220,53 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `fnmatch(string $pattern, string $filename, int $flags = 0): bool` - функция проверяет совпадение названия файла с указанным шаблоном.
 - `fopen(string $filename, string $mode, bool $use_include_path = false, ?resource $context = null): resource|false` - функция открывает файл или указанный URL-ресурс.
 - `fpassthru(resource $stream): int` - выводит все оставшиеся данные из файлового указателя.
-- 
+- `fputcsv(resource $stream, array $fields, string $separator = ",", string $enclosure = "\"", string $escape = "\\", string $eol = "\n"): int|false` - функция форматирует строку в виде `CSV` и записывает её в файловый указатель.
+- `fputs()` - псевдоним функции `fwrite()`.
+- `fread(resource $stream, int $length): string|false` - читает файл как последовательность байтов, в бинано безопасном режиме.
+- `fscanf(resource $stream, string $format, mixed &...$vars): array|int|false|null` - обрабатывает данные из файла по заданному формату.
+- `fseek(resource $stream, int $offset, int $whence = SEEK_SET): int` - функция перемещает позицию файлового указателя.
+- `fstat(resource $stream): array|false` - функция получает информацию о файле по переданному указателю открытого файла.
+- `fsync(resource $stream): bool` - синхронизирует изменения в файле.
+- `ftell(resource $stream): int|false` - функция возвращает текущую позицию указателя чтения/записи файла.
+- `ftruncate(resource $stream, int $size): bool` - функция урезает файл до указанной длинны.
+- `fwrite(resource $stream, string $data, ?int $length = null): int|false` - функция записывает данные в файл в бинарно-безопасном режиме.
+- `glob(string $pattern, int $flags = 0): array|false` - находит файловые пути, совпадающие с указанным шаблоном.
+- `is_dir(string $filename): bool` - функция определяет, является ли переданный файл директорией.
+- `is_executable(string $filename): bool` - определяют, является ли переданный файл исполняемым.
+- `is_file(string $filename): bool` - функция определяет, является ли переданный ресурс файлом.
+- `is_link(string $filename): bool` - определяет, является ли файл символической ссылкой.
+- `is_readable(string $filename): bool` - функция проверяет существование файла, и доступ для чтения.
+- `is_uploaded_file(string $filename): bool` - функция определяет, был ли файл загружен  при помощи HTTP POST.
+- `is_writable(string $filename): bool` - функция определяет, доступен ли файл для записи.
+- `is_writeable()` - псевдоним функции выше.
+- `lchgrp(string $filename, string|int $group): bool` - функция изменяет группу, к которой принадлежит символическая ссылка.
+- `lchown(string $filename, string|int $user): bool` - изменяет владельца указанной символической ссылки.
+- `link(string $target, string $link): bool` - функция создает hard link. (жесткую ссылку).
+- `linkinfo(string $path): int|false` - функция возвращает информацию о переданной ссылке.
+- `lstat(string $filename): array|false` - функция возвращает информацию о файле или символической ссылке.
+- `mkdir(string $directory, int $permissions = 0777, bool $recursive = false,?resource $context = null): bool` - функция создает заданную директорию.
+- `move_uploaded_file(string $from, string $to): bool` - функция перемещает загруженный файл в указанное место.
+- `parse_ini_file(string $filename, bool $process_sections = false, int $scanner_mode = INI_SCANNER_NORMAL): array|false` - функция обрабатывает конфигурационный файл `php.ini`.
+- `parse_ini_string(string $ini_string, bool $process_sections = false, int $scanner_mode = INI_SCANNER_NORMAL): array|false` - функция возвращает настройки `php.ini` в виде ассоциативного массива.
+- `pathinfo(string $path, int $flags = PATHINFO_ALL): array|string` - функция возвращает информацию о пути указанного файла.
+- `pclose(resource $handle): int` - закрывает файловый указатель процесса.
+- `popen(string $command, string $mode): resource|false` - обратна функции выше. Открывает файловые указатель процесса.
+- `readfile(string $filename, bool $use_include_path = false, ?resource $context = null): int|false` - функция читает и записывает файл в буфер вывода.
+- `readlink(string $path): string|false` - возвращает файл, на который указывает символическая ссылка.
+- `realpath(string $path): string|false` - возвращает абсолютный путь к указанному файлу.
+- `realpath_cache_get(): array` - функция получает записи из кэша `realpath`.
+- `realpath_cache_size(): int` - возвращает размер кэша `realpath`.
+- `rename(string $from, string $to, ?resource $context = null): bool` - функция переименовывает указанный файл или директорию.
+- `rewind(resource $stream): bool` - функция открывает позицию файлового указателя.
+- `rmdir(string $directory, ?resource $context = null): bool` - удаляет указанную директорию.
+- `set_file_buffer()` - псевдоним функции `stream_set_write_buffer()`.
+- `stat(string $filename): array|false` - функция возвращает информацию об указанном файле.
+- `symlink(string $target, string $link): bool` - создает символическую ссылку.
+- `tempnam(string $directory, string $prefix): string|false` - функция создает файл с уникальным именем.
+- `tmpfile(): resource|false` - функция создает временный файл.
+- `touch(string $filename, ?int $mtime = null, ?int $atime = null): bool` - аналогична команде `touch` в `bash`.
+- `umask(?int $mask = null): int` - функция изменяет маску прав доступа для новых файлов.
+- `unlink(string $filename, ?resource $context = null): bool` - удаляет файл. Похожа на одноименную функцию в языке `C`.
 ***
 ## Image functions
 - `gd_info(): array` - функция выводит информацию об установленной библиотеке GD.
