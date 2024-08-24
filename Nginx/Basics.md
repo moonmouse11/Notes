@@ -1,10 +1,16 @@
 # Basics
+Nginx это:
+- HTTP-сервер.
+- Обратный прокси сервер.
+- Почтовый прокси сервер.
+- TCP/UDP-сервер общего назначения.
 ***
+## Bash manual
 Работа Nginx и его модулей определяется в концигурационном файле. 
 `nginx.conf` - конфигурационный файл по умолчанию.
 ``` bash
 # Установим NGINX
-sudo apt install nginx
+sudo apt install nginx // Ubuntu command
 
 # Проверяем что запущен
 systemctl status nginx
