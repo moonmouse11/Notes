@@ -17,12 +17,18 @@
  - `php artisan ui` - Swap the front-end scaffolding for the application.
  - `php artisan up` - Bring the application out of maintenance mode.
 
+## About
+- `php artisan about` - выводит информацию о текущей среде окружения.
+	- `--only [environment]` - выводит информацию о указанном окружении.
 ## Serve
 - `php artisan serve` - запускает сервер с приложением.
 	- `--host` - указывает хост для отладки приложения.
 	- `--port` - устанавливает порт.
 	- `--tries` - количество TCP портов, которые следует перебрать в поисках свободного.
 	- `--no-reload` - не перезапускать отладочный серваер при изменении файлов конфигурации.
+## Model
+- `php artisan model:show` - выводит информацию о моделях проекта.
+- `php artisan model:prune` - команда удаляет ненужные модели.
 ## Migrate
 - `php artisan migrate` - запуск всех добавленных миграций.
 	- `--pretend` - запуск миграций с выводом исполняемых SQL запросов.
@@ -74,6 +80,9 @@
 - `php artisan ui:auth` - запускает генерацию файлов для авторизации в фреймворке.
 ## Route
 - `php artisan route:list` - выводит список объявленных путей.
+	- `--only-vendor`  - выводит список объявленных путей подключенных зависимостей.
+	- `--except-vendor` - обратна команде выше. Выводит список объявленных путей без подключенных зависимостей.
+	- `-v` - выводит список с Middleware.
 ## Make
 - `php artisan make:police [policy_name]` - создает политику фреймворка с указанным именем.
 - `php artisan make:migrations [migration_name]` - команда для создания пустого файла миграции.
@@ -97,5 +106,10 @@
 - `php artisan make:request [request_name]` -  создает класс `FormRequest` для обработки форм.
 ## Key
 - `php artisan key:generate` - команда для генерации секретного ключа.
+## Test
+- `php artisan test` - команда запускает тестирование приложения.
+	- `--coverge` - выводит отчет о покрытии тестами приложения.
 ## Vendor
-- `php artisan vendor:publish` - команда для подключения сторонник пакетов.
+- `php artisan vendor:publish` - команда для подключения сторонник пакетовt
+## Our-package
+- `php artisan our-package` 
