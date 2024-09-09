@@ -151,6 +151,9 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `debug_zval_dump(mixed $value, mixed ...$values): void` - функция сбрасывает строковое представление внутренней структуры `zval` на вывод.
 - `empty(mixed $var): bool` - проверяет, пустая ли переменная.
 - `floatval(mixed $value): float` - функция возвращает значение переменной в виде числа с плавающей точкой.
+- `get_debug_type(mixed $value): string` - возвращает имя типа переменной в виде, подходящим для отладки.
+- `get_defined_vars(): array` - функция возвращает массив определенных переменных.
+- 
 - `gettype(mixed $value): string` - функция возвращает тип переменной.
 - `settype(mixed &$var, string $type): bool` - функция задает тип указанной переменной.
 ***
