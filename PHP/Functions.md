@@ -153,12 +153,50 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `floatval(mixed $value): float` - функция возвращает значение переменной в виде числа с плавающей точкой.
 - `get_debug_type(mixed $value): string` - возвращает имя типа переменной в виде, подходящим для отладки.
 - `get_defined_vars(): array` - функция возвращает массив определенных переменных.
-- 
+- `get_resource_id(resource $resource): int` - функция возвращает целочисленный идентификатор данного ресурса.
+- `get_resource_type(resource $resource): string` - функция возвращает тип ресурса.
+- `intval(mixed $value, int $base = 10): int` - функция возвращает целочисленное значение переменной. Тип integer.
+- `is_array(mixed $value): bool` - определяет, является ли переменная массивом.
+- `is_bool(mixed $value): bool` - функция определяет, является ли переменная булевым (логическим) типом.
+- `is_callable(mixed $value, bool $syntax_only = false, string &$callable_name = null): bool` - функция проверяет, что значение может быть вызвано как функция в текущей области видимости.
+- `is_countable(mixed $value): bool` - функция проверяет, принадлежит ли значение переменной типу `array` или `Countable`.
+Пример использования.
+``` php
+var_dump(is_countable([1, 2, 3])); // bool(true)
+var_dump(is_countable(new ArrayIterator(['foo', 'bar', 'baz']))); // bool(true)
+var_dump(is_countable(new ArrayIterator())); // bool(true)
+var_dump(is_countable(new stdClass())); // bool(false)
+```
+- `is_float(mixed $value): bool|is_double(mixed $value): bool|is_real(mixed $value): bool` - проверяет, представляет ли собой переменная число с плавающей точкой (вещественное число).
+- `is_int(mixed $value): bool|is_integer(mixed $value): bool|is_long(mixed $value): bool` - проверяет, представляет ли собой переменная целое число.
+- `is_iterable(mixed $value): bool` - функция проверяет, соответствует ли содержимое переменной псевдотипу `iterable`, то есть — это либо массив `array`, либо объект, который реализует интерфейс `Traversable`.
+Пример использования.
+``` php
+var_dump(is_iterable([1, 2, 3])); // bool(true)  
+var_dump(is_iterable(new ArrayIterator([1, 2, 3]))); // bool(true)  
+var_dump(is_iterable((function () { yield 1; })())); // bool(true)  
+var_dump(is_iterable(1)); // bool(false)  
+var_dump(is_iterable(new stdClass())); // bool(false)
+```
+- `is_null(mixed $value): bool` -  проверяет, равно ли значение переменной `null`.
+- `is_numeric(mixed $value): bool` - функция проверяет, содержит ли переменная число или числовую строку.
+- `is_object(mixed $value): bool` - функция проверяет, представляет ли собой переменная объект.
+- `is_resource(mixed $value): bool` - функция проверяет, хранит ли переменная ссылку на ресурс.
+- `is_scalar(mixed $value): bool` - функция проверяет, представляет ли собой переменная скаляр. Скалярные переменные — это переменные, содержащие `int`, `float`, `string` и `bool`. Типы `array`, `object`, `resource` и `null` — не скалярные.
+- `is_string(mixed $value): bool` - функция проверяет, представляет ли собой тип переменной строку.
+- `strval(mixed $value): string` - функция возвращает строкое значение переменной. **Эта функция не производит форматирование возвращаемого значения.**
+- `isset(mixed $var, mixed ...$vars): bool` - определяет, объявили ли переменную и отличается ли её значение от `null`.
+- `unset(mixed $var, mixed ...$vars): void` - функция удаляет указанную переменную.
+- `print_r(mixed $value, bool $return = false): string|bool` - функция выводит удобочитаемую информацию о переменной. **Функциям `print_r()`, `var_dump()` и `var_export()` разрешено также показывать защищённые и закрытые атрибуты объектов. Статические элементы класса не будут отображены.**
+- `var_dump(mixed $value, mixed ...$values): void` - функция отображает структурированную информацию об одном или нескольких выражениях, включая тип и значение выражений. Массивы и объекты анализируются рекурсивно, значениям задаются отступы, чтобы показать структуру.
+- `var_export(mixed $value, bool $return = false): ?string` - функция возвращает структурированную информацию о данной переменной. Функция аналогична `var_dump()` за одним исключением: возвращаемое представление является полноценным PHP-кодом.
+- `serialize(mixed $value): string` - функция генерирует пригодное для хранения представление переменной. Это полезно для хранения или передачи значений PHP между скриптами без потери их типа и структуры.
+- `unserialize(string $data, array $options = []): mixed` - функция `unserialize()` принимает одну сериализованную переменную и конвертирует её обратно в значение PHP.
 - `gettype(mixed $value): string` - функция возвращает тип переменной.
 - `settype(mixed &$var, string $type): bool` - функция задает тип указанной переменной.
 ***
 ## Class & Objects
-- `enum_exists(string $enum, bool $autoload = true): bool` - функция проверяет существование переданного в аргументы Enum.
+- `enum_exists(string $enum, bool $autoload = true): bool` - функция проверяет существование переданного в аргументы `Enum`.
 - `__autoload(string $class): void` - функция пытается загрузить класс, переданные в аргумент. _**Устаревшая с  PHP 7.2.0**_.
 - `class_alias(string $class, string $alias, bool $autoload = true): bool` - функция создает псевдоним класса.
 - `class_exists(string $class, bool $autoload = true): bool` - функция проверяет объявление класса.
@@ -233,7 +271,19 @@ echo 'stdClass: '.(boolval(new stdClass) ? 'true' : 'false')."\n";  # true
 - `ftell(resource $stream): int|false` - функция возвращает текущую позицию указателя чтения/записи файла.
 - `ftruncate(resource $stream, int $size): bool` - функция урезает файл до указанной длинны.
 - `fwrite(resource $stream, string $data, ?int $length = null): int|false` - функция записывает данные в файл в бинарно-безопасном режиме.
-- `glob(string $pattern, int $flags = 0): array|false` - находит файловые пути, совпадающие с указанным шаблоном.
+- `glob(string $pattern, int $flags = 0): array|false` - функция `glob()` ищет совпавшие с шаблоном pattern пути по правилам функции `glob()` модуля `libc`, похожим на правила распространённых командных оболочек.
+Допустимые флаги:
+``` php
+GLOB_BRACE (int) /** Разворачивает шаблон {a,b,c} так, чтобы он соответствовал «a», «b» или «c».
+Замечание: Флаг GLOB_BRACE недоступен в ряде систем, которые отличаются от GNU, например Solaris или Alpine Linux.*/
+GLOB_ERR (int) /** Остановиться при ошибках чтения (например, при нечитаемых каталогах), по умолчанию ошибки игнорируются. */
+GLOB_ONLYDIR (int) /** Возвращать только те записи директории, которые соответствуют шаблону. */
+GLOB_MARK (int) /** Добавлять слеш (обратный слеш в операционных системах Windows) к каждой возвращаемой директории. */
+GLOB_NOSORT (int) /** Возвращать файлы в том виде, в каком они отображаются в директории (без сортировки). Пути сортируются в алфавитном порядке, если флаг не установили. */
+GLOB_NOCHECK (int) /** Вернуть шаблон поиска, если файлы, которые соответствуют шаблону, не найдены. */
+GLOB_NOESCAPE (int) /** Обратные слеши не заключают метасимволы в кавычки. */ 
+GLOB_AVAILABLE_FLAGS (int) /** Флаги семейства GLOB_* вместе взятые. Эквивалентно записи 0 | GLOB_BRACE | GLOB_MARK | GLOB_NOSORT | GLOB_NOCHECK | GLOB_NOESCAPE | GLOB_ERR | GLOB_ONLYDIR. */
+```
 - `is_dir(string $filename): bool` - функция определяет, является ли переданный файл директорией.
 - `is_executable(string $filename): bool` - определяют, является ли переданный файл исполняемым.
 - `is_file(string $filename): bool` - функция определяет, является ли переданный ресурс файлом.
