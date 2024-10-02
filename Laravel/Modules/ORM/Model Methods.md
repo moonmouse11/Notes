@@ -212,3 +212,4 @@ DB::table('categories')->insert(['title' => 'Техника']);
 // Добавляем запись в таблицу offers базы данных mysql 
 DB::connection('mysql')->table('offers')->insert(['many_data_values']);
 ```
+***
