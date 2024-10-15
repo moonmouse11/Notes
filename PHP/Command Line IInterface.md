@@ -48,3 +48,4 @@ Usage: php [options] [-f] <file> [--] [args...]
   --rz <name>      Show information about Zend extension <name>.
   --ri <name>      Show configuration for extension <name>.
 ```
+***
