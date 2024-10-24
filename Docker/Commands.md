@@ -1,15 +1,23 @@
 # Commands
 ***
-- `docker rmi [image_id]` - удаляет образ и контейнер с диска.
+- `docker rm [container_id]` - команда удаляет указанный контейнер с локального устройства.
+- `docker rmi [image_id|container_id]` - удаляет образ и контейнер с диска.
 - `docker rmi -f $(docker images -a -q)` - скрипт для удаления всех образов на устройстве.
+- `docker run hello-world` - запускает контейнер Hello World. Для проверки после установки.
 - `docker run -p 8080:8080 -v [path to local code]:/app[path to container code] -w /app[create file/directory] [container_name] [command]`
-- `docker run -d` - запуск image в отвязке от консоли.
-- `docker ps` - запущенные контейнеры.
+- `docker run -d [image_name] [command = ''] [parameters = '']` - запуск указанного образа  в отвязке от консоли. (detached mode).
+- `docker start [container_id]` - повторный запуск созданного контейнера.
+- `docker ps` - выводит список запущенных контейнеров.
 - `docker ps -a` - показывает все контейнеры и историю запусков.
 - `docker run -d --name=[conatainer name]` - задает имя контейнера. Можно использовать вместо id.
-- `docker start [container_name]` - запускает созданный контейнер в detach.
-- `docker stop [comtainer_id]` - останавливает рабочий контейнер.
-- `docker images`|`docker image -ls`|`docker image list` - просмотр всех images на устройстве.
+- `docker start [container_name|container_id]` - запускает созданный контейнер в detach.
+- `docker pause [container_name|container_id]` - останавливает работу указанного контейнера.
+- `docker unpause [container_name|container_id]` - восстанавливает работу указанного остановленного контейнера.
+- `docker stop [container_name|container_id]` - выключает указанный контейнер.
+- `docker kill [container_name|container_id]` - 
+- `docker images`|`docker image -ls`|`docker image list` - просмотр всех образов на локальном устройстве.
+- `docker search [image_name]` - поиск образа в глобальной сети.
+- `docker pull [inage_name]:[tag = latest]` - загуржает указанный образ из сети.
 - `docker container list` - выводит список всех запущенных контейнеров.
 - `docker container stats` - мониторинг использования ресурсов контейнерами.
 - `docker container rename [container_name] [new_container_name]` - переименовывает контейнер.
@@ -21,7 +29,7 @@
 - `docker context export [context_name]` - экспортирует указанный контекст.
 - `docker context import [context_name] [context_export_file]` - импортирует указанный контекст из файла.
 - `docker tag` - смена тега у образа.
-- `docker image inspect` - log образа.
+- `docker image inspect [image_name|image_id]` - log указанного образа.
 - `docker logs [-f] [container_id]` - получает и выводит журнал работы контейнера.
 - `docker volume` - 
 - `docker volume inspect [container_id]` - выводит информацию о volume указанного контейнера.
