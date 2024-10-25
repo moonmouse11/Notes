@@ -25,6 +25,7 @@
 - `docker system prune` - удаляет все скачанные контейнеры.
 - `docker attach` - подключиться к контейнеру.
 - `docker network ls` - выводит список сетей.
+- `docker network inspect [network_name]` - выводит конфигурацию указанной сети.
 - `docker context ls` - выводит список контекстов.
 - `docker context inspect [context_name]` - выводит конфигурацию указанного контекста.
 - `docker context export [context_name]` - экспортирует указанный контекст.
@@ -35,4 +36,7 @@
 - `docker volume` - 
 - `docker volume inspect [container_id]` - выводит информацию о volume указанного контейнера.
 - `docker exec -it [container_name] [command]` - запускает указанную команду в указанном контейнере.
+- `docker build [dockerfile_path]` - собирает образ по `Dockerfile`.
+- `docker build -t [image_tag] [dockerfile_path]` - собирает образ по `Dockerfile` и дает ему указанный тег.
+- 
 ***
