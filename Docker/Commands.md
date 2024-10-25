@@ -13,8 +13,9 @@
 - `docker start [container_name|container_id]` - запускает созданный контейнер в detach.
 - `docker pause [container_name|container_id]` - останавливает работу указанного контейнера.
 - `docker unpause [container_name|container_id]` - восстанавливает работу указанного остановленного контейнера.
-- `docker stop [container_name|container_id]` - выключает указанный контейнер.
-- `docker kill [container_name|container_id]` - 
+- `docker stop [container_name|container_id]` - выключает указанный контейнер `SIGTERM`.
+- `docker kill [container_name|container_id]` - выключает указанный контейнер `SIGKILL`.
+- `docker stats [container_id]` - выводит данные об указанном контейнере.
 - `docker images`|`docker image -ls`|`docker image list` - просмотр всех образов на локальном устройстве.
 - `docker search [image_name]` - поиск образа в глобальной сети.
 - `docker pull [inage_name]:[tag = latest]` - загуржает указанный образ из сети.
