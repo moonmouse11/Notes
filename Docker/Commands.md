@@ -3,9 +3,9 @@
 - `docker rm [container_id]` - команда удаляет указанный контейнер с локального устройства.
 - `docker rmi [image_id|container_id]` - удаляет образ и контейнер с диска.
 - `docker rmi -f $(docker images -a -q)` - скрипт для удаления всех образов на устройстве.
-- `docker run hello-world` - запускает контейнер Hello World. Для проверки после установки.
+- `docker run hello-world` - запускает образ и создает контейнер Hello World. Для проверки после установки.
 - `docker run -p 8080:8080 -v [path to local code]:/app[path to container code] -w /app[create file/directory] [container_name] [command]`
-- `docker run -d [image_name] [command = ''] [parameters = '']` - запуск указанного образа  в отвязке от консоли. (detached mode).
+- `docker run -d [image_name] [command = ''] [parameters = '']` - запуск указанного образа  в отвязке от консоли с созданием контейнера. (detached mode).
 - `docker start [container_id]` - повторный запуск созданного контейнера.
 - `docker ps` - выводит список запущенных контейнеров.
 - `docker ps -a` - показывает все контейнеры и историю запусков.
@@ -22,7 +22,7 @@
 - `docker container list` - выводит список всех запущенных контейнеров.
 - `docker container stats` - мониторинг использования ресурсов контейнерами.
 - `docker container rename [container_name] [new_container_name]` - переименовывает контейнер.
-- `docker system prune` - удаляет все скачанные контейнеры.
+- `docker system prune` - удаляет все остановленные контейнеры.
 - `docker attach` - подключиться к контейнеру.
 - `docker network ls` - выводит список сетей.
 - `docker network inspect [network_name]` - выводит конфигурацию указанной сети.

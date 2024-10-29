@@ -5,3 +5,4 @@
 ***
 ## Options
 - `ps xa` - 
+- `ps aux` - 
