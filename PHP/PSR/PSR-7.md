@@ -1,7 +1,7 @@
 # PSR-7
 ***
 # HTTP message interfaces
-First, though I want to clarify what PSR-7 is attempting.
+
 ***
 ## HTTP Messages
 HTTP messages are relatively simple, which is why the protocol has succeeded over the years. All messages have the following structure:
