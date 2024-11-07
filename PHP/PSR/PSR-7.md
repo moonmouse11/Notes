@@ -1,10 +1,11 @@
 # PSR-7
 ***
 # HTTP message interfaces
-
+## Basic
+HTTP-сообщения являются основой веб-разработки. Веб-браузеры и HTTP-клиенты, такие как `cURL`, создают HTTP-сообщения-запросы, которые отправляются на веб-сервер, который предоставляет HTTP-сообщение-ответ. Серверный код получает HTTP-сообщение-запрос и возвращает HTTP-сообщение-ответ.
 ***
 ## HTTP Messages
-HTTP messages are relatively simple, which is why the protocol has succeeded over the years. All messages have the following structure:
+Каждое сообщение HTTP-запроса имеет определенную форму. HTTP-сообщения относительно просты, поэтому протокол и преуспел за эти годы. Все сообщения имеют следующую структуру:
 
 ```http
 <message line>
@@ -14,39 +15,27 @@ Another-Header: value
 Message body
 ```
 
-Headers are key/value pairs. The keys are case insensitive. Values are strings. The same header type may be emitted multiple times, in which case (typically) the values are considered as a list; in most cases, these can also be expressed by concatenating the values with comma delimiters.
-
-The message body is a string, but typically handled by servers and clients as a stream in order to conserve memory and processing overhead. This is incredibly important when you transmit large data sets, and particularly when transmitting files. As an example, PHP natively represents the incoming request body as the stream `php://input`, and uses output buffers — a form of stream — to return a response.
-
-The message line is what differentiates a request from a response.
-
-The message line of a request is called the request line, and has the following format:
-
+Заголовки — это пары ключ/значение. Ключи нечувствительны к регистру. Значения — это строки. Один и тот же тип заголовка может быть выдан несколько раз, в этом случае (обычно) значения рассматриваются как список; в большинстве случаев их также можно выразить путем объединения значений с разделителями-запятыми.
+Тело сообщения представляет собой строку, но обычно обрабатывается серверами и клиентами как поток, чтобы экономить память и накладные расходы на обработку. Это невероятно важно при передаче больших наборов данных, и особенно при передаче файлов. Например, PHP изначально представляет тело входящего запроса как поток `php://input`и использует выходные буферы — форму потока — для возврата ответа.
+Строка сообщения — это то, что отличает запрос от ответа.
+Строка сообщения запроса называется строкой запроса и имеет следующий формат:
 ```http
 METHOD request-target HTTP/VERSION
 ```
 
-`METHOD` indicates the operation requested: GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD, etc. The `VERSION` is typically 1.0 or 1.1 (usually 1.1 in modern web clients). The `request-target` is where things get complex.
-
-A request target can be one of four different forms:
-
-- `origin-form`, which is the path and query string (if present) of the URI.
-- `absolute-form`, which is an absolute URI.
-- `authority-form`, which is the authority portion of the uri (`user-info`, if present; `host`; and `port`, if non-standard).
-- `asterisk-form`, which is the string `*`.
-
-Typically, an HTTP client will use the scheme and authority from a URI to make the connection to the HTTP server, and then pass an origin-form target in the transmitted HTTP request message. However, it's perfectly valid to send the absolute URI as well. authority-form is typically only used with CONNECT requests, which are usually performed when working with a proxy server. asterisk-form is used with OPTIONS requests to get general capabilities of a web server.
-
-In short, there's a lot of moving parts in the request-target.
-
-Now, to make things more complicated, when we look at URIs, we have the following:
-
+`METHOD` указывает на запрошенную операцию: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `OPTIONS`, `HEAD`, и т.д.. `VERSION` Обычно это 1.0 или 1.1 (обычно 1.1 в современных веб-клиентах). Здесь `request-target`все становится сложнее.
+Цель запроса может иметь одну из четырех различных форм:
+- `origin-form`, который представляет собой путь и строку запроса (если есть) URI.
+- `absolute-form`, который является абсолютным URI.
+- `authority-form`, который является авторитетной частью URI ( `user-info`, если присутствует; `host`; и `port`, если нестандартный).
+- `asterisk-form`, которая является строкой `*`.
+Обычно HTTP-клиент использует схему и полномочия из URI для установления соединения с HTTP-сервером, а затем передает цель `origin-form` в переданном сообщении HTTP-запроса. Однако вполне допустимо отправлять и абсолютный URI. `authority-form` обычно используется только с запросами `CONNECT`, которые обычно выполняются при работе с прокси-сервером. `asterisk-form` используется с запросами `OPTIONS` для получения общих возможностей веб-сервера.
+Короче говоря, в запросе-цели много движущихся частей.
+Теперь, чтобы все усложнить, рассмотрим URI:
 ```markdown
 <scheme>://<authority>[/<path>][?<query string>]
 ```
-
-The scheme, when doing HTTP requests, will be one of `http` or `https`. The path is a well-known format as well. But what about authority?
-
+Схема, при выполнении HTTP-запросов, будет одной из `http`или `https`. Путь — это также известный формат. Но что насчет полномочий?
 ```text
 [user-info@]host[:port]
 ```

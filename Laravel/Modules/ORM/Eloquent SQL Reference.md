@@ -687,3 +687,4 @@ User::where('id', 2)->increment('bonus', 12)
 ```sql
 UPDATE users SET bonus = bonus + 12, users.updated_at = '2023-10-25 14:58:10' WHERE id = 2
 ```
+***
