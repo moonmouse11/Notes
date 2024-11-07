@@ -7,9 +7,9 @@
 ## Functions & Variables
 - camelCase
  ``` php
-/* Правильно*/
+/* Правильно */
 getPost(), $isActive, $id
-/* Не правильно*/
+/* Не правильно */
 GetPost(), $is_active, $ID
 ```
 ***
@@ -19,9 +19,9 @@ GetPost(), $is_active, $ID
 - PascalCase
 - App\Models
 ``` php
-/* Правильно*/
+/* Правильно */
 Post, PostComment
-/* Не правильно*/
+/* Не правильно */
 Posts, post_comment, Postcomment
 ```
 ***
@@ -32,9 +32,9 @@ Posts, post_comment, Postcomment
 Если `$table` не указано явно в модели, то Laravel автоматически получит имя таблицы.
 Даже если явно указывать имя таблицы, то всё равно рекомендуется придерживаться данного соглашения.
 ``` php
-/* Правильно*/
+/* Правильно */
 posts, post_comments
-/* Не правильно*/
+/* Не правильно */
 post, postcomment, PostComments
 ```
 ***
@@ -43,9 +43,9 @@ post, postcomment, PostComments
 - Имена моделей в алфавитном порядке
 - snake_case
 ``` php
-/* Правильно*/
+/* Правильно */
 post_user
-/* Не правильно*/
+/* Не правильно */
 user_post, posts_users
 ```
 ***
@@ -53,18 +53,18 @@ user_post, posts_users
 - snake_case
 - Без префикса таблицы
 ``` php
-/* Правильно*/
+/* Правильно */
 id, full_description, created_at
-/* Не правильно*/
+/* Не правильно */
 ID, fulldescr, createdAt
 ```
 ***
 ## Primary Key
 - Без префиксов и постфиксов
 ``` php
-/* Правильно*/
+/* Правильно */
 id, full_description, created_at
-/* Не правильно*/
+/* Не правильно */
 ID, fulldescr, createdAt
 ```
 ***
@@ -72,9 +72,9 @@ ID, fulldescr, createdAt
 - Имя таблицы в единственном числе
 - Постфикс `_id`
 ``` php
-/* Правильно*/
+/* Правильно */
 user_id, post_id
-/* Не правильно*/
+/* Не правильно */
 user, users_id, id_post
 ```
 ***
@@ -82,9 +82,9 @@ user, users_id, id_post
 - camelCase
 - Единственное число
 ``` php
-/* Правильно*/
+/* Правильно */
 user()
-/* Не правильно*/
+/* Не правильно */
 users()
 ```
 ***
@@ -92,9 +92,9 @@ users()
 - camelCase
 - Множественное число
 ``` php
-/* Правильно*/
+/* Правильно */
 users()
-/* Не правильно*/
+/* Не правильно */
 user()
 ```
 ***
@@ -102,9 +102,9 @@ user()
 - snake_case
 - Название описывает действие
 ``` php
-/* Правильно*/
+/* Правильно */
 create_posts_table, add_user_id_to_posts_table
-/* Не правильно*/
+/* Не правильно */
 posts, fix_table, update_column
 ```
 ***
@@ -114,9 +114,9 @@ posts, fix_table, update_column
 - Постфикс `Seeder`
 - `Database\Seeders`
 ``` php
-/* Правильно*/
+/* Правильно */
 PostSeeder
-/* Не правильно*/
+/* Не правильно */
 Post, PostsSeeder
 ```
 ***
@@ -125,9 +125,9 @@ Post, PostsSeeder
 - kebab-case
 [REST Naming Guide](https://restfulapi.net/resource-naming/) - более подробная информация.
 ``` php
-/* Правильно*/
+/* Правильно */
 /posts/1, /about-us
-/* Не правильно*/
+/* Не правильно */
 /post/1, /aboutUs, /about_us
 ```
 ***
@@ -135,9 +135,9 @@ Post, PostsSeeder
 - snake_case
 - dot-нотация
 ``` php
-/* Правильно*/
+/* Правильно */
 posts.index, posts.show, about_us
-/* Не правильно*/
+/* Не правильно */
 posts, postsShow, about.us, about-us
 ```
 ***
@@ -147,9 +147,9 @@ posts, postsShow, about.us, about-us
 - Постфикс «Controller»
 - App\Http\Controllers
 ``` php
-/* Правильно*/
+/* Правильно */
 PostController, PostCommentController
-/* Не правильно*/
+/* Не правильно */
 PostsController, Post, posts_controller
 ```
 ***
@@ -173,14 +173,19 @@ PostsController, Post, posts_controller
 Точки используются для разделения директорий, поэтому в имени их быть не должно, кроме расширения `.blade.php`
 Данное соглашение касается как файлов, так и директорий.
 ``` php
-/* Правильно*/
+/* Правильно */
 index, post_comments, post-comments
-/* Не правильно*/
+/* Не правильно */
 Index, postComments
 ```
 ***
 ## Config & Language
 - snake_case
+``` php
+/* Example */
+database.php
+mail.php
+```
 ***
 ## Contract / Interface
 - PascalCase
@@ -188,9 +193,9 @@ Index, postComments
 - Без префикса и постфикса
 - App\Contracts
 ``` php
-/* Правильно*/
+/* Правильно */
 Authenticatable, Dispatcher, ShouldQueue
-/* Не правильно*/
+/* Не правильно */
 Authentication, DispatcherInterface, IShouldQueue
 ```
 ***
@@ -200,9 +205,97 @@ Authentication, DispatcherInterface, IShouldQueue
 - Без префикса и постфикса
 - App\Traits
 ``` php
-/* Правильно*/
+/* Правильно */
 Notifiable, Dispatchable
-/* Не правильно*/
+/* Не правильно */
 Notification, NotifiableTrait, Dispatcher
 ```
+***
+## Class
+- Studly Case так же известен как PascalCase.
+``` php
+/* Example */
+UserController, PostController
+```
+***
+## Method
+- Camel Case
+``` php
+/* Example */
+getUserById(), createNewPost()
+```
+***
+## Variable
+- Camel Case
+``` php
+/* Example */
+$userName, $postContent
+```
+***
+## Conventions accepted by Laravel community
+
+| What                                                                  | How                                                                       | Good                                    | Bad                                                             |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------- | --------------------------------------- | --------------------------------------------------------------- |
+| Controller                                                            | singular                                                                  | ArticleController                       | ~~ArticlesController~~                                          |
+| Route                                                                 | plural                                                                    | articles/1                              | ~~article/1~~                                                   |
+| Route name                                                            | snake_case with dot notation                                              | users.show_active                       | ~~users.show-active, show-active-users~~                        |
+| Model                                                                 | singular                                                                  | User                                    | ~~Users~~                                                       |
+| hasOne or belongsTo relationship                                      | singular                                                                  | articleComment                          | ~~articleComments, article_comment~~                            |
+| All other relationships                                               | plural                                                                    | articleComments                         | ~~articleComment, article_comments~~                            |
+| Table                                                                 | plural                                                                    | article_comments                        | ~~article_comment, articleComments~~                            |
+| Pivot table                                                           | singular model names in alphabetical order                                | article_user                            | ~~user_article, articles_users~~                                |
+| Table column                                                          | snake_case without model name                                             | meta_title                              | ~~MetaTitle; article_meta_title~~                               |
+| Model property                                                        | snake_case                                                                | $model->created_at                      | ~~$model->createdAt~~                                           |
+| Foreign key                                                           | singular model name with _id suffix                                       | article_id                              | ~~ArticleId, id_article, articles_id~~                          |
+| Primary key                                                           | -                                                                         | id                                      | ~~custom_id~~                                                   |
+| Migration                                                             | -                                                                         | 2017_01_01_000000_create_articles_table | ~~2017_01_01_000000_articles~~                                  |
+| Method                                                                | camelCase                                                                 | getAll                                  | ~~get_all~~                                                     |
+| Method in resource controller                                         | [table](https://laravel.com/docs/master/controllers#resource-controllers) | store                                   | ~~saveArticle~~                                                 |
+| Method in test class                                                  | camelCase                                                                 | testGuestCannotSeeArticle               | ~~test_guest_cannot_see_article~~                               |
+| Variable                                                              | camelCase                                                                 | $articlesWithAuthor                     | ~~$articles_with_author~~                                       |
+| Collection                                                            | descriptive, plural                                                       | $activeUsers = User::active()->get()    | ~~$active, $data~~                                              |
+| Object                                                                | descriptive, singular                                                     | $activeUser = User::active()->first()   | ~~$users, $obj~~                                                |
+| Config and language files index                                       | snake_case                                                                | articles_enabled                        | ~~ArticlesEnabled; articles-enabled~~                           |
+| View                                                                  | kebab-case                                                                | show-filtered.blade.php                 | ~~showFiltered.blade.php, show_filtered.blade.php~~             |
+| Config                                                                | snake_case                                                                | google_calendar.php                     | ~~googleCalendar.php, google-calendar.php~~                     |
+| Contract (interface)                                                  | adjective or noun                                                         | AuthenticationInterface                 | ~~Authenticatable, IAuthentication~~                            |
+| Trait                                                                 | adjective                                                                 | Notifiable                              | ~~NotificationTrait~~                                           |
+| Trait [(PSR)](https://www.php-fig.org/bylaws/psr-naming-conventions/) | adjective                                                                 | NotifiableTrait                         | ~~Notification~~                                                |
+| Enum                                                                  | singular                                                                  | UserType                                | ~~UserTypes~~, ~~UserTypeEnum~~                                 |
+| FormRequest                                                           | singular                                                                  | UpdateUserRequest                       | ~~UpdateUserFormRequest~~, ~~UserFormRequest~~, ~~UserRequest~~ |
+| Seeder                                                                | singular                                                                  | UserSeeder                              | ~~UsersSeeder~~                                                 |
+***
+## Standard Laravel tools
+ Лучше использовать встроенную функциональность Laravel и пакеты сообщества вместо использования сторонних пакетов и инструментов. Любому разработчику, который будет работать с вашим приложением в будущем, потребуется изучить новые инструменты. Кроме того, шансы получить помощь от сообщества Laravel значительно ниже, если вы используете сторонний пакет или инструмент.
+
+|Task|Standard tools|3rd party tools|
+|---|---|---|
+|Authorization|Policies|Entrust, Sentinel and other packages|
+|Compiling assets|Laravel Mix, Vite|Grunt, Gulp, 3rd party packages|
+|Development Environment|Laravel Sail, Homestead|Docker|
+|Deployment|Laravel Forge|Deployer and other solutions|
+|Unit testing|PHPUnit, Mockery|Phpspec, Pest|
+|Browser testing|Laravel Dusk|Codeception|
+|DB|Eloquent|SQL, Doctrine|
+|Templates|Blade|Twig|
+|Working with data|Laravel collections|Arrays|
+|Form validation|Request classes|3rd party packages, validation in controller|
+|Authentication|Built-in|3rd party packages, your own solution|
+|API authentication|Laravel Passport, Laravel Sanctum|3rd party JWT and OAuth packages|
+|Creating API|Built-in|Dingo API and similar packages|
+|Working with DB structure|Migrations|Working with DB structure directly|
+|Localization|Built-in|3rd party packages|
+|Realtime user interfaces|Laravel Echo, Pusher|3rd party packages and working with WebSockets directly|
+|Generating testing data|Seeder classes, Model Factories, Faker|Creating testing data manually|
+|Task scheduling|Laravel Task Scheduler|Scripts and 3rd party packages|
+|DB|MySQL, PostgreSQL, SQLite, SQL Server|MongoDB|
+***
+## Other good practice
+- Избегайте использования шаблонов и инструментов, чуждых Laravel и аналогичным фреймворкам (например, RoR, Django). Если вам нравится подход Symfony (или Spring) для создания приложений, то лучше использовать эти фреймворки.
+- Никогда не вносите никакой логики в файлы route.
+- Минимизируйте использование чистого PHP в шаблонах Blade.
+- Используйте базу данных в памяти для тестирования.
+- Не переопределяйте стандартные функции фреймворка, чтобы избежать проблем, связанных с обновлением версии фреймворка, и многих других проблем.
+- По возможности используйте современный синтаксис PHP, но не забывайте о читабельности.
+- Избегайте использования View Composers и подобных инструментов, если вы не знаете, что делаете. В большинстве случаев есть лучший способ решить проблему.
 ***
