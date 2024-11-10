@@ -2,5 +2,5 @@
 ***
 - [[Basics & Docs]]
 - [[Cheat-sheet]]
-- [[Semantic Versioning 2.0.0]]
+- [[Oh Shit, Git!]]
 - 

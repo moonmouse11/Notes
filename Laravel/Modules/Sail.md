@@ -1,7 +1,8 @@
 # Sail
 ***
 ## Basics
-_**Laravel Sail**_ - это инструмент командной строки для взаимодействия со средой разработки Docker. Sail обеспечивает отправную точку для создания приложения Laravel с использованием PHP, MySQL и Redis. 
+_**Laravel Sail**_ - это инструмент командной строки для взаимодействия со средой разработки Docker. Sail обеспечивает отправную точку для создания приложения Laravel с использованием PHP, MySQL и Redis.
+По сути, Sail – это файл `docker-compose.yml`, который хранится в корне вашего проекта и набор скриптов `sail`, при помощи которых можно управлять docker-контейнерами, определёнными в `docker-compose.yml`.
 - `php artisan sail:install`
 - `composer require laravel/sail --dev`
 - `./vendor/bin/sail up`
