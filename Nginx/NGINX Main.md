@@ -1,5 +1,5 @@
 # Main
 - [[Notes/Nginx/Basics|Basics]]
-- [[Modules Main]]
+- [[Nginx/Modules/Modules Main]]
 - [[Config Structure]]
 - 

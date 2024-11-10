@@ -1,5 +1,5 @@
 # Got Flow Main
 ***
-- [[Commitlint]]
+- [[Commit-flow]]
 - [[Semantic Versioning 2.0.0]]
 - 
