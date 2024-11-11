@@ -1,7 +1,7 @@
 # Core Main
 ***
 - [[Project Structure]]
-- [[Predefined Constants]]
+- [[PHP/Core/Predefined Constants]]
 - [[php.ini]]
 - [[Hints]]
 - [[Generators]]

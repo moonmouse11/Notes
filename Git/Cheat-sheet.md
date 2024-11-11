@@ -1,5 +1,6 @@
 # Cheat-sheet
 ***
+## Settings
 ``` bash
 #---------------------------------------------------------------------
 # НАСТРОЙКИ
@@ -24,7 +25,10 @@ git config --global core.editor "atom --wait"
 git config --global core.editor "code --wait"
 git config --global core.editor "/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text -n -w"
 git config --global core.editor "mate -w"
-
+```
+***
+## Changes
+``` bash
 #---------------------------------------------------------------------
 # ИЗМЕНЕНИЯ
 #---------------------------------------------------------------------
@@ -80,7 +84,10 @@ git show REVISION:/path/to/file
 # Создать архив из измененных файлов:
 tar czf changed-files.tar.gz `git ls-files --modified`
 zip modified-files.zip $(git ls-files --modified)
-
+```
+***
+## Commits
+``` bash
 #---------------------------------------------------------------------
 # КОММИТЫ
 #---------------------------------------------------------------------
@@ -142,7 +149,10 @@ git checkout <commit> -- /path/to/file.txt
 
 # Запушить заданный коммит:
 git push origin <commit>:refs/heads/master
-
+```
+***
+## Branches
+``` bash
 #---------------------------------------------------------------------
 # ВЕТКИ
 #---------------------------------------------------------------------
@@ -196,7 +206,10 @@ git push origin --delete feature/something
 
 # Переименовать текущую локальную ветку:
 git branch -m new-name
-
+```
+***
+## Tags
+``` bash
 #---------------------------------------------------------------------
 # ТЕГИ
 #---------------------------------------------------------------------
@@ -206,7 +219,10 @@ git tag
 
 # Показать теги на remote:
 git ls-remote --tags origin
-
+```
+***
+## Repository
+``` bash
 #---------------------------------------------------------------------
 # РЕПОЗИТОРИИ
 #---------------------------------------------------------------------
@@ -259,7 +275,10 @@ Host space.jetbrains.gusenov
  HostName git.jetbrains.space
  User git
  IdentityFile ~/.ssh/gusenov.jetbrains.space-id_rsa
- 
+```
+***
+## Repository Defense
+``` bash
 #---------------------------------------------------------------------
 # ЗАЩИТА РЕПОЗИТОРИЕВ
 #---------------------------------------------------------------------
@@ -269,3 +288,4 @@ git remote add cryptremote gcrypt::git@bitbucket.org:user/gcrypt-sample.git
 git config remote.cryptremote.gcrypt-participants <GPG key fingerprint>
 git config remote.cryptremote.gcrypt-signingkey <GPG key fingerprint>
 ```
+***
