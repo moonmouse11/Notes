@@ -120,6 +120,7 @@
 - `docker network ls` - выводит список сетей.
 - `docker network inspect [network_name|network_id]` - выводит конфигурацию указанной сети.
 - `docker network create [new_network_name]` - команда создает новую сеть.
+- `docker network create --subnet [ip_address:port] --gateway [ip_address:port] [new_network_name]` - создает новую сеть с подсетью и шлюзом.
 - `docker network connect [network_name] [container_name]` - подключает контейнер к сети.
 - `docker network disconnect [network_name] [container_name]` - подключает контейнер к сети.
 - `docker network rm [networks_name|networks_id]` - удаляет указанные сети.
@@ -131,8 +132,12 @@
 - `docker context import [context_name] [context_export_file]` - импортирует указанный контекст из файла.
 - `docker tag` - смена тега у образа.
 ### Volume commands
-- `docker volume` - 
-- `docker volume inspect [container_id]` - выводит информацию о volume указанного контейнера.
+- `docker volume -h` - выводит в консоль справку по томам.
+- `docker volume ls` - выводит список всех томов хоста.
+- `docker volume create -d [path_to_volume] [new_volume_name]` - команда создает том между контейнером и хостом.
+- `docker volume inspect [volume_id|volume_name]` - выводит информацию о volume указанного контейнера.
+- `docker volume rm [volume_id|volume_name]` - удаляет указанный том.
+- 
 ### Build commands
 - `docker build [dockerfile_path]` - собирает образ по `Dockerfile`.
 - `docker build -t [image_tag] [dockerfile_path]` - собирает образ по `Dockerfile` и дает ему указанный тег.

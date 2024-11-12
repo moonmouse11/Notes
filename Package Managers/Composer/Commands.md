@@ -6,7 +6,7 @@
 - `composer update` - обновляет пакеты из файла `composer.json` в допустимых пределах.
 - `composer update [package_name]` - обновляет один, заданный пакет.
 - `composer require [package_name]` - устанавливает заданный пакет.
-- `composer require [package_name] --dev` - устанавливает заданный пакет только для DEV окружения.
+- `composer require [package_name] --dev` - устанавливает заданный пакет только для DEV(development) окружения.
 - `composer remove [package_name]` - удаляет заданный пакет.
 - `composer dump-autoload` - обновляет подгрузку классов.
 - `composer dump-autoload -o` - обновляет подгрузку классов с оптимизацией.
@@ -17,51 +17,51 @@
 composer about                # Выводит краткую информацию о Composer.
 composer archive              # Создает архив указаного пакета.
 composer audit                # Проверяет уязвимости установленных пакетов.
-composer browse               # [home] Opens the package's repository URL or homepage in your browser
-composer bump                 # Increases the lower limit of your composer.json requirements to the currently installed versions
-composer check-platform-reqs  # Check that platform requirements are satisfied
-composer clear-cache          # [clearcache|cc] Clears composer's internal package cache
-composer completion           # Dump the shell completion script
-composer config               # Sets config options
-composer create-project       # Creates new project from a package into given directory
-composer depends              # [why] Shows which packages cause the given package to be installed
-composer diagnose             # Diagnoses the system to identify common errors
-composer dump-autoload        # [dumpautoload] Dumps the autoloader
-composer exec                 # Executes a vendored binary/script
-composer fund                 # Discover how to help fund the maintenance of your dependencies
-composer global               # Allows running commands in the global composer dir ($COMPOSER_HOME)
-composer help                 # Display help for a command
-composer init                 # Creates a basic composer.json file in current directory
-composer install              # [i] Installs the project dependencies from the composer.lock file if present, or falls back on the composer.json
-composer licenses             # Shows information about licenses of dependencies
-composer list                 # List commands
-composer outdated             # Shows a list of installed packages that have updates available, including their latest version
-composer prohibits            # [why-not] Shows which packages prevent the given package from being installed
-composer reinstall            # Uninstalls and reinstalls the given package names
-composer remove               # [rm|uninstall] Removes a package from the require or require-dev
-composer require              # [r] Adds required packages to your composer.json and installs them
-composer run-script           # [run] Runs the scripts defined in composer.json
-composer search               # Searches for packages
-composer self-update          # [selfupdate] Updates composer.phar to the latest version
-composer show                 # [info] Shows information about packages
-composer status               # Shows a list of locally modified packages
-composer suggests             # Shows package suggestions
-composer update               # [u|upgrade] Updates your dependencies to the latest version according to composer.json, and updates the composer.lock file
-composer validate             # Validates a composer.json and composer.lock
+composer browse               # [home] Открывает URL-адрес хранилища пакета или домашнюю страницу в вашем браузере.
+composer bump                 # Увеличивает нижний предел ваших требований к composer.json по сравнению с текущими установленными версиями/
+composer check-platform-reqs  # Проверяет, что требования к платформе выполнены.
+composer clear-cache          # [clearcache|cc] Очищает внутренний кэш пакетов composer.
+composer completion           # Выгружает сценарий завершения оболочки.
+composer config               # Устанавливает параметры конфигурации.
+composer create-project       # Создает новый проект из пакета в заданной директории
+composer depends              # [why] Показывает зависимости пакета.
+composer diagnose             # Диагностирует систему для выявления распространенных ошибок
+composer dump-autoload        # [dumpautoload] Сбрасывает автозагрузчик.
+composer exec                 # Запускает скрипт из vendor
+composer fund                 # Как задонатить разработчикам пакетом.
+composer global               # Позволяет запускать команды в глобальном каталоге composer ($COMPOSER_HOME).
+composer help                 # Выводит помощь по команде
+composer init                 # Создает базовый файл composer.json в текущую директорию.
+composer install              # [i] Устанавливает зависимости проекта из composer.lock, если он присутствует, или устанавливает из composer.json.
+composer licenses             # Выводит лицензии зависимостей проекта.
+composer list                 # Список комманд composer.
+composer outdated             # Показывает список установленных пакетов, для которых доступны обновления, включая их последнюю версию.
+composer prohibits            # [why-not] Показывает, какие пакеты препятствуют установке данного пакета.
+composer reinstall            # Удаляет и переустанавливает указанные пакеты.
+composer remove               # [rm|uninstall] Удаляет пакет из проекта.
+composer require              # [r] Устанавливает указанный пакет в проект.
+composer run-script           # [run] Запускает скрипты, определенные в  composer.json.
+composer search               # Поиск пакетов composer.
+composer self-update          # [selfupdate] Обновляет composer.phar до последней версии.
+composer show                 # [info] Выводит информаию о пакете.
+composer status               # Показывает список локально измененных пакетов.
+composer suggests             # Показывает предложения по пакетам.
+composer update               # [u|upgrade] Обновляет ваши зависимости до последней версии в соответствии с composer.json и обновляет composer.lock.
+composer validate             # Проверяет composer.json и composer.lock
 ```
 ***
 ## Options
 ``` bash
-  -h, --help                     Display help for the given command. When no command is given display help for the list command
-  -q, --quiet                    Do not output any message
-  -V, --version                  Display this application version
-      --ansi|--no-ansi           Force (or disable --no-ansi) ANSI output
-  -n, --no-interaction           Do not ask any interactive question
-      --profile                  Display timing and memory usage information
-      --no-plugins               Whether to disable plugins.
-      --no-scripts               Skips the execution of all scripts defined in composer.json file.
-  -d, --working-dir=WORKING-DIR  If specified, use the given directory as working directory.
-      --no-cache                 Prevent use of the cache
-  -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+  -h, --help                     # Выводит мануал по указанной команде.
+  -q, --quiet                    # Не выводит сообщений.
+  -V, --version                  # Выводит версию Composer.
+      --ansi|--no-ansi           # Управление выводом ANSI.
+  -n, --no-interaction           # Не задает проверочных вопросов.
+      --profile                  # Отображение информации о времени и использовании памяти.
+      --no-plugins               # Отключение плагинов.
+      --no-scripts               # Пропускает выполнение всех скриптов, определенных в файле composer.json.
+  -d, --working-dir=WORKING-DIR  # Использует указанную директорию в качестве рабочей.
+      --no-cache                 # Запрещает использовение кэша.
+  -v|vv|vvv, --verbose           # Увеличивает детализацию сообщений: 1 для обычного вывода, 2 для более подробного вывода и 3 для отладки.
 ``` 
 ***
