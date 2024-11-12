@@ -1,3 +1,4 @@
-# Main
+# Linux Main
+***
 - [[Notes/Linux/General|General]]
 - [[Bash Main]]
