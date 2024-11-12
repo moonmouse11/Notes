@@ -6,7 +6,7 @@
 - `composer update` - обновляет пакеты из файла `composer.json` в допустимых пределах.
 - `composer update [package_name]` - обновляет один, заданный пакет.
 - `composer require [package_name]` - устанавливает заданный пакет.
-- `composer require [package_name] --dev` - устанавливает заданный пакет только для DEV(development) окружения.
+- `composer require [package_name] --dev` - устанавливает заданный пакет только для `DEV`(development) окружения.
 - `composer remove [package_name]` - удаляет заданный пакет.
 - `composer dump-autoload` - обновляет подгрузку классов.
 - `composer dump-autoload -o` - обновляет подгрузку классов с оптимизацией.

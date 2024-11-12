@@ -1,11 +1,11 @@
 # Core Main
 ***
 - [[Project Structure]]
-- [[PHP/Core/Predefined Constants]]
+- [[Programming Languages/PHP/Core/Predefined Constants]]
 - [[php.ini]]
 - [[Hints]]
 - [[Generators]]
-- [[PHP/Core/Functions|Functions]]
+- [[Programming Languages/PHP/Core/Functions|Functions]]
 - [[Extensions]]
 - [[Command Line IInterface]]
 - [[Code Convention]]
