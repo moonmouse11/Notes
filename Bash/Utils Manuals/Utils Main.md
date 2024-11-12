@@ -8,4 +8,5 @@
 - [[ping]]
 - [[ps]]
 - [[whereis]]
+- [[ifconfig]]
 - 

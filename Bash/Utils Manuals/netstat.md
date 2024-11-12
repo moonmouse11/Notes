@@ -2,11 +2,21 @@
 ***
 ## Basic
 Утилита позволяет увидеть открытые порты на хост-устройстве и соответствующие им адреса, таблицу маршрутизации и скрытые соединения.
-### Синтаксис:
+### Syntax
 ```bash
 netstat  [address_family_options]  [--tcp|-t]  [--udp|-u]  [--udplite|-U]  [--sctp|-S]  [--raw|-w]  [--l2cap|-2] [--rfcomm|-f] [--listening|-l] [--all|-a] [--numeric|-n] [--numeric-hosts] [--numeric-ports] [--numeric-users] [--symbolic|-N] [--extend|-e[--extend|-e]] [--timers|-o] [--program|-p] [--verbose|-v] [--continuous|-c] [--wide|-W]
 ```
-
+***
+## Description
+Netstat выводит информацию о работающих сетях Linux.  Вывод информации контрлируется первыми аргументами в команде.
+``` bash
+   (none) # Вывод по умолчанию
+   --route, -r # Выводит таблицу путей ядра системы.
+   --groups, -g # Отображает информацию о принадлежности в группе многоадресной рассылки для IPv4 и IPv6.
+   --interfaces, -i # Выводит таблицу всех сетевых интерфейсов.
+   --masquerade, -M # Выводит список замаскированных подключений.
+   --statistics, -s # Выводит сводную статистику по каждому протоколу.
+```
 ***
 ## Options
 - `netstat -tulpen` - 
