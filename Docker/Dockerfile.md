@@ -1,7 +1,7 @@
 # Dockerfile
 ***
 ## Basic
-
+**Dockerfile** - файл с инструкциями для создания docker image.
 ***
 ## Dockerfile Directives
 
@@ -28,3 +28,26 @@ WORKDIR	    # Установка рабочей директории конте�
 ```
 ***
 ## Example
+``` Dockerfile
+FROM node:latest
+
+LABEL org.label-schema.version=v1.1
+
+ENV NODE_ENV="dev"
+
+ENV PORT=3000
+
+RUN mkdir -p /var/node
+
+ADD src/ /var/node/
+
+WORKDIR /var/node
+
+RUN npm install
+
+EXPOSE $PORT
+
+CMD ./bin/www
+```
+***
+## .dockerignore

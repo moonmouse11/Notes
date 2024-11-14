@@ -101,10 +101,24 @@
 - `docker stats [container_id]` - выводит данные об указанном контейнере.
 - `docker exec -it [container_name] [command]` - запускает указанную команду в указанном контейнере.
 - `docker search [image_name]` - поиск образа в глобальной сети.
-- `docker pull [inage_name]:[tag = latest]` - загуржает указанный образ из сети.
+- `docker pull [image_name]:[tag = latest]` - загуржает указанный образ из сети.
 ### Image commands
-- `docker image inspect [image_name|image_id]` - log указанного образа.
-- `docker images`|`docker image -ls`|`docker image list` - просмотр всех образов на локальном устройстве.
+- `docker image -h` - выводит в консоль справку по командам образов Docker.
+- `docker image build [path_to_dockerfile]|docker build|docker builder build` - собирает image из указанного Dockerfile.
+- `docker image history [image_name|image_id]|docker history [image_name|image_id]` - показывает историю образа.
+- `docker image inspect [image_name|image_id]` - выводит подробную информацию образа.
+- `docker images|docker image -ls|docker image list` - просмотр всех образов на локальном устройстве.
+- `docker image -ls -a` - список всех образов на хосте (в том числе промежуточных).
+- `docker image import [path_to_file|url]|docker import [path_to_file|url]` - команда импортирует image из указанного источника.
+- `docker image load [path_to_tar]|docker load [path_to_tar]` - звгружает образ из `tar` архива или из `STDIN`.
+- `docker image prune` - удаляет неиспользуемые образы с хоста.
+- `docker image prune -f` - удаляет неиспользуемые образы с хоста без запроса подтверждения.
+- `docker image pull [image_name]` - загружает образ из репозитория.
+- `docker image push [image_name]` - загружает образ в репозиторий.
+- `docker image rm[image_name|image_id]|docker image remove[image_name|image_id]| docker rmi [image_name|image_id]` - удаляет указанный образ с хоста.
+- `docker image rm[image_name|image_id] -f` - удаляет указанный образ с хоста без запроса подтверждения.
+- `docker image save [image_name|image_id]|docker save [image_name|image_id]` - команда сохраняет образ в `tar` архив.
+- `docker image tag[source_image[:tag] target_image[:tag]]|docker tag [source_image[:tag] target_image[:tag]]` - добавляет тэг образу.
 ### Container commands
 - `docker container list` - выводит список всех запущенных контейнеров.
 - `docker container stats` - мониторинг использования ресурсов контейнерами.

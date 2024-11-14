@@ -1,6 +1,7 @@
 # Main
-- [[Notes/Laravel/Basics|Basics]]
-- [[Sail]]
-- [[Fucntions]]
+- [[Frameworks/Laravel/Basics|Basics]]
+- [[Frameworks/Laravel/Functions]]
 - [[Laravel Patterns]]
 - [[Eloquent SQL Reference]]
+- [[Frameworks/Laravel/Modules/Modules Main|Modules Main]]
+- 
