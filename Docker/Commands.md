@@ -122,12 +122,12 @@
 ### Container commands
 - `docker container list` - выводит список всех запущенных контейнеров.
 - `docker container stats` - мониторинг использования ресурсов контейнерами.
+- `docker container top [container_name|container_id]` - просмотр процессов контейнера. Запуск команды `top`.
 - `docker container port [container_name]` - выводит список портов указанного контейнера.
 - `docker container logs [container_name]|docker logs [-f] [container_id]` - выводит в консоль лог контейнера.
 - `docker container rename [container_name] [new_container_name]` - переименовывает контейнер.
 ### Service commands
 - `docker service logs [service_name]` - выводит в консоль лог сервиса.
-- `docker system prune` - удаляет все остановленные контейнеры.
 - `docker attach` - подключиться к контейнеру.
 ### Network commands
 - `docker network -h` - выводит справку по сетевым командам.
@@ -155,5 +155,7 @@
 ### Build commands
 - `docker build [dockerfile_path]` - собирает образ по `Dockerfile`.
 - `docker build -t [image_tag] [dockerfile_path]` - собирает образ по `Dockerfile` и дает ему указанный тег.
-- 
+## System commands
+- `docker system df` - 
+- `docker system prune` - удаляет все неиспользуемые данные.
 ***
