@@ -1,4 +1,5 @@
-# Main
+# Laravel Main
+***
 - [[Frameworks/Laravel/Basics|Basics]]
 - [[Frameworks/Laravel/Functions]]
 - [[Laravel Patterns]]

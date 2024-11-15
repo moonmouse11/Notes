@@ -1,11 +1,10 @@
 # PHP Main
 ***
-- [[Notes/PHP/Basics|Basics]]
+- [[PHP/Basics|Basics]]
 - [[Extensions]]
-- [[Notes/PHP/Functions|Functions]]
-- [[Notes/PHP/General|General]]
+- [[PHP/Core/Functions|Functions]]
 - [[Object Oriented Programming]]
-- [[Notes/PHP/Versions|Versions]]
+- [[PHP/Versions|Versions]]
 - [[php.ini]]
 - [[Hints]]
 - [[SPL Main]]

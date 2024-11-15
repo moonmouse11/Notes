@@ -4,4 +4,6 @@
 - [[Docker Service]]
 - [[Docker Compose]]
 - [[Docker Swarm]]
+- [[Docker Trust]]
+- [[Docker Stack]]
 - 
