@@ -1,6 +1,5 @@
 # Commands
 ***
-## Basic
 ### Common Commands
 ``` bash
   docker run         # Create and run a new container from an image
@@ -29,9 +28,6 @@
   docker system      # Manage Docker
   docker trust       # Manage trust on Docker images
   docker volume      # Manage volumes
-```
-### Swarm Commands
-```bash
   docker swarm       # Manage Swarm
 ```
 ### Commands
@@ -124,6 +120,7 @@
 - `docker container stats` - мониторинг использования ресурсов контейнерами.
 - `docker container top [container_name|container_id]` - просмотр процессов контейнера. Запуск команды `top`.
 - `docker container port [container_name]` - выводит список портов указанного контейнера.
+- `docker container stop [container_name|container_id]` - остановка работающего контейнера. 
 - `docker container logs [container_name]|docker logs [-f] [container_id]` - выводит в консоль лог контейнера.
 - `docker container rename [container_name] [new_container_name]` - переименовывает контейнер.
 ### Service commands
