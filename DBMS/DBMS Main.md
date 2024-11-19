@@ -3,6 +3,6 @@
 ## SQL Language
 - [[SQL Main]]
 ## DBMS Models
-- [[Relation SQL Databases]]
-- [[NoSQL Databases]]
+- [[Relation SQL Databases Main]]
+- [[NoSQL Databases Main]]
 - 
