@@ -1,5 +1,5 @@
 # Main
-- [[Notes/Bash/General|General]]
+- [[Bash/General|General]]
 - [[Shell Scripts]]
 - [[Utils Main]]
 - 

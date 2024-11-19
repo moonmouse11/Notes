@@ -1,4 +1,5 @@
-# Main
-- [[Notes/Package Mnagers/Composer/Basics|Basics]]
-- [[Notes/Package Mnagers/Composer/Commands|Commands]]
+# Composer Main
+***
+- [[Package Managers/Composer/Basics|Basics]]
+- [[Package Managers/Composer/Commands|Commands]]
 - 

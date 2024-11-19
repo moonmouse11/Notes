@@ -1,4 +1,4 @@
 # Linux Main
 ***
-- [[Notes/Linux/General|General]]
+- [[Linux/General|General]]
 - [[Bash Main]]

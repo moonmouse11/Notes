@@ -1,3 +1,5 @@
-# Main
-- [[Notes/Vim/General|General]]
-- [[Notes/Vim/Commands|Commands]]
+# Vim Main
+***
+- [[Vim/General|General]]
+- [[Vim/Commands|Commands]]
+- 
