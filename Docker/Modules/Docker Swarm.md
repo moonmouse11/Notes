@@ -22,7 +22,7 @@ docker node update      # Update a node
 ***
 ## Command list
 ### Basic commands
-- `docker swarm join --token SWMTKN-1-1r7nd8fglku1h10p785ertdg8inrvs3q0fr8ji2tyg9om1ra5b-14sdrdyeenqocvdp7zfvuabhx 192.168.31.194:2377`
+- `docker swarm join --token SWMTKN-1-[swarm_token] 192.168.31.194:2377`
 - `docker swarm leave --force` - выход из узлов Docker Swarm.
 ### Node commands
 - `docker node ls` - выводит список узлов.

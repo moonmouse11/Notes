@@ -1,24 +1,25 @@
 # Commands
 ***
+## Basic
 ### Common Commands
 ``` bash
-  docker run         # Create and run a new container from an image
-  docker exec        # Execute a command in a running container
-  docker ps          # List containers
-  docker build       # Build an image from a Dockerfile
-  docker pull        # Download an image from a registry
-  docker push        # Upload an image to a registry
-  docker images      # List images
-  docker login       # Authenticate to a registry
-  docker logout      # Log out from a registry
-  docker search      # Search Docker Hub for images
-  docker version     # Show the Docker version information
-  docker info        # Display system-wide information
+  docker run         # Создайте и запустите новый контейнер из образа.
+  docker exec        # Выполните команду в запущенном контейнере.
+  docker ps          # Список запущенных контейнеров.
+  docker build       # Создайте образ из файла Dockerfile.
+  docker pull        # Загрузка образа из реестра.
+  docker push        # Загрузить образ в реестр.
+  docker images      # Список образов.
+  docker login       # Пройти аутентификацию в реестре.
+  docker logout      # Выйдите из реестра.
+  docker search      # Поиск образа в Docker Hub.
+  docker version     # Выводит информацию о версии Docker.
+  docker info        # Вывод общесистемной информации.
 ```
 ### Management Commands
 ``` bash
   docker builder     # Manage builds
-  docker compose*    # Docker Compose
+  docker compose*    # Manage Docker Compose
   docker container   # Manage containers
   docker context     # Manage contexts
   docker image       # Manage images
@@ -32,49 +33,49 @@
 ```
 ### Commands
 ``` bash
-  docker attach      # Attach local standard input, output, and error streams to a running container
-  docker commit      # Create a new image from a container's changes
-  docker cp          # Copy files/folders between a container and the local filesystem
-  docker create      # Create a new container
-  docker diff        # Inspect changes to files or directories on a container's filesystem
-  docker events      # Get real time events from the server
-  docker export      # Export a container's filesystem as a tar archive
-  docker history     # Show the history of an image
-  docker import      # Import the contents from a tarball to create a filesystem image
-  docker inspect     # Return low-level information on Docker objects
-  docker kill        # Kill one or more running containers
-  docker load        # Load an image from a tar archive or STDIN
-  docker logs        # Fetch the logs of a container
-  docker pause       # Pause all processes within one or more containers
-  docker port        # List port mappings or a specific mapping for the container
-  docker rename      # Rename a container
-  docker restart     # Restart one or more containers
-  docker rm          # Remove one or more containers
-  docker rmi         # Remove one or more images
-  docker save        # Save one or more images to a tar archive (streamed to STDOUT by default)
-  docker start       # Start one or more stopped containers
-  docker stats       # Display a live stream of container(s) resource usage statistics
-  docker stop        # Stop one or more running containers
-  docker tag         # Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
-  docker top         # Display the running processes of a container
-  docker unpause     # Unpause all processes within one or more containers
-  docker update      # Update configuration of one or more containers
-  docker wait        # Block until one or more containers stop, then print their exit codes
+  docker attach      # Подключает локальные стандартные потоки ввода, вывода и ошибок к запущенному контейнеру.
+  docker commit      # Создает новый образ на основе изменений, внесенных в контейнер.
+  docker cp          # Копирование файлов/папок между контейнером и локальной файловой системой
+  docker create      # Создает новый контейнер.
+  docker diff        # Проверяет изменения в файлах или каталогах файловой системы контейнера.
+  docker events      # Получает события в режиме реального времени с сервера.
+  docker export      # Экспорт файловой системы контейнера в виде tar-архива
+  docker history     # Выводит историю образа.
+  docker import      # Импортирует содержимое из архиватора, чтобы создать образ.
+  docker inspect     # Возвращает низкоуровневую информацию об объектах Docker.
+  docker kill        # Убивает один или несколько запущенных контейнеров.
+  docker load        # Загружает образ из архива tar или стандартного ввода-вывода
+  docker logs        # Извлекает логи из контейнера.
+  docker pause       # Останавливает все процессы в одном или нескольких контейнерах.
+  docker port        # Выводит сопоставления портов или конкретное сопоставление для контейнера.
+  docker rename      # Переименовывает контейнер.
+  docker restart     # Перезапускает один и более контейнеров.
+  docker rm          # Удаляет один или несколько контейнеров.
+  docker rmi         # Удаляет один или несколько образов.
+  docker save        # Сохраняет один или несколько образов в архив tar (по умолчанию они передаются в стандартный вывод).
+  docker start       # Запускает один или несколько остановленных контейнеров.
+  docker stats       # Выводит статистику использования ресурсов контейнером (контейнерами) в режиме реального времени.
+  docker stop        # Останавливает один или несколько остановленных контейнеров.
+  docker tag         # Создает тег TARGET_IMAGE, который ссылается на SOURCE_IMAGE.
+  docker top         # Выводит список запущенных процессов внутри контейнера.
+  docker unpause     # Возобновить все процессы в одном или нескольких контейнерах.
+  docker update      # Обновляет конфигурацию одного или нескольких контейнеров.
+  docker wait        # Блокирует контейнер до тех пор, пока один или несколько контейнеров не остановятся, затем выведите их коды выхода.
 ```
 ***
 ## Options
 ``` bash
-      --config string      # Location of client config files (default "/home/potter/.docker")
-  -c, --context string     # Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var and default context set with "docker context use")
-  -D, --debug              # Enable debug mode
-  -H, --host list          # Daemon socket to connect to
-  -l, --log-level string   # Set the logging level ("debug", "info", "warn", "error", "fatal") (default "info")
-      --tls                # Use TLS; implied by --tlsverify
-      --tlscacert string   # Trust certs signed only by this CA (default "/home/potter/.docker/ca.pem")
-      --tlscert string     # Path to TLS certificate file (default "/home/potter/.docker/cert.pem")
-      --tlskey string      # Path to TLS key file (default "/home/potter/.docker/key.pem")
-      --tlsverify          # Use TLS and verify the remote
-  -v, --version            # Print version information and quit
+      --config string      # Путь до конфигуционного файла (default "/home/potter/.docker").
+  -c, --context string     # Имя контекста, используемого для подключения к демону (переопределяет переменную DOCKER_HOST env и контекст по умолчанию, установленный с помощью "docker context use".)
+  -D, --debug              # Включить режим отладки.
+  -H, --host list          # Демои сокет для подключения.
+  -l, --log-level string   # Устанавливает уровень логирования ("debug", "info", "warn", "error", "fatal") (default "info")
+      --tls                # Использовать TLS; подразумевается --tlsverify
+      --tlscacert string   # Сертификаты доверия, подписанные только этим центром сертификации (default "/home/potter/.docker/ca.pem")
+      --tlscert string     # Путь к файлу сертификата TLS (default "/home/potter/.docker/cert.pem")
+      --tlskey string      # Путь к ключевому файлу TLS (default "/home/potter/.docker/key.pem")
+      --tlsverify          # Используйте TLS и проверьте удаленный сертификат.
+  -v, --version            # Выводит информацию о версии и завершает работу.
 ```
 ***
 ## Command list

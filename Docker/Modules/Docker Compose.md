@@ -25,37 +25,37 @@ services: // начало сервисов
 ***
 ## Commands
 ``` bash
-docker compose attach      # Attach local standard input, output, and error streams to a service's running container
-docker compose build       # Build or rebuild services
-docker compose config      # Parse, resolve and render compose file in canonical format
-  cp          # Copy files/folders between a service container and the local filesystem
-docker compose create      # Creates containers for a service
-docker compose down        # Stop and remove containers, networks
-docker compose events      # Receive real time events from containers
-docker compose exec        # Execute a command in a running container
-docker compose export      # Export a service container's filesystem as a tar archive
-docker compose images      # List images used by the created containers
-docker compose kill        # Force stop service containers
-docker compose logs        # View output from containers
-docker compose ls          # List running compose projects
-docker compose pause       # Pause services
-docker compose port        # Print the public port for a port binding
-docker compose ps          # List containers
-docker compose pull        # Pull service images
-docker compose push        # Push service images
-docker compose restart     # Restart service containers
-docker compose rm          # Removes stopped service containers
-docker compose run         # Run a one-off command on a service
-docker compose scale       # Scale services 
-docker compose start       # Start services
-docker compose stats       # Display a live stream of container(s) resource usage statistics
-docker compose stop        # Stop services
-docker compose top         # Display the running processes
-docker compose unpause     # Unpause services
-docker compose up          # Create and start containers
-docker compose version     # Show the Docker Compose version information
-docker compose wait        # Block until containers of all (or specified) services stop.
-docker compose watch       # Watch build context for service and rebuild/refresh containers when files are updated
+docker compose attach      # Подключает локальные стандартные потоки ввода, вывода и ошибок к запущенному контейнеру службы.
+docker compose build       # Собирает или пересобирает сервис Compose.
+docker compose config      # Вывод файла compose в yml формате.
+docker compose cp          # Копирует файлы/папки между контейнером и локальной файловой системой.
+docker compose create      # Создает контейнеры для сервиса.
+docker compose down        # Останаливает и удаляет запущенные сети и контейнеры.
+docker compose events      # Получать события в режиме реального времени из контейнеров.
+docker compose exec        # Выполяет коменду в запущенном контейнере.
+docker compose export      # Экспорт файловой системы сервисного контейнера в виде tar-архива.
+docker compose images      # Список образов, используемы контейнерами.
+docker compose kill        # Убивает процесс сервис-контейнера.
+docker compose logs        # Выводит логов контейнера.
+docker compose ls          # Список контейнеров.
+docker compose pause       # Останавливает сервис.
+docker compose port        # Выводит открытые порты сервиса.
+docker compose ps          # Список запущенных контейнеров.
+docker compose pull        # Загружает локально образы сервиса.
+docker compose push        # Загружает в удаленный хаб образы сервиса.
+docker compose restart     # Перезапускает сервис контейнеров.
+docker compose rm          # Удаляет остановленные контейнеры.
+docker compose run         # Запускет одноразовую команду для службы.
+docker compose scale       # Масштабировение сервиса.
+docker compose start       # Запуск сервис контейнерв.
+docker compose stats       # Выводит статистику использования ресурсов.
+docker compose stop        # Остановка сервис контейнера.
+docker compose top         # Отображает запущенные процессы сервис контейнера.
+docker compose unpause     # Возобнавляет работу сервиса.
+docker compose up          # Создает и запускает сервис контейнер.
+docker compose version     # Выводит версию Docker Compose.
+docker compose wait        # Режим ожидания сервиса.
+docker compose watch       # Выводит контекст сборки для обслуживания и обновления контейнера.
 ```
 ***
 ## Command list

@@ -5,10 +5,10 @@
 ***
 ## Commands
 ``` bash
-docker secret create      # Create a secret from a file or STDIN as content
-docker secret inspect     # Display detailed information on one or more secrets
-docker secret ls          # List secrets
-docker secret rm          # Remove one or more secrets
+docker secret create      # Создает Docker Secret из файла или потока ввода.
+docker secret inspect     # Выводит подробную информацию о Docker Secrets.
+docker secret ls          # Выводит список Docker Secrets.
+docker secret rm          # Удаляет один или несколько секретов.
 ```
 ***
 ## Command list
