@@ -1,4 +1,4 @@
 # C Main
 ***
-- [[Notes/C/Basics|Basics]]
+- [[C/Basics|Basics]]
 - 

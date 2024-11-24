@@ -1,4 +1,5 @@
-# Main
-- [[Notes/HTML/Basics|Basics]]
+# HTML Main
+***
+- [[HTML/Basics|Basics]]
 - [[Bootstrap Main]]
 - 

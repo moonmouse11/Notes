@@ -1,4 +1,5 @@
-# Main
-- [[Notes/HTML/Bootsptrap/General|General]]
-- [[Notes/HTML/Bootsptrap/Versions]]
+# Bootstrap Main
+***
+- [[HTML/Bootsptrap/General|General]]
+- [[HTML/Bootsptrap/Versions]]
 - 

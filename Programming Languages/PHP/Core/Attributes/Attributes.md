@@ -54,12 +54,12 @@ class AnotherThing {}
 #[Attribute]  
 class MyAttribute  
 {  
-public $value;  
+	public $value;  
   
-public function __construct($value)  
-{  
-$this->value = $value;  
-}  
+	public function __construct($value)  
+	{  
+		$this->value = $value;  
+	}  
 }  
   
 #[MyAttribute(value: 1234)]  
@@ -67,13 +67,13 @@ class Thing {}
   
 function dumpAttributeData($reflection)  
 {  
-$attributes = $reflection->getAttributes();  
+	$attributes = $reflection->getAttributes();  
   
-foreach ($attributes as $attribute) {  
-var_dump($attribute->getName());  
-var_dump($attribute->getArguments());  
-var_dump($attribute->newInstance());  
-}  
+	foreach ($attributes as $attribute) {  
+		var_dump($attribute->getName());  
+		var_dump($attribute->getArguments());  
+		var_dump($attribute->newInstance());  
+	}  
 }  
   
 dumpAttributeData(new ReflectionClass(Thing::class));  
@@ -136,5 +136,35 @@ Attribute::TARGET_PROPERTY
 Attribute::TARGET_CLASS_CONSTANT
 Attribute::TARGET_PARAMETER
 Attribute::TARGET_ALL
+```
+***
+## Example
+```php
+#[ExampleAttribute('Hello world', 42)]
+class Foo {}
+
+#[Attribute]
+class ExampleAttribute {
+    private string $message;
+    private int $answer;
+    public function __construct(string $message, int $answer) {
+        $this->message = $message;
+        $this->answer = $answer;
+    }
+}
+
+$reflector = new \ReflectionClass(Foo::class);
+$attrs = $reflector->getAttributes();
+
+foreach ($attrs as $attriubute) {
+
+    $attriubute->getName(); // "My\Attributes\ExampleAttribute"
+    $attriubute->getArguments(); // ["Hello world", 42]
+    $attriubute->newInstance();
+        // object(ExampleAttribute)#1 (2) {
+        //  ["message":"Foo":private]=> string(11) "Hello World"        
+        //  ["answer":"Foo":private]=> int(42) 
+        // }
+}
 ```
 ***
