@@ -1,3 +1,4 @@
 # Algorithm Main
 ***
+- [[Tasks Resolve]]
 - 
