@@ -1,25 +1,25 @@
 # Extensions
 ***
 - `php[version]-amqp` - расширение, использующее клиентскую библиотеку `RabbitMQ-C`. Реализована только возможность публикации сообщений.
-- `php[version]-amqplib` - 
-- `php[version]-gearman` -
-- `php[version]-mcrypt` -
-- `php[version]-psr` -
-- `php[version]-uploadprogress` -
-- `php[version]-apcu` -
-- `php[version]-gmagick` -
-- `php[version]-memcache` -
-- `php[version]-raphf` -
-- `php[version]-uuid` -
-- `php[version]-ast` -
-- `php[version]-gmp` -
-- `php[version]-memcached` -
-- `php[version]-rdkafka` -
-- `php[version]-vips` -
-- `php[version]-bcmath` -
-- `php[version]-gnupg` -
-- `php[version]-mongodb` -
-- `php[version]-readline` -
+- `php[version]-amqplib` - библиотека PHP, реализующая протокол расширенной очереди сообщений `AMQP`.
+- `php[version]-gearman` - универсальный фреймворк разработки приложений для раздачи работ множеству машин или процессов. Это позволяет приложениям выполнять задачи параллельно, распределяя нагрузку и использовать функции различных языков.
+- `php[version]-mcrypt` - интерфейс к библиотеке `mcrypt`, которая поддерживает широкий спектр блочных алгоритмов, таких как `DES`, `TripleDES`, `Blowfish` (по умолчанию), `3-WAY`, `SAFER-SK64`, `SAFER-SK128`, `TWOFISH`, `TEA`, `RC2` и `GOST` с режимами шифрования `CBC`, `OFB`, `CFB` и `ECB`. **(Deprecated)**
+- `php[version]-psr` - расширение, предоставляет интефейсы стандартов `PSR`.
+- `php[version]-uploadprogress` - расширение для отслеживания хода загрузки файлов.
+- `php[version]-apcu` - хранилище «ключ — значение» для `PHP`.
+- `php[version]-gmagick` - встроенный модуль `PHP`, который помогает создавать и изменять изображения через API-интерфейс библиотеки `ImageMagick`.
+- `php[version]-memcache` - расширение для работы с демоном `memcached`.
+- `php[version]-raphf` - библиотека, фабрика ресурсор и дескрипторов.
+- `php[version]-uuid` - расширение для генерации `UUID`.
+- `php[version]-ast` - расширение предоставляет абстрактное синтаксическое дерево в `PHP7` и `PHP8`.
+- `php[version]-gmp` - модуль разрешает работать с целыми числами произвольной длины через библиотеку `GNU MP`. (Большие целые числа задаются строкой — иначе PHP приведёт значение к числу с плавающей точкой и значение потеряет точность.)
+- `php[version]-memcached` - расширение для работы с базой данных `memcached`.
+- `php[version]-rdkafka` - клинет для работы с `Apache Kafka`.
+- `php[version]-vips` - разширение для работы с библиотекой изображений `libvips`. (Deprecated - перенесено из расширений в `FFI`).
+- `php[version]-bcmath` - модуль для математических операций с числами произвольной точности `PHP`.
+- `php[version]-gnupg` - модуль взаимодействия с библиотекой `gpgme`, которая открывает доступ к функциям программы защиты конфиденциальных данных `GnuPG`.
+- `php[version]-mongodb` - расширение предоставляет API для работы с `MongoDB`.
+- `php[version]-readline` - модуль `Readline` реализуют интерфейс к библиотеке `GNU Readline`.
 - `php[version]-xdebug` -
 - `php[version]-bz2` -
 - `php[version]-grpc` -
