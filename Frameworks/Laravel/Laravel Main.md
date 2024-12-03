@@ -1,6 +1,7 @@
 # Laravel Main
 ***
 - [[Frameworks/Laravel/Basics|Basics]]
+- [[Config]]
 - [[Frameworks/Laravel/Functions]]
 - [[Laravel Patterns]]
 - [[Eloquent SQL Reference]]
