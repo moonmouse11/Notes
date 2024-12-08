@@ -429,3 +429,177 @@ $this->app->extend(Service::class, function (Service $service, Application $app)
 ***
 ## Resolving
 ### Метод `make`
+- `make` - метод извлекает экземпляр класса из `Service Container`. Принимает имя класса или интерфейса, который нужно получить.
+```php
+/* Пример работы метода make */
+
+use App\Services\Transistor;
+
+$transistor = $this->app->make(Transistor::class);
+```
+Если некоторые зависимости класса не могут быть разрешены через контейнер, можно вывести их, передав как ассоциативный массив в метод `makeWith`.
+```php
+/* Пример использования метода makeWith */
+
+use App\Services\Transistor;
+
+$transistor = $this->app->makeWith(Transistor::class, ['id' => 1]);
+```
+Метод `bound` используется для определения, был ли класс или интерфейс явно привязан в контейнере.
+```php
+/* Пример использования метода bound */
+
+if ($this->app->bound(Transistor::class)) {
+    // ...
+}
+```
+За пределами Service Provider методы доступны через фасад `App`.
+```php
+/* Пример использования make через фасад */
+
+use App\Services\Transistor;
+use Illuminate\Support\Facades\App;
+
+$transistor = App::make(Transistor::class);
+
+$transistor = app(Transistor::class);
+```
+Если необходимо, чтобы сам экземпляр контейнера Laravel был внедрен в класс, извлекаемый контейнером, можно указать класс `Illuminate\Container\Container` в конструкторе класса.
+```php
+/* Внедрение класса Container в зависимость */
+
+use Illuminate\Container\Container;
+
+/**
+ * Создать новый экземпляр класса.
+ */
+public function __construct(
+    protected Container $container,
+) {}
+```
+### Automatic Injection
+**Важно**, что в качестве альтернативы, можно объявить тип зависимости в конструкторе класса, который извлекается контейнером (`Controllers`, `EventListeners`, `Middlerware`). Кроме того, можно объявить зависимости в методе `handle` обработки заданий в очереди. На практике именно так контейнер должен извлекать большинство пользовательских объектов.
+```php
+/* Service AppleMusic подключается автоматически */
+
+
+namespace App\Http\Controllers;
+
+use App\Services\AppleMusic;
+
+final class PodcastController extends Controller
+{
+    /**
+     * Создать новый экземпляр контроллера.
+     */
+    public function __construct(
+        protected AppleMusic $apple,
+    ) {}
+
+    /**
+     * Показать информацию о данном подкасте.
+     */
+    public function show(string $id): Podcast
+    {
+        return $this->apple->findPodcast($id);
+    }
+}
+```
+***
+## Method Invocation and Injection
+Иногда может потребоваться вызвать метод для экземпляра объекта, позволяя контейнеру автоматически вводить зависимости этого метода.
+```php
+<?php
+
+namespace App;
+
+use App\Services\AppleMusic;
+
+final class PodcastStats
+{
+    /**
+     * Generate a new podcast stats report.
+     */
+    public function generate(AppleMusic $apple): array
+    {
+        return [
+            // ...
+        ];
+    }
+}
+
+/* Связывание зависимости для метода generate */
+
+use App\PodcastStats;
+use Illuminate\Support\Facades\App;
+
+$stats = App::call([new PodcastStats, 'generate']);
+```
+Метод `call` принимает любой вызываемый PHP-код. Метод контейнера `call` может даже использоваться для вызова замыкания при автоматическом внедрении его зависимостей.
+```php
+/* Использование callback в методе App::call */
+
+use App\Services\AppleMusic;
+use Illuminate\Support\Facades\App;
+
+$result = App::call(function (AppleMusic $apple) {
+    // ...
+});
+```
+***
+## Container Events
+Контейнер служб инициирует событие каждый раз, когда извлекает объект. Cобытие доступно с помощью метода `resolving`.
+```php
+/* События Service Container */
+
+use App\Services\Transistor;
+use Illuminate\Contracts\Foundation\Application;
+
+$this->app->resolving(Transistor::class, function (Transistor $transistor, Application $app) {
+    // Вызывается, когда контейнер извлекает объекты типа `Transistor`...
+});
+
+$this->app->resolving(function (mixed $object, Application $app) {
+    // Вызывается, когда контейнер извлекает объект любого типа...
+});
+```
+Извлекаемый объект будет передан в замыкание, что позволит установить любые дополнительные свойства объекта до того, как он будет передан его получателю.
+### Rebinding
+Метод `rebinding` позволяет прослушивать, когда служба повторно привязывается к контейнеру, то есть она снова регистрируется или переопределяется после первоначальной привязки.
+```php
+/* Пример использование rebinding */
+
+use App\Contracts\PodcastPublisher;
+use App\Services\SpotifyPublisher;
+use App\Services\TransistorPublisher;
+use Illuminate\Contracts\Foundation\Application;
+
+$this->app->bind(PodcastPublisher::class, SpotifyPublisher::class);
+
+$this->app->rebinding(
+    PodcastPublisher::class,
+    function (Application $app, PodcastPublisher $newInstance) {
+        //
+    },
+);
+
+// Новая привязка вызовет повторное замыкание...
+$this->app->bind(PodcastPublisher::class, TransistorPublisher::class);
+```
+***
+## PSR-11
+Service Container Laravel реализует интерфейс PSR-11.
+```php
+use App\Services\Transistor;
+use Psr\Container\ContainerInterface;
+
+Route::get('/', function (ContainerInterface $container) {
+    $service = $container->get(Transistor::class);
+
+    // ...
+});
+```
+Исключение выбрасывается, если данный идентификатор не может быть получен.
+- `Psr\Container\NotFoundExceptionInterface` - выбрасывается если идентификатор никогда не был привязан.
+-  `Psr\Container\ContainerExceptionInterface` - выбрасывается, если идентификатор был привязан, но не может быть извлечен.
+***
