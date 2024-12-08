@@ -1,5 +1,6 @@
 # Basics
 ***
+## General
 **Nginx** это:
 - HTTP-сервер.
 - Обратный прокси сервер.
@@ -62,7 +63,8 @@ sudo nginx -t
 # Перезапускаем NGINX
 sudo systemctl restart nginx
 ```
-###### Базовые команды.
+***
+## Сommands
 ``` bash
 nginx
 Options:
