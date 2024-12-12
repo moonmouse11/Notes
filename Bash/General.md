@@ -121,7 +121,8 @@
 - `iptables` - программа для проверки передачи пакетов через протоколы IPv4/IPv6.
 - `chsh -s /bin/bash` - команда для смены консольной оболочки.
 - `whereis [command_name]` - выводит путь к программе, её файлам конфигурации и мануалу.
-- `sudo blkid | grep "ntfs"` - поиск устройств с форматированием ntfs
+- `sudo blkid | grep "ntfs"` - поиск устройств с форматированием ntfs.
+- `dd bs=4M if=path/to/archlinux-version-x86_64.iso of=/dev/sdx conv=fsync oflag=direct status=progress` - команда для записи iso-образа на указанный диск.
 ***
 ## Tips
 Абсолютная и относительная адресация. `/`
