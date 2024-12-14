@@ -670,3 +670,184 @@ public function resolveChildRouteBinding($childType, $value, $field)
 ***
 ## Fallback Routes
 Используя метод `Route::fallback`, можно определить маршрут, который будет выполняться, когда ни один другой маршрут не соответствует входящему запросу.
+Как правило, необработанные запросы автоматически отображают страницу `404` через обработчик исключений приложения.
+Но при определении резервного маршрута в  файле `routes/web.php`, все посредники группы `web` будет применены к этому маршруту. При необходимости можно добавить дополнительный посредник для этого маршрута.
+```php
+/* Пример метода fallback фасада Route */
+
+Route::fallback(function () {
+    // ...
+});
+```
+***
+## Rate Limiting
+### Defining Rate Limiters
+Laravel включает в себя мощные и настраиваемые сервисы для ограничения частоты запросов, которые можно использовать для ограничения объема трафика для определенного маршрута или группы маршрутов.
+Ограничители скорости (`RateLimiter`) могут быть определены в методе `boot` класса `App\Providers\AppServiceProvider`.
+```php
+/* Пример RateLimiter в методе boot AppServiceProvider */
+
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+
+/**
+ * Запуск любых служб приложения.
+ */
+protected function boot(): void
+{
+    RateLimiter::for('api', function (Request $request) {
+        return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+    });
+}
+```
+Ограничители определяются с помощью метода `for` фасада `RateLimiter`. Метод `for` принимает имя ограничителя и замыкание, которое возвращает конфигурацию ограничений, применяемых к назначенным маршрутам. Конфигурация ограничений – это экземпляры класса `Illuminate\Cache\RateLimiting\Limit`.
+```php
+/* Пример RateLimiter с именем global в методе boot AppServiceProvider */
+
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+
+/**
+ * Запуск любых служб приложения.
+ */
+protected function boot(): void
+{
+    RateLimiter::for('global', function (Request $request) {
+        return Limit::perMinute(1000);
+    });
+}
+```
+Если входящий запрос превышает указанный лимит, то Laravel автоматически вернет ответ с `429` кодом состояния HTTP. Если необходимо определить другой ответ, который должен возвращаться, можно  использовать метод `response`.
+```php
+/* Использование response в RateLimiter */
+
+RateLimiter::for('global', function (Request $request) {
+    return Limit::perMinute(1000)->response(function (Request $request, array $headers) {
+        return response('Custom response...', 429, $headers);
+    });
+});
+```
+Поскольку замыкание получает экземпляр входящего HTTP-запроса, то есть возможность динамически создать ограничение на основе входящего запроса или статуса аутентификации пользователя.
+```php
+/* Ограничение на основе входящего запроса */
+
+RateLimiter::for('uploads', function (Request $request) {
+    return $request->user()->vipCustomer()
+                ? Limit::none()
+                : Limit::perMinute(100);
+});
+```
+### Segmenting Rate Limits
+Иногда может потребоваться сегментация ограничений по некоторым произвольным значениям (Например разрешить пользователям получать доступ к указанному маршруту 100 раз в минуту на каждый IP-адрес). Для этого можно использовать метод `by` при построении лимита.
+```php
+/* Пример использования метода by фасада Limit */
+
+RateLimiter::for('uploads', function (Request $request) {
+    return $request->user()->vipCustomer()
+                ? Limit::none()
+                : Limit::perMinute(100)->by($request->ip());
+});
+
+/* Похожий пример с другими значениями */
+
+RateLimiter::for('uploads', function (Request $request) {
+    return $request->user()
+                ? Limit::perMinute(100)->by($request->user()->id)
+                : Limit::perMinute(10)->by($request->ip());
+});
+```
+### Multiple Rate Limits
+При необходимости можно вернуть массив ограничений при указании конфигурации ограничителя. Каждое ограничение будет оцениваться для маршрута в зависимости от порядка, в котором они размещены в массиве.
+```php
+/* Пример использования массива ограничений Limit */
+
+RateLimiter::for('login', function (Request $request) {
+    return [
+        Limit::perMinute(500),
+        Limit::perMinute(3)->by($request->input('email')),
+    ];
+});
+```
+Если назначается несколько ограничений скорости, сегментированных по одинаковым значениям `by`, следует убедиться, что каждое значение `by` уникально. Самый простой способ добиться этого — добавить префикс к значениям, заданным методом `by`.
+```php
+/* Пример использования массива Limit с двумя ограничениями скорости */
+
+RateLimiter::for('uploads', function (Request $request) {
+    return [
+        Limit::perMinute(10)->by('minute:'.$request->user()->id),
+        Limit::perDay(1000)->by('day:'.$request->user()->id),
+    ];
+});
+```
+***
+## Attaching Rate Limiters to Routes
+Ограничители могут быть закреплены за маршрутами или группами маршрутов с помощью `middleware` `throttle`. Посредник `throttle` принимает имя ограничителя, которое необходимо назначить маршруту.
+```php
+/* Пример middleware throttle */
+
+Route::middleware(['throttle:uploads'])->group(function () {
+    Route::post('/audio', function () {
+        // ...
+    });
+
+    Route::post('/video', function () {
+        // ...
+    });
+});
+```
+### Throttling With Redis
+По умолчанию посредник `throttle` сопоставлен классу `Illuminate\Routing\Middleware\ThrottleRequests`. 
+Eсли вы используется Redis в качестве драйвера кэша приложения, можно поручить Laravel использовать Redis для управления ограничением скорости. Для этого следует использовать метод `throttleWithRedis` в файле `bootstrap/app.php`. Этот метод сопоставляет `middleware` `throttle` с классом `middleware` `Illuminate\Routing\Middleware\ThrottleRequestsWithRedis`.
+```php
+/* Пример middleware throttleWithRedis */
+
+->withMiddleware(function (Middleware $middleware) {
+    $middleware->throttleWithRedis();
+    // ...
+})
+```
+***
+## Form Method Spoofing
+HTML-формы не поддерживают действия `PUT`, `PATCH` или `DELETE`. Таким образом, при определении маршрутов `PUT`, `PATCH` или `DELETE`, которые вызываются из HTML-формы, нужно добавить в форму скрытое поле `_method`. Значение, отправленное с полем `_method`, будет использоваться как метод HTTP-запроса.
+```php
+/* Добавление _method в HTML форму */
+
+<form action="/example" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+</form>
+```
+Так же можно использовать директиву `@method` в шаблонизаторе `Blade`.
+```php
+/* Добавление _method в Blade форму */
+
+<form action="/example" method="POST">
+    @method('PUT')
+    @csrf
+</form>
+```
+***
+## Accessing the Current Route
+Можно использовать методы `current`, `currentRouteName` и `currentRouteAction` фасада `Route` для доступа к информации о маршруте, обрабатывающем входящий запрос.
+```php
+/* Пример получения информации о текущем маршруте */
+
+use Illuminate\Support\Facades\Route;
+
+$route = Route::current(); // Illuminate\Routing\Route
+$name = Route::currentRouteName(); // string
+$action = Route::currentRouteAction(); // string
+```
+***
+## Cross-Origin Resource Sharing (`CORS`)
+Laravel может автоматически отвечать на HTTP-запросы `CORS` `OPTIONS`  сконфигурируемыми значениями. Запросы `OPTIONS` будут автоматически обрабатываться `HandleCors` `middleware`, который автоматически включается в глобальный стек промежуточного программного обеспечения приложения.
+- `php artisan config:publish cors` - команда для конфигурации `CORS`. Поместит файл конфигурации `cors.php` в каталог `config`.
+***
+## Route Caching
+При развертывании приложения на рабочем веб-сервере, необходимо воспользоваться кешем маршрутов Laravel. Использование кеша маршрутов резко сократит время, необходимое для регистрации всех маршрутов приложения.
+- `php artisan route:cache` - команда для кэширования маршрутов.
+После выполнения команды файл кеша маршрутов будет загружаться при каждом запросе. При добавлении новых маршрутов, необходимо будет сгенерировать новый кеш маршрутов. По этой причине запускать команду `route:cache` только во время развертывания проекта.
+- `php artisan route:clear` - команда для очиски кэша маршрутов.
+***
