@@ -121,3 +121,552 @@ Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
 > При использовании параметров маршрута в маршрутах представлений, параметры `view`, `data`, `status` и `headers` зарезервированы Laravel и не могут быть использованы.
 ***
 ## Listing Your Routes
+- `php artisan route:list` - выводит список всех маршрутов приложения.
+- `php artisan route:list [-v|-vv]` - выводит список маршрутов с разделением на группы.
+- `php artisan route:list --path=api` - выводит  список маршрутов указанной группы.
+- `php artisan route:list --except-vendor` - выводит список маршрутов, скрывая маршруты `vendor`.
+- `php artisan route:list --only-vendor` - выводит список только `vendor` маршрутов.
+***
+## Routing Customization
+По умолчанию маршруты Laravel настраиваются и загружаются в файле `bootstrap/app.php`.
+```php
+/* Пример подключения routes/web.php в bootstrap/app.php */
+
+use Illuminate\Foundation\Application;
+
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__.'/../routes/web.php',
+        commands: __DIR__.'/../routes/console.php',
+        health: '/up',
+    )->create();
+```
+Однако может потребоваться определить совершенно новый файл, содержащий подмножество других маршрутов приложения. Для этого можно предоставить замыкание `then` для метода `withRouting` и в рамках этого замыкания прописать любые дополнительные маршруты.
+```php
+/* Пример подключения routes/webhooks.php в callback then bootstrap/app.php */
+
+use Illuminate\Support\Facades\Route;
+
+->withRouting(
+    web: __DIR__.'/../routes/web.php',
+    commands: __DIR__.'/../routes/console.php',
+    health: '/up',
+    then: function () {
+        Route::middleware('api')
+            ->prefix('webhooks')
+            ->name('webhooks.')
+            ->group(base_path('routes/webhooks.php'));
+    },
+)
+```
+Так же можно получить полный контроль над регистрацией маршрута, предоставив замыкание `using` для метода `withRouting` **(При передаче этого аргумента платформа не будет регистрировать HTTP-маршруты)**.
+```php
+/* Пример using в bootstrap/app.php */
+
+use Illuminate\Support\Facades\Route;
+
+->withRouting(
+    commands: __DIR__.'/../routes/console.php',
+    using: function () {
+        Route::middleware('api')
+            ->prefix('api')
+            ->group(base_path('routes/api.php'));
+
+        Route::middleware('web')
+            ->group(base_path('routes/web.php'));
+    },
+)
+```
+***
+## Route Parameters
+### Required Parameters
+```php
+/* Пример обязательного параметра id маршрута */
+
+Route::get('/user/{id}', function (string $id) {
+    return 'User '.$id;
+});
+```
+Параметр `{id}` осслеживает идентификатор пользователя из URL-адреса.
+```php
+/* Пример двух обязательных параметров post и comment */
+
+Route::get('/posts/{post}/comments/{comment}', function (string $postId, string $commentId) {
+    // ...
+});
+```
+Параметры маршрута всегда заключаются в фигурные скобки `{}` и должны состоять из буквенных символов. Подчеркивание (`_`) также допускается в именах параметров маршрута. 
+Параметры маршрута будут внедрены в замыкания маршрута / контроллеры в зависимости от их порядка, т.е. имена аргументов замыкания маршрута / контроллера не имеют значения.
+#### Parameters and Dependency Injection
+Если у  маршрута есть зависимости, которые необходимо, чтобы Service Container Laravel автоматически внедрил в замыкание маршрута, то нужно указать эти зависимости **перед** параметрами маршрута. 
+```php
+/* Пример DI в параметрах маршрута */
+
+use Illuminate\Http\Request;
+
+Route::get('/user/{id}', function (Request $request, string $id) {
+    return 'User '.$id;
+});
+```
+### Optional Parameters
+```php
+/* Пример необязательного параметра name маршрута */
+
+Route::get('/user/{name?}', function (?string $name = null) {
+    return $name;
+});
+
+Route::get('/user/{name?}', function (?string $name = 'John') {
+    return $name;
+});
+```
+Для создания необязательного параметра нужно добавить `?` в конце его имени и так же присвоить соответствующей переменной маршрута значение по умолчанию.
+### Regular Expression Constraints
+Можно ограничить формат параметров вашего маршрута, используя метод `where`. Метод `where` принимает имя параметра и регулярное выражение, определяющее, как параметр должен быть ограничен.
+```php
+/* Пример использования метода where */
+
+Route::get('/user/{name}', function (string $name) {
+    // ...
+})->where('name', '[A-Za-z]+');
+
+Route::get('/user/{id}', function (string $id) {
+    // ...
+})->where('id', '[0-9]+');
+
+Route::get('/user/{id}/{name}', function (string $id, string $name) {
+    // ...
+})->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
+```
+Для часто используемых шаблонов регулярных выражений есть соответствующие вспомогательные методы, позволяющие быстро добавлять их к маршрутам.
+```php
+/* Пример использования вспомогательных методов where */
+
+Route::get('/user/{id}/{name}', function (string $id, string $name) {
+    // ...
+})->whereNumber('id')->whereAlpha('name');
+
+Route::get('/user/{name}', function (string $name) {
+    // ...
+})->whereAlphaNumeric('name');
+
+Route::get('/user/{id}', function (string $id) {
+    // ...
+})->whereUuid('id');
+
+Route::get('/user/{id}', function (string $id) {
+    // ...
+})->whereUlid('id');
+
+Route::get('/category/{category}', function (string $category) {
+    // ...
+})->whereIn('category', ['movie', 'song', 'painting']);
+
+Route::get('/category/{category}', function (string $category) {
+    // ...
+})->whereIn('category', CategoryEnum::cases());
+```
+Если входящий запрос не соответствует ограничениям, то будет возвращен `404` HTTP-ответ.
+#### Global Constraints
+Если требуется, чтобы параметр маршрута всегда ограничивался конкретным регулярным выражением, то можно использовать метод `pattern`. Требуется определить эти шаблоны в методе `boot` класса `App\Providers\AppServiceProvider`.
+```php
+/* Пример Route::pattern в методе boot AppServiceProvider */
+
+use Illuminate\Support\Facades\Route;
+
+/**
+ * Запуск любых служб приложения.
+ */
+public function boot(): void
+{
+    Route::pattern('id', '[0-9]+');
+}
+```
+Как только шаблон определен, он автоматически применяется ко всем маршрутам, использующим это имя параметра.
+```php
+Route::get('/user/{id}', function (string $id) {
+    // Выполнится, только если параметр `{id}` имеет числовое значение...
+});
+```
+#### Encoded Forward Slashes
+Компонент маршрутизации Laravel позволяет всем символам, кроме обратного слеша (`/`), присутствовать в значениях параметров маршрута. Необходимо явно разрешить `/` быть частью заполнителя `{}`, используя регулярное выражение условия `where`.
+```php
+/* Пример where с обратным слешем? */
+
+Route::get('/search/{search}', function (string $search) {
+    return $search;
+})->where('search', '.*');
+```
+_**Обратные слеши поддерживаются только в рамках последнего сегмента маршрута.**_
+***
+## Named Routes
+**Именованные маршруты** позволяют легко создавать URL-адреса или перенаправления для определенных маршрутов.
+Можно указать имя для маршрута, связав метод `name` с определением маршрута.
+```php
+/* Пример использования метода name */
+
+Route::get('/user/profile', function () {
+    // ...
+})->name('profile');
+```
+Также указываются имена маршрутов для действий контроллера.
+```php
+/* Пример использования метода name для Controller Action */
+
+Route::get(
+    '/user/profile',
+    [UserProfileController::class, 'show']
+)->name('profile');
+```
+> **Имена маршрутов всегда должны быть уникальными.**
+### Generating URLs to Named Routes
+После присвоения имени указанному маршруту, можно использовать имя маршрута при генерации URL-адресов или перенаправлений с помощью вспомогательных глобальных функций `route` и `redirect`.
+```php
+// Создание URL-адреса...
+$url = route('profile');
+
+// Создание перенаправления...
+return redirect()->route('profile');
+
+return to_route('profile');
+```
+Если именованный маршрут определяет параметры, можно передать параметры в качестве второго аргумента функции `route`. Указанные параметры будут автоматически подставлены в сгенерированный URL в соответствующие места.
+```php
+/* Пример передачи параметров вторым аргументом в route */
+
+Route::get('/user/{id}/profile', function (string $id) {
+    // ...
+})->name('profile');
+
+$url = route('profile', ['id' => 1]);
+```
+Если передать дополнительные параметры в массиве, то эти пары ключ / значение будут автоматически добавлены в строку запроса сгенерированного URL-адреса.
+```php
+/* Пример передачи нескольких параметров вторым аргументом в route */
+
+Route::get('/user/{id}/profile', function (string $id) {
+    // ...
+})->name('profile');
+
+$url = route('profile', ['id' => 1, 'photos' => 'yes']);
+
+// /user/1/profile?photos=yes
+```
+> Иногда требуется указать значение по умолчанию для параметров URL запроса, например, текущий язык.  Для этого подойдет метод `URL::defaults`.
+#### Inspecting the Current Route
+Если требуется определить, был ли текущий запрос направлен на конкретный именованный маршрут, то можно использовать метод `named` экземпляра `Route`.
+```php
+/* Получение инфоормации о текущем маршруте из middleware */
+
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+/**
+ * Обработка входящего запроса.
+ *
+ * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+ */
+public function handle(Request $request, Closure $next): Response
+{
+    if ($request->route()->named('profile')) {
+        // ...
+    }
+
+    return $next($request);
+}
+```
+***
+## Route Groups
+**Группы маршрутов** позволяют совместно использовать атрибуты маршрута (например, посредники) для большого количества маршрутов без необходимости определять эти атрибуты для каждого маршрута отдельно.
+Вложенные группы пытаются разумно «объединить» атрибуты со своей родительской группой. Посредники и условия `where` объединяются, а имена и префиксы добавляются. Разделители пространства имен и слеши в префиксах `URI` автоматически добавляются там, где это необходимо.
+### Middleware
+Чтобы назначить `middleware` всем маршрутам в группе, можно использовать метод `middleware` перед определением группы (посредники(`middleware`) будут выполняться в том порядке, в котором они перечислены в массиве).
+```php
+/* Пример группировки middleware */
+
+Route::middleware(['first', 'second'])->group(function () {
+    Route::get('/', function () {
+        // Использует посредники `first` и `second`...
+    });
+
+    Route::get('/user/profile', function () {
+        // Использует посредники `first` и `second`...
+    });
+});
+```
+### Controllers
+Если группа маршрутов использует один и тот же контроллер - подойдет метод `controller` для определения общего контроллера всех маршрутов в группе. Затем при определении маршрутов необходимо будет указать только метод вызываемого контроллера.
+```php
+/* Пример группировки controller */
+
+use App\Http\Controllers\OrderController;
+
+Route::controller(OrderController::class)->group(function () {
+    Route::get('/orders/{id}', 'show');
+    Route::post('/orders', 'store');
+});
+```
+### Subdomain Routing
+Группы маршрутов также могут использоваться для управления маршрутизацией поддоменов (sub-domain). Поддоменам могут быть назначены параметры маршрута так же, как и `URI` маршрута, что позволяет отследить сегмент с поддоменом для использования его маршруте или контроллере. Поддомен можно указать, вызвав метод `domain` перед определением группы.
+```php
+/* Пример группировки domain с поддоменом */
+
+Route::domain('{account}.example.com')->group(function () {
+    Route::get('/user/{id}', function (string $account, string $id) {
+        // ...
+    });
+});
+```
+> **Чтобы обеспечить доступность маршрутов поддоменов, требуется зарегистрировать маршруты поддоменов перед регистрацией маршрутов корневого домена. Это предотвратит перезапись маршрутами корневого домена маршрутов поддоменов, имеющих одинаковый путь `URI`.**
+### Route Prefixes
+Метод `prefix` используется для подстановки указанного `URI` в качестве префикса каждому маршруту в группе.
+```php
+/* Пример prefix admin в маршрутах */
+
+Route::prefix('admin')->group(function () {
+    Route::get('/users', function () {
+        // Соответствует URL-адресу `/admin/users`
+    });
+});
+```
+### Route Name Prefixes
+Метод `name` может быть использован для добавления префикса к каждому имени маршрута в группе с использованием заданной строки. Заданная строка добавляется к имени маршрута точно так, как она указана (поэтому обязательно ставить знак `.` в конце префикса).
+```php
+/* Пример префикса имени маршрута */
+
+Route::name('admin.')->group(function () {
+    Route::get('/users', function () {
+        // Маршруту присвоено имя `admin.users`...
+    })->name('users');
+});
+```
+***
+## Route Model Binding
+При внедрении идентификатора модели в маршрут или действие контроллера - идет запрос в базу данных, чтобы получить модель с соответствующим идентификатором.
+Привязка модели к маршруту Laravel обеспечивает удобный способ автоматического внедрения экземпляров модели непосредственно маршруты.
+### Implicit Binding
+Laravel автоматически извлечет модели `Eloquent`, определенные в маршрутах или действиях контроллера, чьи имена переменных объявленного типа соответствуют имени сегмента маршрута.
+```php
+/* Пример неявной привазки с моделью User */
+
+use App\Models\User;
+
+Route::get('/users/{user}', function (User $user) {
+    return $user->email;
+});
+```
+Так как переменная `$user` типизирована как модель `App\Models\User` Eloquent и имя переменной соответствует сегменту `{user}` `URI`, то Laravel автоматически внедрит экземпляр модели с идентификатором, совпадающим со значением `URI` из запроса. Если соответствующий экземпляр модели не найден в базе данных, то автоматически будет сгенерирован `404` HTTP-ответ.
+Неявная привязка также возможна при использовании методов контроллера. Сегмент `{user}` `URI`  должен соответсвовать переменной `$user` в контроллере, которая типизирована как `App\Models\User`.
+```php
+/* Пример неявной привазки с моделью User в контроллере */
+
+use App\Http\Controllers\UserController;
+use App\Models\User;
+
+// Определение маршрута...
+Route::get('/users/{user}', [UserController::class, 'show']);
+
+// Определение метода контроллера...
+public function show(User $user)
+{
+    return view('user.profile', ['user' => $user]);
+}
+```
+#### Soft Deleted Models
+Как правило, неявная привязка модели не будет извлекать модели, которые были удалены программно (Soft Deleted).Но можно указать неявной привязке извлекать эти модели, привязав метод `withTrashed` к маршруту.
+```php
+/* Привязка метода withTrashed к маршруту */
+
+use App\Models\User;
+
+Route::get('/users/{user}', function (User $user) {
+    return $user->email;
+})->withTrashed();
+```
+#### Customizing the Key
+По желанию можно извлекать модели `Eloquent`, используя столбец, отличный от `id`. Для этого требуется указать столбец в определении параметра маршрута.
+```php
+/* Привязка модели Post через параметр slug */
+
+use App\Models\Post;
+
+Route::get('/posts/{post:slug}', function (Post $post) {
+    return $post;
+});
+```
+Если необходимо, чтобы при извлечении класса связанной модели всегда использовался столбец базы данных, отличный от `id`, то нужно переопределить метод `getRouteKeyName` модели `Eloquent`.
+```php
+/* Неявная привязка по полю - указанному в модели */
+
+/**
+ * Получить ключ маршрута для модели.
+ */
+public function getRouteKeyName(): string
+{
+    return 'slug';
+}
+```
+#### Custom Keys and Scoping
+При неявном связывании нескольких моделей `Eloquent` в одном определении маршрута бывает необходимо ограничить вторую модель `Eloquent` так, чтобы она была дочерней по отношению к предыдущей модели `Eloquent`.
+```php
+/* Пример неявной привязки двух моделей */
+
+use App\Models\Post;
+use App\Models\User;
+
+Route::get('/users/{user}/posts/{post:slug}', function (User $user, Post $post) {
+    return $post;
+});
+```
+При использовании неявной привязки с измененным ключом в качестве параметра вложенного маршрута, Laravel автоматически задает ограничение запроса для получения вложенной модели своим родителем, используя соглашения, чтобы угадать имя отношения родительской модели.
+В этом случае предполагается, что модель `User` имеет отношение с именем `posts` (форма множественного числа имени параметра маршрута), которое можно использовать для получения модели `Post`.
+Так же можно указать Laravel охватывать “дочерние” привязки, даже если пользовательский ключ не предоставлен. Для этого необходимо вызвать метод `scopeBindings` при определении маршрута.
+```php
+/* Пример использования метода scopeBindings */
+
+use App\Models\Post;
+use App\Models\User;
+
+Route::get('/users/{user}/posts/{post}', function (User $user, Post $post) {
+    return $post;
+})->scopeBindings();
+```
+Или указать целой группе определений маршрутов использовать привязки с заданной областью действия.
+```php
+/* Пример использования метода scopeBindings на группу*/
+
+Route::scopeBindings()->group(function () {
+    Route::get('/users/{user}/posts/{post}', function (User $user, Post $post) {
+        return $post;
+    });
+});
+```
+Точно так же можно явно указать Laravel не использовать ограничение области действия привязок, вызвав метод `withoutScopedBindings`.
+```php
+/* Пример использования метода withoutScopedBindings */
+
+Route::get('/users/{user}/posts/{post:slug}', function (User $user, Post $post) {
+    return $post;
+})->withoutScopedBindings();
+```
+#### Customizing Missing Model Behavior
+Обычно, если неявно связанная модель не найдена, то генерируется `404` HTTP-ответ. Но можно изменить это поведение, вызвав метод `missing` при определении маршрута. Метод `missing` принимает замыкание, которое будет вызываться, если неявно связанная модель не может быть найдена.
+```php
+/* Пример использования метода missing */
+
+use App\Http\Controllers\LocationsController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+
+Route::get('/locations/{location:slug}', [LocationsController::class, 'show'])
+        ->name('locations.view')
+        ->missing(function (Request $request) {
+            return Redirect::route('locations.index');
+        });
+```
+#### Implicit Enum Binding
+ Laravel позволяет указывать `Enum` в определении маршрута, и Laravel будет вызывать маршрут только в том случае, если сегмент маршрута соответствует допустимому значению `Enum`. В противном случае автоматически будет возвращен ответ `HTTP 404`.
+ ```php
+/* Пример Enum для неявной привязки */
+
+namespace App\Enums;
+
+enum Category: string
+{
+    case Fruits = 'fruits';
+    case People = 'people';
+}
+```
+Можно определить маршрут, который будет вызываться только в случае, если сегмент `{category}` маршрута является `fruits` или `people`.
+```php
+/* Пример неявной привязки для Category Enum */
+
+use App\Enums\Category;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/categories/{category}', function (Category $category) {
+    return $category->value;
+});
+```
+### Explicit Binding
+Yеобязательно использовать неявные привязки модели на основе соглашений Laravel, чтобы использовать привязку модели. Можно явно определить, как параметры маршрута должны быть сопоставлены моделям.
+Чтобы зарегистрировать явную привязку есть метод маршрутизатора `model`, чтобы указать класс для переданного параметра. _**Необходимо определить явные привязки модели в начале метода `boot`  класса `AppServiceProvider`**_
+```php
+/* Определение явной привязки в методе boot AppServiceProvider */
+
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
+
+/**
+ * Запуск любых служб приложения.
+ */
+public function boot(): void
+{
+    Route::model('user', User::class);
+}
+```
+Затем определить маршрут, содержащий параметр `{user}`.
+```php
+/* Пример явной привязки модели */
+
+use App\Models\User;
+
+Route::get('/users/{user}', function (User $user) {
+    // ...
+});
+```
+Поскольку все параметры `{user}` связаны с моделью `App\Models\User`, экземпляр этого класса будет внедрен в маршрут.
+Если соответствующий экземпляр модели не найден в базе данных, то автоматически будет сгенерирован `404` HTTP-ответ.
+#### Customizing the Resolution Logic
+Если необходимо определить свою собственную логику связывания модели, можно использовать метод `Route::bind`.
+Замыкание, которое передается методу `bind`, получит значение сегмента `URI` и должно вернуть экземпляр класса, который должен быть внедрен в маршрут.
+_**Эти изменения должны выполняться в методе `boot` поставщика `AppServiceProvider`**_
+```php
+/* Добавление custom привязки в методе boot AppServiceProvider */
+
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
+
+/**
+ * Запуск любых служб приложения.
+ */
+public function boot(): void
+{
+    Route::bind('user', function (string $value) {
+        return User::where('name', $value)->firstOrFail();
+    });
+}
+```
+В качестве альтернативы можно переопределить метод `resolveRouteBinding` модели `Eloquent`. Этот метод получит значение сегмента `URI` и должен вернуть экземпляр класса, который должен быть внедрен в маршрут.
+```php
+/**
+ * Получить модель для привязанного к маршруту значения параметра.
+ *
+ * @param  mixed  $value
+ * @param  string|null  $field
+ * @return \Illuminate\Database\Eloquent\Model|null
+ */
+public function resolveRouteBinding($value, $field = null)
+{
+    return $this->where('name', $value)->firstOrFail();
+}
+```
+Если в маршруте используется ограничения неявной привязки модели, то для получения связанной дочерней модели будет использоваться метод `resolveChildRouteBinding` родительской модели.
+```php
+/**
+ * Получить дочернюю модель для привязанного к маршруту значения параметра.
+ *
+ * @param  string  $childType
+ * @param  mixed  $value
+ * @param  string|null  $field
+ * @return \Illuminate\Database\Eloquent\Model|null
+ */
+public function resolveChildRouteBinding($childType, $value, $field)
+{
+    return parent::resolveChildRouteBinding($childType, $value, $field);
+}
+```
+***
+## Fallback Routes
+Используя метод `Route::fallback`, можно определить маршрут, который будет выполняться, когда ни один другой маршрут не соответствует входящему запросу.
