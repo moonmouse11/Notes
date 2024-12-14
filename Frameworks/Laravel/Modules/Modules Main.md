@@ -2,6 +2,4 @@
 ***
 - [[Artisan]]
 - [[Blade]]
-- [[Sail]]
 - [[Facades Main]]
-- 
