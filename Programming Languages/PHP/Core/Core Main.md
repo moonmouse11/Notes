@@ -6,7 +6,7 @@
 - [[Hints]]
 - [[Generators]]
 - [[Programming Languages/PHP/Core/Functions|Functions]]
-- [[Extensions]]
+- [[PHP Extensions]]
 - [[Command Line IInterface]]
 - [[Code Convention]]
 - [[Attributes Main]]

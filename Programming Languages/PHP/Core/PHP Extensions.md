@@ -1,4 +1,4 @@
-# Extensions
+# PHP Extensions
 ***
 - `php[version]-amqp` - расширение, использующее клиентскую библиотеку `RabbitMQ-C`. Реализована только возможность публикации сообщений.
 - `php[version]-amqplib` - библиотека PHP, реализующая протокол расширенной очереди сообщений `AMQP`.
@@ -51,35 +51,35 @@
 - `php[version]-pcov` - модуль покрытия кода (для тестирования).
 - `php[version]-solr` - модуль позволяет эффективно взаимодействовать с сервером `Apache Solr` в PHP.
 - `php[version]-yaml` - модуль реализует стандарт сериализации данных `YAML Ain't Markup Language` (`YAML`). Для обработки данных используется библиотека `LibYAML`.
-- `php[version]-decimal` - 
-- `php[version]-interbase` -
-- `php[version]-pgsql` -
-- `php[version]-sqlite3` -
-- `php[version]-zip` -
-- `php[version]-dev` -
-- `php[version]-intl` -
-- `php[version]-phalcon5` -
-- `php[version]-ssh2` -
-- `php[version]-zmq` -
-- `php[version]-ds` -
-- `php[version]-ldap` -
-- `php[version]-phpdbg` -
-- `php[version]-stomp` -
-- `php[version]-zstd` -
-- `php[version]-enchant` -
-- `php[version]-libvirt-php` -
-- `php[version]-pq` -
-- `php[version]-swoole` -         
-- `php[version]-excimer` -
-- `php[version]-mailparse` -
-- `php[version]-protobuf` -
-- `php[version]-sybase` -
+- `php[version]-decimal` - модуль для работы с дробными числами.
+- `php[version]-interbase` - модуль для работы с базой данных `Firebird`. **(Deprecated)**.
+- `php[version]-pgsql` - модуль для работы с базой данных `PostgreSQL`.
+- `php[version]-sqlite3` - модуль для работы с базой данных `SQLite`.
+- `php[version]-zip` - модуль позволяет легко и записывать как в сами сжатые ZIP-архивы, так и в файлы внутри них.
+- `php[version]-dev` - пакет, включающий веб-сервер, PHP и некоторые инструменты, необходимые для разработки.
+- `php[version]-intl` - обёртка для библиотеки `ICU`, позволяющая программистам на PHP производить различные операции.
+- `php[version]-phalcon5` - фреймворк `Phalcon` написанный на `C`.
+- `php[version]-ssh2` - Привязка к библиотеке `libssh2`, которая предоставляет доступ к ресурсам (shell, удалённый запуск, туннелирование, передача файлов) на удалённом компьютере с использованием криптографически защищённой передачи данных.
+- `php[version]-zmq` - расширение для использования `0MQ`.
+- `php[version]-ds` - структуры данных для `PHP 7`, альтернатива массивам.
+- `php[version]-ldap` - облегчённый протокол доступа к каталогам, который используют для получения доступа к серверам каталогов.
+- `php[version]-phpdbg` - модуль-отладчик PHP.
+- `php[version]-stomp` - модуль позволяет PHP приложениям взаимодействовать с любыми `Stomp`-совместимыми брокерами сообщений (`Message Broker`).
+- `php[version]-zstd` - расширение для использования `Zstandard`.
+- `php[version]-enchant` - модуль для работы с библиотекой `Enchant`. (`Enchant` позволяет обеспечить единообразие и согласованность всех библиотек орфографии и реализовать определённые функции, которые могут отсутствовать в какой-либо отдельной библиотеке.)
+- `php[version]-libvirt-php` - расширение для работы с виртуализацией. 
+- `php[version]-pq` - серверный интерфейс для работы с элементами `DOM`.
+- `php[version]-swoole` - высокопроизводительный сетевой фреймворк с асинхронной неблокирующей моделью ввода-вывода, которой управляют события. Модулем пользуются для разработки высокопроизводительных, масштабируемых, параллельных `TCP`-, `UDP`- и Unix-сокетов и служб на основе `HTTP`- или `Websocket`-протокола.
+- `php[version]-excimer` - таймер прерывания и профилировщик выборки с низкими расходами. 
+- `php[version]-mailparse` - модуль для анализа и работы с почтовыми сообщениями.
+- `php[version]-protobuf` - расширение для работы с `Google Protobuf`.
+- `php[version]-sybase` - модуль для работы с базой данный `Sybase`.
 - `php[version]-fpm` -
 - `php[version]-maxminddb` -
 - `php[version]-ps` -
 - `php[version]-tidy` -
 - `php[version]-gd` -
-- `php[version]-mbstring` -
+- `php[version]-mbstring` - модуль для работы со строками в мультибайтовом режиме.
 - `php[version]-pspell` -
 - `php[version]-uopz` -
 ***
