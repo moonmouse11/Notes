@@ -74,10 +74,10 @@
 - `php[version]-mailparse` - модуль для анализа и работы с почтовыми сообщениями.
 - `php[version]-protobuf` - расширение для работы с `Google Protobuf`.
 - `php[version]-sybase` - модуль для работы с базой данный `Sybase`.
-- `php[version]-fpm` -
-- `php[version]-maxminddb` -
-- `php[version]-ps` -
-- `php[version]-tidy` -
+- `php[version]-fpm` - основная реализация интерфейса `FastCGI` для PHP, которая в основном содержит функционал, полезный для высоконагруженных сайтов.
+- `php[version]-maxminddb` - модуль для работы с базой данных `MaxMind`.
+- `php[version]-ps` - модуль позволяет создавать документы в формате `PostScript`.
+- `php[version]-tidy` - интерфейс к утилите очистки и восстановления `Tidy` `HTML`, которая кроме очистки и восстановления разметки помогает также манипулировать `HTML`, `XHTML` и `XML`-документами.
 - `php[version]-gd` -
 - `php[version]-mbstring` - модуль для работы со строками в мультибайтовом режиме.
 - `php[version]-pspell` -
