@@ -8,7 +8,7 @@
 - [[Programming Languages/PHP/Core/Functions|Functions]]
 - [[PHP Extensions]]
 - [[Command Line IInterface]]
-- [[Code Convention]]
+- [[Programming Languages/PHP/Core/Code Convention]]
 - [[Attributes Main]]
 - [[SPL Main]]
 - [[PCRE Main]]
