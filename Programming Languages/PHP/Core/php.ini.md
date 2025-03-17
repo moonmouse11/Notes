@@ -3,6 +3,145 @@
 ## Directives
 `mbstring.func_overload` -
 `default_socket_timeout` -
+### Configuration options
+
+| **Name**                          | **Default**           | **Changeable** | **Changelog**                                                                                |
+| --------------------------------- | --------------------- | -------------- | -------------------------------------------------------------------------------------------- |
+| `allow_url_fopen`                 | "1"                   | `INI_SYSTEM`   |                                                                                              |
+| `allow_url_include`               | "0"                   | `INI_SYSTEM`   | Deprecated as of PHP 7.4.0.                                                                  |
+| `arg_separator.input`             | "&"                   | `INI_PERDIR`   |                                                                                              |
+| `arg_separator.output`            | "&"                   | `INI_ALL`      |                                                                                              |
+| `assert.active`                   | "1"                   | `INI_ALL`      |                                                                                              |
+| `assert.bail`                     | "0"                   | `INI_ALL`      |                                                                                              |
+| `assert.callback`                 | null                  | `INI_ALL`      |                                                                                              |
+| `assert.exception`                | "0"                   | `INI_ALL`      |                                                                                              |
+| `assert.quiet_eval`               | "0"                   | `INI_ALL`      | Removed as of PHP 8.0.0                                                                      |
+| `assert.warning`                  | "1"                   | `INI_ALL`      |                                                                                              |
+| `auto_append_file`                | null                  | `INI_PERDIR`   |                                                                                              |
+| `auto_detect_line_endings`        | "0"                   | `INI_ALL`      |                                                                                              |
+| `auto_globals_jit`                | "1"                   | `INI_PERDIR`   |                                                                                              |
+| `auto_prepend_file`               | null                  | `INI_PERDIR`   |                                                                                              |
+| `bcmath.scale`                    | "0"                   | `INI_ALL`      |                                                                                              |
+| `browscap`                        | null                  | `INI_SYSTEM`   |                                                                                              |
+| `cgi.check_shebang_line`          | "1"                   | `INI_SYSTEM`   |                                                                                              |
+| `cgi.discard_path`                | "0"                   | `INI_SYSTEM`   |                                                                                              |
+| `cgi.fix_pathinfo`                | "1"                   | `INI_SYSTEM`   |                                                                                              |
+| `cgi.force_redirect`              | "1"                   | `INI_SYSTEM`   |                                                                                              |
+| `cgi.nph`                         | "0"                   | `INI_ALL`      |                                                                                              |
+| `cgi.redirect_status_env`         | null                  | `INI_SYSTEM`   |                                                                                              |
+| `cgi.rfc2616_headers`             | "0"                   | `INI_ALL`      |                                                                                              |
+| `child_terminate`                 | "0"                   | `INI_ALL`      |                                                                                              |
+| `cli.pager`                       | ""                    | `INI_ALL`      |                                                                                              |
+| `cli.prompt`                      | "\\b \\> "            | `INI_ALL`      |                                                                                              |
+| `cli_server.color`                | "0"                   | `INI_ALL`      |                                                                                              |
+| `com.allow_dcom`                  | "0"                   | `INI_SYSTEM`   |                                                                                              |
+| `com.autoregister_typelib`        | "0"                   | `INI_ALL`      |                                                                                              |
+| `com.autoregister_verbose`        | "0"                   | `INI_ALL`      |                                                                                              |
+| `com.autoregister_casesensitive`  | "1"                   | `INI_ALL`      |                                                                                              |
+| `com.code_page`                   | ""                    | `INI_ALL`      |                                                                                              |
+| `com.dotnet_version`              | ""                    | `INI_SYSTEM`   | As of PHP 8.0.0                                                                              |
+| `com.typelib_file`                | ""                    | `INI_SYSTEM`   |                                                                                              |
+| `curl.cainfo`                     | NULL                  | `INI_SYSTEM`   |                                                                                              |
+| `date.default_latitude`           | "31.7667"             | `INI_ALL`      |                                                                                              |
+| `date.default_longitude`          | "35.2333"             | `INI_ALL`      |                                                                                              |
+| `date.sunrise_zenith`             | "90.833333"           | `INI_ALL`      | Prior to PHP 8.0.0, the default was "90.583333"                                              |
+| `date.sunset_zenith`              | "90.833333"           | `INI_ALL`      | Prior to PHP 8.0.0, the default was "90.583333"                                              |
+| `date.timezone`                   | "UTC"                 | `INI_ALL`      | From PHP 8.2, a warning is emitted when setting this to an invalid value or an empty string. |
+| `dba.default_handler`             | DBA_DEFAULT           | `INI_ALL`      |                                                                                              |
+| `default_charset`                 | "UTF-8"               | `INI_ALL`      |                                                                                              |
+| `input_encoding`                  | ""                    | `INI_ALL`      |                                                                                              |
+| `output_encoding`                 | ""                    | `INI_ALL`      |                                                                                              |
+| `internal_encoding`               | ""                    | `INI_ALL`      |                                                                                              |
+| `default_mimetype`                | "text/html"           | `INI_ALL`      |                                                                                              |
+| `default_socket_timeout`          | "60"                  | `INI_ALL`      |                                                                                              |
+| `disable_classes`                 | ""                    | php.ini only   |                                                                                              |
+| `disable_functions`               | ""                    | php.ini only   |                                                                                              |
+| `display_errors`                  | "1"                   | `INI_ALL`      |                                                                                              |
+| `display_startup_errors`          | "1"                   | `INI_ALL`      | Prior to PHP 8.0.0, the default value was "0".                                               |
+| `docref_ext`                      | ""                    | `INI_ALL`      |                                                                                              |
+| `docref_root`                     | ""                    | `INI_ALL`      |                                                                                              |
+| `doc_root`                        | null                  | `INI_SYSTEM`   |                                                                                              |
+| `enable_dl`                       | "1"                   | `INI_SYSTEM`   | This deprecated feature will certainly be removed in the future.                             |
+| `enable_post_data_reading`        | "On"                  | `INI_PERDIR`   |                                                                                              |
+| `engine`                          | "1"                   | `INI_ALL`      |                                                                                              |
+| `error_append_string`             | null                  | `INI_ALL`      |                                                                                              |
+| `error_log`                       | null                  | `INI_ALL`      |                                                                                              |
+| `error_log_mode`                  | 0o644                 | `INI_ALL`      | Available as of PHP 8.2.0                                                                    |
+| `error_prepend_string`            | null                  | `INI_ALL`      |                                                                                              |
+| `error_reporting`                 | null                  | `INI_ALL`      |                                                                                              |
+| `exif.encode_unicode`             | "ISO-8859-15"         | `INI_ALL`      |                                                                                              |
+| `exif.decode_unicode_motorola`    | "UCS-2BE"             | `INI_ALL`      |                                                                                              |
+| `exif.decode_unicode_intel`       | "UCS-2LE"             | `INI_ALL`      |                                                                                              |
+| `exif.encode_jis`                 | ""                    | `INI_ALL`      |                                                                                              |
+| `exif.decode_jis_motorola`        | "JIS"                 | `INI_ALL`      |                                                                                              |
+| `exif.decode_jis_intel`           | "JIS"                 | `INI_ALL`      |                                                                                              |
+| `exit_on_timeout`                 | ""                    | `INI_ALL`      |                                                                                              |
+| `expect.timeout`                  | "10"                  | `INI_ALL`      |                                                                                              |
+| `expect.loguser`                  | "1"                   | `INI_ALL`      |                                                                                              |
+| `expect.logfile`                  | ""                    | `INI_ALL`      |                                                                                              |
+| `expect.match_max`                | ""                    | `INI_ALL`      |                                                                                              |
+| `expose_php`                      | "1"                   | php.ini only   |                                                                                              |
+| `extension`                       | null                  | php.ini only   |                                                                                              |
+| `extension_dir`                   | "/path/to/php"        | `INI_SYSTEM`   |                                                                                              |
+| `fastcgi.impersonate`             | "0"                   | `INI_SYSTEM`   |                                                                                              |
+| `fastcgi.logging`                 | "1"                   | `INI_SYSTEM`   |                                                                                              |
+| `file_uploads`                    | "1"                   | `INI_SYSTEM`   |                                                                                              |
+| `filter.default`                  | "unsafe_raw"          | `INI_PERDIR`   | Deprecated as of PHP 8.1.0.                                                                  |
+| `filter.default_flags`            | NULL                  | `INI_PERDIR`   |                                                                                              |
+| `from`                            | ""                    | `INI_ALL`      |                                                                                              |
+| `gd.jpeg_ignore_warning`          | "1"                   | `INI_ALL`      |                                                                                              |
+| `geoip.custom_directory`          | ""                    | `INI_ALL`      |                                                                                              |
+| `hard_timeout`                    | "2"                   | `INI_SYSTEM`   | Available as of PHP 7.1.0.                                                                   |
+| `highlight.comment`               | "#FF8000"             | `INI_ALL`      |                                                                                              |
+| `highlight.default`               | "#0000BB"             | `INI_ALL`      |                                                                                              |
+| `highlight.html`                  | "#000000"             | `INI_ALL`      |                                                                                              |
+| `highlight.keyword`               | "#007700"             | `INI_ALL`      |                                                                                              |
+| `highlight.string`                | "#DD0000"             | `INI_ALL`      |                                                                                              |
+| `html_errors`                     | "1"                   | `INI_ALL`      |                                                                                              |
+| `ibase.allow_persistent`          | "1"                   | `INI_SYSTEM`   |                                                                                              |
+| `ibase.max_persistent`            | "-1"                  | `INI_SYSTEM`   |                                                                                              |
+| `ibase.max_links`                 | "-1"                  | `INI_SYSTEM`   |                                                                                              |
+| `ibase.default_db`                | NULL                  | `INI_SYSTEM`   |                                                                                              |
+| `ibase.default_user`              | NULL                  | `INI_ALL`      |                                                                                              |
+| `ibase.default_password`          | NULL                  | `INI_ALL`      |                                                                                              |
+| `ibase.default_charset`           | NULL                  | `INI_ALL`      |                                                                                              |
+| `ibase.timestampformat`           | "%Y-%m-%d %H:%M:%S"   | `INI_ALL`      |                                                                                              |
+| `ibase.dateformat`                | "%Y-%m-%d"            | `INI_ALL`      |                                                                                              |
+| `ibase.timeformat`                | "%H:%M:%S"            | `INI_ALL`      |                                                                                              |
+| `ibm_db2.binmode`                 | "1"                   | `INI_ALL`      |                                                                                              |
+| `ibm_db2.i5_all_pconnect`         | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 1.6.5.                                                               |
+| `ibm_db2.i5_allow_commit`         | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 1.4.9.                                                               |
+| `ibm_db2.i5_blank_userid`         | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 1.9.7.                                                               |
+| `ibm_db2.i5_char_trim`            | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 2.1.0.                                                               |
+| `ibm_db2.i5_dbcs_alloc`           | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 1.5.0.                                                               |
+| `ibm_db2.i5_guard_profile`        | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 1.9.7.                                                               |
+| `ibm_db2.i5_ignore_userid`        | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 1.8.0.                                                               |
+| `ibm_db2.i5_job_sort`             | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 1.8.4.                                                               |
+| `ibm_db2.i5_log_verbose`          | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 1.9.7.                                                               |
+| `ibm_db2.i5_max_pconnect`         | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 1.9.7.                                                               |
+| `ibm_db2.i5_override_ccsid`       | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 1.9.7.                                                               |
+| `ibm_db2.i5_servermode_subsystem` | NULL                  | `INI_SYSTEM`   | Available as of ibm_db2 1.9.7.                                                               |
+| `ibm_db2.i5_sys_naming`           | "0"                   | `INI_SYSTEM`   | Available as of ibm_db2 1.9.7.                                                               |
+| `ibm_db2.instance_name`           | NULL                  | `INI_SYSTEM`   | Available as of ibm_db2 1.0.2.                                                               |
+| `iconv.input_encoding`            | ""                    | `INI_ALL`      | Deprecated in PHP 5.6.0.                                                                     |
+| `iconv.output_encoding`           | ""                    | `INI_ALL`      | Deprecated in PHP 5.6.0.                                                                     |
+| `iconv.internal_encoding`         | ""                    | `INI_ALL`      | Deprecated in PHP 5.6.0.                                                                     |
+| `ignore_repeated_errors`          | "0"                   | `INI_ALL`      |                                                                                              |
+| `ignore_repeated_source`          | "0"                   | `INI_ALL`      |                                                                                              |
+| `ignore_user_abort`               | "0"                   | `INI_ALL`      |                                                                                              |
+| `implicit_flush`                  | "0"                   | `INI_ALL`      |                                                                                              |
+| `include_path`                    | ".:/path/to/php/pear" | `INI_ALL`      |                                                                                              |
+| `intl.default_locale`             |                       | `INI_ALL`      |                                                                                              |
+| `intl.error_level`                | 0                     | `INI_ALL`      |                                                                                              |
+| `intl.use_exceptions`             | 0                     | `INI_ALL`      | Available since PECL 3.0.0a1                                                                 |
+| `last_modified`                   | "0"                   | `INI_ALL`      |                                                                                              |
+|                                   |                       |                |                                                                                              |
+|                                   |                       |                |                                                                                              |
+|                                   |                       |                |                                                                                              |
+|                                   |                       |                |                                                                                              |
+***
+## Sections
+
 
 ***
 ## Example
