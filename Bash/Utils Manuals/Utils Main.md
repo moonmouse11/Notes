@@ -1,5 +1,6 @@
 # Utils Main
 ***
+- [[awk]]
 - [[chgrp]]
 - [[chmod]]
 - [[chown]]
@@ -24,6 +25,7 @@
 - [[ping]]
 - [[ps]]
 - [[rsync]]
+- [[sed]]
 - [[systemctl]]
 - [[tail]]
 - [[tar]]
