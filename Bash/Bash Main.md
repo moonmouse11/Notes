@@ -4,4 +4,5 @@
 - [[Shell Scripts]]
 - [[Utils Main]]
 - [[Shortcuts]]
+- [[learnbash]]
 - 

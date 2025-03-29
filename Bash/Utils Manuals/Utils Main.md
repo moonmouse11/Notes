@@ -17,6 +17,7 @@
 - [[ifconfig]]
 - [[ip]]
 - [[iptables]]
+- [[journalctl]]
 - [[kill]]
 - [[netstat]]
 - [[passwd]]
