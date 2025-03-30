@@ -1,4 +1,4 @@
 # NPM Main
 ***
-- [[Basic]]
+- [[Package Managers/NPM/Basic]]
 - 

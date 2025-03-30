@@ -1,6 +1,6 @@
 # Patterns Main
 ***
-- [[Basic]]
+- [[Package Managers/NPM/Basic]]
 ## Behavioral
 
 ***

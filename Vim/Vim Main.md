@@ -1,6 +1,6 @@
 # Vim Main
 ***
-- [[Vim/General|General]]
+- [[Vim/Basic|Basic]]
 - [[Vim/Commands|Commands]]
 - [[Essentials]]
 - [[learnvim]]
