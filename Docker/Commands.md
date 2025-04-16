@@ -83,6 +83,7 @@
 - `docker rm [container_id]` - команда удаляет указанный контейнер с локального устройства.
 - `docker rmi [image_id|container_id]` - удаляет образ и контейнер с диска.
 - `docker rmi -f $(docker images -a -q)` - скрипт для удаления всех образов на устройстве.
+- `docker system prune -a` - скрипт для удаления всех образов, контейнеров и сетей с устройства.
 - `docker run hello-world` - запускает образ и создает контейнер Hello World. Для проверки после установки.
 - `docker run -p 8080:8080 -v [path to local code]:/app[path to container code] -w /app[create file/directory] [container_name] [command]`
 - `docker run -d [image_name] [command = ''] [parameters = '']` - запуск указанного образа  в отвязке от консоли с созданием контейнера. (detached mode).
