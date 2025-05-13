@@ -53,6 +53,7 @@
 - [[mkdir]]
 - [[mkfs]]
 - [[more]]
+- [[netcat]]
 - [[netstat]]
 - [[nice]]
 - [[nmap]]
