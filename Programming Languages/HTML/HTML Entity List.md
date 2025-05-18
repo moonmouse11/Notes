@@ -1,4 +1,4 @@
-# HTML Entity List
+# [HTML Entity List](https://www.freeformatter.com/html-entities.html)
 ***
 ## ASCII Characters (Printable)
 | Character | Entity Name | Entity Number | Description                  |
